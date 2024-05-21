@@ -1,0 +1,30 @@
+<form action="" class="max-w-3xl w-full">
+    <h2 mat-dialog-title>Install Angular</h2>
+    <mat-dialog-content class="mat-typography">
+        <div class="flex items-center w-full mt-6">
+            <mat-form-field class="w-1/2 pl-2" [subscriptSizing]="'dynamic'">
+                <mat-label>The lounge</mat-label>
+                <mat-select class="w-12">
+                    <ng-container
+                        *ngFor="let lounge of ['lounge 1', 'lounge 2', 'lounge 3', 'lounge 4']">
+                        <mat-option [value]="lounge">{{lounge}}</mat-option>
+                    </ng-container>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="w-1/2 pl-2" [subscriptSizing]="'dynamic'">
+                <mat-label>Period</mat-label>
+                <mat-select >
+                    <ng-container
+                        *ngFor="let period of ['period 1', 'period 2', 'period 3', 'period 4']">
+                        <mat-option [value]="period">{{period}}</mat-option>
+                    </ng-container>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+    </mat-dialog-actions>
+
+</form>

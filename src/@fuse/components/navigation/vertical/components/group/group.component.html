@@ -1,0 +1,55 @@
+<!-- Item wrapper -->
+<div
+    class="fuse-vertical-navigation-item-wrapper"
+    [class.fuse-vertical-navigation-item-has-subtitle]="!!item.subtitle"
+    [ngClass]="item.classes?.wrapper">
+
+    <div class="fuse-vertical-navigation-item">
+
+        <!-- Icon -->
+        <ng-container *ngIf="item.icon">
+            <mat-icon
+                class="fuse-vertical-navigation-item-icon"
+                [ngClass]="item.classes?.icon"
+                [svgIcon]="item.icon"></mat-icon>
+        </ng-container>
+
+        <!-- Title & Subtitle -->
+        <div class="fuse-vertical-navigation-item-title-wrapper">
+            <div class="fuse-vertical-navigation-item-title">
+                <span [ngClass]="item.classes?.title">
+                    {{item.title}}
+                </span>
+            </div>
+        </div>
+
+        <!-- Badge -->
+        <ng-container *ngIf="item.badge">
+            <div class="fuse-vertical-navigation-item-badge">
+                <div
+                    class="fuse-vertical-navigation-item-badge-content"
+                    [ngClass]="item.badge.classes">
+                    {{item.badge.title}}
+                </div>
+            </div>
+        </ng-container>
+
+    </div>
+
+</div>
+
+<ng-container *ngFor="let item of item.children; trackBy: trackByFn">
+
+    <!-- Skip the hidden items -->
+    <ng-container *ngIf="(item.hidden && !item.hidden(item)) || !item.hidden">
+
+        <!-- Basic -->
+        <ng-container *ngIf="item.type === 'basic'">
+            <fuse-vertical-navigation-basic-item
+                [item]="item"
+                [name]="name"></fuse-vertical-navigation-basic-item>
+        </ng-container>
+
+    </ng-container>
+
+</ng-container>

@@ -159,7 +159,7 @@
                     </ng-container>
 
                     <!-- Footer -->
-                    <ng-container matColumnDef="recentOrdersTableFooter">
+                    <!-- <ng-container matColumnDef="recentOrdersTableFooter">
                         <td
                             class="py-6 px-0 border-0"
                             mat-footer-cell
@@ -167,7 +167,7 @@
                             colspan="6">
                             <button mat-stroked-button>See all transactions</button>
                         </td>
-                    </ng-container>
+                    </ng-container> -->
 
                     <tr
                         mat-header-row
@@ -176,10 +176,10 @@
                         class="order-row h-16"
                         mat-row
                         *matRowDef="let row; columns: displayedColumns;"></tr>
-                    <tr
+                    <!-- <tr
                         class="h-16 border-0"
                         mat-footer-row
-                        *matFooterRowDef="['recentOrdersTableFooter']"></tr>
+                        *matFooterRowDef="['recentOrdersTableFooter']"></tr> -->
                 </table>
             </div>
         </div>

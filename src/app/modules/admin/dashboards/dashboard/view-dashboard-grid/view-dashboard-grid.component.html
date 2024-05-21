@@ -1,0 +1,66 @@
+<!-- <p>{{data.name}}</p> -->
+<div class="modal-dialog-content">
+    <div class="flex flex-col w-full">
+        <!-- Close button -->
+        <div class="text-right">
+            <a mat-dialog-close
+                mat-icon-button
+                [matTooltip]="'Close'">
+                <mat-icon
+                    [svgIcon]="'heroicons_outline:x-mark'"></mat-icon>
+            </a>
+        </div>
+
+    <ng-container>
+            
+        <!-- Contact -->
+        <div class="edit-mode relative flex flex-col flex-auto items-center p-6 pt-0 sm:p-12 sm:pt-0">
+            <div class="w-full max-w-3xl">
+    
+                <!-- Name -->
+                <div class="mt-3 text-4xl font-bold truncate">{{data.name}}</div>
+    
+                <div class="flex flex-col mt-4 pt-6 border-t space-y-8">
+
+                    <!-- Transaction ID -->
+                    <ng-container *ngIf="data.transactionId">
+                        <div class="flex sm:items-center">
+                            <mat-icon [svgIcon]="'heroicons_outline:building-office-2'"></mat-icon>
+                            <div class="ml-6 leading-6">{{data.transactionId}}</div>
+                        </div>
+                    </ng-container>
+
+                    <!-- Date -->
+                    <ng-container *ngIf="data.date">
+                        <div class="flex sm:items-center">
+                            <mat-icon [svgIcon]="'heroicons_outline:building-office-2'"></mat-icon>
+                            <div class="ml-6 leading-6">{{data.date}}</div>
+                        </div>
+                    </ng-container>
+
+                    <!-- Amount -->
+                    <ng-container *ngIf="data.amount">
+                        <div class="flex sm:items-center">
+                            <mat-icon [svgIcon]="'heroicons_outline:building-office-2'"></mat-icon>
+                            <div class="ml-6 leading-6">{{data.amount}}</div>
+                        </div>
+                    </ng-container>
+
+                    <!-- Status -->
+                    <ng-container *ngIf="data.status">
+                        <div class="flex sm:items-center">
+                            <mat-icon [svgIcon]="'heroicons_outline:building-office-2'"></mat-icon>
+                            <div class="ml-6 leading-6">{{data.status}}</div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </ng-container>
+    </div>
+</div>

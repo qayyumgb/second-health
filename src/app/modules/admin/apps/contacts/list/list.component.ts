@@ -13,6 +13,7 @@ import { ContactsService } from 'app/modules/admin/apps/contacts/contacts.servic
 import { Contact, Country } from 'app/modules/admin/apps/contacts/contacts.types';
 import { filter, fromEvent, Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { ContactsDetailsComponent } from '../details/details.component';
+import { AddNewUserComponent } from '../add-new-user/add-new-user.component';
 
 @Component({
     selector       : 'contacts-list',
@@ -63,6 +64,15 @@ export class ContactsListComponent implements OnInit, OnDestroy
       // this._router.navigate(['./', item.id]); // Navigate to the route corresponding to the item
       this.selectedContact = null;
     }
+
+
+    createNewUser() {
+        this.dialog.open(AddNewUserComponent, {
+            width: '800px',
+        });
+    }
+
+
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------

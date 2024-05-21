@@ -132,7 +132,7 @@ fuse-vertical-navigation {
         height: 100%;
         overflow: hidden;
         z-index: 10;
-        background: inherit;
+        background: #15508A;
         box-shadow: inset -1px 0 0 var(--fuse-border);
 
         /* Header */
@@ -589,7 +589,8 @@ fuse-vertical-navigation-group-item {
             .fuse-vertical-navigation-item-title-wrapper {
 
                 .fuse-vertical-navigation-item-title {
-                    @apply opacity-100 text-primary-600 dark:text-primary-400;
+                    // @apply opacity-100 text-primary-600 dark:text-primary-400;
+                    color: #3AC0C3;
                 }
             }
         }

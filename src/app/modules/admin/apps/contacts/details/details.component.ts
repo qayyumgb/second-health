@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatOptionModule, MatRippleModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -29,7 +29,7 @@ import { debounceTime, Subject, takeUntil } from 'rxjs';
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
-    imports        : [NgIf, MatButtonModule, MatTooltipModule, RouterLink, MatIconModule, NgFor, FormsModule, ReactiveFormsModule, MatRippleModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, NgClass, MatSelectModule, MatOptionModule, MatDatepickerModule, TextFieldModule, FuseFindByKeyPipe, DatePipe],
+    imports        : [NgIf, MatButtonModule, MatTooltipModule, RouterLink, MatIconModule, NgFor, FormsModule, ReactiveFormsModule, MatRippleModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, NgClass, MatSelectModule, MatOptionModule, MatDatepickerModule, TextFieldModule, FuseFindByKeyPipe, DatePipe, MatDialogModule],
 })
 export class ContactsDetailsComponent implements OnInit, OnDestroy
 {
@@ -37,12 +37,15 @@ export class ContactsDetailsComponent implements OnInit, OnDestroy
     @ViewChild('tagsPanel') private _tagsPanel: TemplateRef<any>;
     @ViewChild('tagsPanelOrigin') private _tagsPanelOrigin: ElementRef;
 
-    
+    countries: Country[];
+    editMode: boolean = false;
+    contactForm: UntypedFormGroup;
 
     /**
      * Constructor
      */
     constructor(
+      private _formBuilder: UntypedFormBuilder,
       @Inject(MAT_DIALOG_DATA) public data: any
     )
     {
@@ -58,7 +61,20 @@ export class ContactsDetailsComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        
+        // Create the contact form
+        this.contactForm = this._formBuilder.group({
+          id          : [''],
+          avatar      : [null],
+          name        : ['', [Validators.required]],
+          emails      : this._formBuilder.array([]),
+          phoneNumbers: this._formBuilder.array([]),
+          title       : [''],
+          company     : [''],
+          birthday    : [null],
+          address     : [null],
+          notes       : [null],
+          tags        : [[]],
+      });
     }
 
     /**
@@ -74,4 +90,34 @@ export class ContactsDetailsComponent implements OnInit, OnDestroy
     {
         return item.id || index;
     }
+
+    /**
+     * Get country info by iso code
+     *
+     * @param iso
+     */
+    getCountryByIso(iso: string): Country
+    {
+        return this.countries.find(country => country.iso === iso);
+    }
+
+     /**
+     * Toggle edit mode
+     *
+     * @param editMode
+     */
+     toggleEditMode(editMode: boolean | null = null): void
+     {
+         if ( editMode === null )
+         {
+             this.editMode = !this.editMode;
+         }
+         else
+         {
+             this.editMode = editMode;
+         }
+ 
+     }
+
+     
 }

@@ -1,0 +1,213 @@
+
+<div class="modal-dialog-content">
+    <div class="flex flex-col w-full">
+        <!-- Close button -->
+        <div class="text-right">
+            <a mat-dialog-close
+                mat-icon-button
+                [matTooltip]="'Close'">
+                <mat-icon
+                    [svgIcon]="'heroicons_outline:x-mark'"></mat-icon>
+            </a>
+        </div>
+
+
+        <!-- Contact form -->
+        <div class="not-edit-mode relative flex flex-col flex-auto items-center px-6 sm:px-12">
+            <div class="w-full max-w-3xl">
+                <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+
+                    <!-- Avatar -->
+                    <div class="flex flex-auto items-end">
+                        <div class="relative flex items-center justify-center w-32 h-32 rounded-full overflow-hidden ring-4 ring-bg-card">
+                            <!-- Upload / Remove avatar -->
+                            <div class="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
+                            <div class="absolute inset-0 flex items-center justify-center z-20">
+                                <div>
+                                    <input
+                                        id="avatar-file-input"
+                                        class="absolute h-0 w-0 opacity-0 invisible pointer-events-none"
+                                        type="file"
+                                        [multiple]="false"
+                                        [accept]="'image/jpeg, image/png'"
+                                        (change)="uploadAvatar(avatarFileInput.files)"
+                                        #avatarFileInput>
+                                    <label
+                                        class="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-hover"
+                                        for="avatar-file-input"
+                                        matRipple>
+                                        <mat-icon
+                                            class="text-white"
+                                            [svgIcon]="'heroicons_outline:camera'"></mat-icon>
+                                    </label>
+                                </div>
+                                <div>
+                                    <button
+                                        mat-icon-button>
+                                        <mat-icon
+                                            class="text-white"
+                                            [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Name -->
+                    <div class="mt-8">
+                        <mat-form-field
+                            class="w-full"
+                            [subscriptSizing]="'dynamic'">
+                            <mat-label>Name</mat-label>
+                            <mat-icon
+                                matPrefix
+                                class="hidden sm:flex icon-size-5"
+                                [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                            <input
+                                matInput
+                                [formControlName]="'name'"
+                                [placeholder]="'Enter name in english'"
+                                [spellcheck]="false">
+                        </mat-form-field>
+                    </div>
+
+                    <!-- Name -->
+                    <div class="mt-8">
+                        <mat-form-field
+                            class="w-full"
+                            [subscriptSizing]="'dynamic'">
+                            <mat-label>اسم</mat-label>
+                            <mat-icon
+                                matPrefix
+                                class="hidden sm:flex icon-size-5"
+                                [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                            <input
+                                matInput
+                                [formControlName]="'arabicName'"
+                                [placeholder]="'Enter name in Arabic'"
+                                [spellcheck]="false">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="mt-8">
+                        <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+                            <mat-label>Group</mat-label>
+                            <input type="text" placeholder="Select group" aria-label="Number" matInput [formControlName]="'group'"
+                                [matAutocomplete]="auto">
+                            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                <mat-option [value]="'1'">Group 1</mat-option>
+                                <mat-option [value]="'2'">Group 2</mat-option>
+                                <mat-option [value]="'3'">Group 3</mat-option>
+                                <mat-option [value]="'4'">Group 4</mat-option>
+                                <mat-option [value]="'5'">Group 5</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+
+                    <!-- phone -->
+                    <div class="mt-8">
+                        <mat-form-field
+                            class="w-full"
+                            [subscriptSizing]="'dynamic'">
+                            <mat-label>Phone</mat-label>
+                            <mat-icon
+                                matPrefix
+                                class="hidden sm:flex icon-size-5"
+                                [svgIcon]="'heroicons_solid:phone'"></mat-icon>
+                            <input
+                                matInput
+                                [formControlName]="'phone'"
+                                [placeholder]="'Enter phone number'"
+                                [spellcheck]="false">
+                        </mat-form-field>
+                    </div>
+
+                    <!-- email -->
+                    <div class="mt-8">
+                        <mat-form-field
+                            class="w-full"
+                            [subscriptSizing]="'dynamic'">
+                            <mat-label>Email</mat-label>
+                            <mat-icon
+                                matPrefix
+                                class="hidden sm:flex icon-size-5"
+                                [svgIcon]="'heroicons_solid:envelope'"></mat-icon>
+                            <input
+                                matInput
+                                [formControlName]="'email'"
+                                [placeholder]="'Enter email address'"
+                                [spellcheck]="false">
+                        </mat-form-field>
+                    </div>
+
+                    <!-- password -->
+                    <div class="mt-8">
+                        <mat-form-field
+                            class="w-full"
+                            [subscriptSizing]="'dynamic'">
+                            <mat-label>Password</mat-label>
+                            <mat-icon
+                                matPrefix
+                                class="hidden sm:flex icon-size-5"
+                                [svgIcon]="'heroicons_solid:lock-closed'"></mat-icon>
+                            <input
+                                matInput
+                                [formControlName]="'password'"
+                                [placeholder]="'Enter password'"
+                                [spellcheck]="false">
+                        </mat-form-field>
+                    </div>
+
+                    <!-- confirm password -->
+                    <div class="mt-8">
+                        <mat-form-field
+                            class="w-full"
+                            [subscriptSizing]="'dynamic'">
+                            <mat-label>Confirm password</mat-label>
+                            <mat-icon
+                                matPrefix
+                                class="hidden sm:flex icon-size-5"
+                                [svgIcon]="'heroicons_solid:lock-closed'"></mat-icon>
+                            <input
+                                matInput
+                                [formControlName]="'confirmPassword'"
+                                [placeholder]="'Confirm password'"
+                                [spellcheck]="false">
+                        </mat-form-field>
+                    </div>
+                    
+
+
+                    <!-- Actions -->
+                    <div class="flex items-center mt-10 -mx-6 sm:-mx-12 py-4 pr-4 pl-1 sm:pr-12 sm:pl-7 border-t bg-gray-50 dark:bg-transparent">
+                        <!-- Delete -->
+                        <button
+                            mat-button
+                            [color]="'warn'"
+                            [matTooltip]="'Delete'">
+                            Delete
+                        </button>
+                        <!-- Cancel -->
+                        <button
+                            class="ml-auto"
+                            mat-button
+                            [matTooltip]="'Cancel'">
+                            Cancel
+                        </button>
+                        <!-- Save -->
+                        <button
+                            class="ml-2"
+                            mat-flat-button
+                            [color]="'primary'"
+                            [matTooltip]="'Save'">
+                            Save
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</div>

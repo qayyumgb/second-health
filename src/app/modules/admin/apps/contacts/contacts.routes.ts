@@ -73,9 +73,6 @@ const canDeactivateContactsDetails = (
         // Just navigate
         return true;
     }
-
-    // Otherwise, close the drawer first, and then navigate
-    return component.closeDrawer().then(() => true);
 };
 
 export default [

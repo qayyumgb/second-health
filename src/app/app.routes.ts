@@ -87,7 +87,7 @@ export const appRoutes: Route[] = [
             // Apps
             {path: 'apps', children: [
                 {path: 'academy', loadChildren: () => import('app/modules/admin/apps/academy/academy.routes')},
-                {path: 'contact', loadChildren: () => import('app/modules/admin/apps/academy/academy.routes')},
+                {path: 'contacts', loadChildren: () => import('app/modules/admin/apps/contacts/contacts.routes')},
             ]},
 
             // Pages

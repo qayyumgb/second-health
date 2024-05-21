@@ -1,7 +1,8 @@
 import { AsyncPipe, DOCUMENT, I18nPluralPipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -11,6 +12,7 @@ import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 import { ContactsService } from 'app/modules/admin/apps/contacts/contacts.service';
 import { Contact, Country } from 'app/modules/admin/apps/contacts/contacts.types';
 import { filter, fromEvent, Observable, Subject, switchMap, takeUntil } from 'rxjs';
+import { ContactsDetailsComponent } from '../details/details.component';
 
 @Component({
     selector       : 'contacts-list',
@@ -18,7 +20,7 @@ import { filter, fromEvent, Observable, Subject, switchMap, takeUntil } from 'rx
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
-    imports        : [MatSidenavModule, RouterOutlet, NgIf, MatFormFieldModule, MatIconModule, MatInputModule, FormsModule, ReactiveFormsModule, MatButtonModule, NgFor, NgClass, RouterLink, AsyncPipe, I18nPluralPipe],
+    imports        : [MatSidenavModule, RouterOutlet, NgIf, MatFormFieldModule, MatIconModule, MatInputModule, FormsModule, ReactiveFormsModule, MatButtonModule, NgFor, NgClass, RouterLink, AsyncPipe, I18nPluralPipe,MatDialogModule],
 })
 export class ContactsListComponent implements OnInit, OnDestroy
 {
@@ -33,7 +35,7 @@ export class ContactsListComponent implements OnInit, OnDestroy
     searchInputControl: UntypedFormControl = new UntypedFormControl();
     selectedContact: Contact;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
-
+    @ViewChild('dialogTemplate') dialogTemplate!: TemplateRef<any>;
     /**
      * Constructor
      */
@@ -44,10 +46,23 @@ export class ContactsListComponent implements OnInit, OnDestroy
         @Inject(DOCUMENT) private _document: any,
         private _router: Router,
         private _fuseMediaWatcherService: FuseMediaWatcherService,
+        public dialog: MatDialog
     )
     {
     }
 
+
+    openDetail(item: any): void {
+     
+      this.dialog.open(ContactsDetailsComponent, {
+        width: '800px',
+        data: item,
+        // other configuration options
+      });
+  
+      // this._router.navigate(['./', item.id]); // Navigate to the route corresponding to the item
+      this.selectedContact = null;
+    }
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
@@ -107,17 +122,17 @@ export class ContactsListComponent implements OnInit, OnDestroy
             .subscribe();
 
         // Subscribe to MatDrawer opened change
-        this.matDrawer.openedChange.subscribe((opened) =>
-        {
-            if ( !opened )
-            {
-                // Remove the selected contact when drawer closed
-                this.selectedContact = null;
+        // this.matDrawer.openedChange.subscribe((opened) =>
+        // {
+        //     if ( !opened )
+        //     {
+        //         // Remove the selected contact when drawer closed
+        //         this.selectedContact = null;
 
-                // Mark for check
-                this._changeDetectorRef.markForCheck();
-            }
-        });
+        //         // Mark for check
+        //         this._changeDetectorRef.markForCheck();
+        //     }
+        // });
 
         // Subscribe to media changes
         this._fuseMediaWatcherService.onMediaChange$

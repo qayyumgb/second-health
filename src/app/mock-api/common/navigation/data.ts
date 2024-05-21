@@ -31,6 +31,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 icon : 'heroicons_outline:academic-cap',
                 link : '/apps/AppName',
             },
+            {
+              id   : 'apps.contacts',
+              title: 'Contacts',
+              type : 'basic',
+              icon : 'heroicons_outline:user-group',
+              link : '/apps/contacts',
+          },
         ],
     },
     {

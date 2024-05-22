@@ -10,6 +10,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { ModalComponent } from '@fuse/components/modal/modal.component';
+import { AddInventoryComponent } from '../add-inventory/add-inventory.component';
 
 export interface Iinventory {
   lodge?: string;
@@ -50,7 +51,7 @@ export class InventoryListComponent {
   constructor(public dialog: MatDialog) {}
 
   openDialog() {
-    const dialogRef = this.dialog.open(ModalComponent);
+    const dialogRef = this.dialog.open(AddInventoryComponent,{maxWidth:'660px'});
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

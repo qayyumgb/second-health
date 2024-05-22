@@ -151,10 +151,17 @@
                         <th mat-header-cell *matHeaderCellDef>
                         </th>
                         <td mat-cell *matCellDef="let DashboardSummary">
-                            <a href="/dashboards/view-detail">link</a>
-                            <button mat-icon-button>
-                                <mat-icon [svgIcon]="'heroicons_mini:eye'"></mat-icon>
+                          
+                            <button mat-icon-button (click)="Edit()">
+                              <mat-icon svgIcon="heroicons_mini:pencil-square" class="icon-size-4"></mat-icon>
                             </button>
+                            <button mat-icon-button (click)="deleteGridItem()">
+                              <mat-icon svgIcon="heroicons_mini:trash" class="icon-size-4"></mat-icon>
+                            </button>
+                            <button mat-icon-button>
+                              <mat-icon [svgIcon]="'heroicons_mini:eye'" class="icon-size-4"></mat-icon>
+                            </button>
+            
                         </td>
                     </ng-container>
 

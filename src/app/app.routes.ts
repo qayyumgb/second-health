@@ -88,6 +88,7 @@ export const appRoutes: Route[] = [
             {path: 'apps', children: [
                 {path: 'academy', loadChildren: () => import('app/modules/admin/apps/academy/academy.routes')},
                 {path: 'contacts', loadChildren: () => import('app/modules/admin/apps/contacts/contacts.routes')},
+                {path: 'ecommerce', loadChildren: () => import('app/modules/admin/apps/ecommerce/ecommerce.routes')},
             ]},
 
             // Pages

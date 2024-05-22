@@ -146,11 +146,20 @@
     </div>
 
     <!-- World Map -->
-
+    <div class="world-map-chart w-full sm:col-span-2 md:col-span-4 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden mt-8">
+      <div class="text-lg font-medium tracking-tight leading-6 truncate">World Map</div>
+      <highcharts-chart
+      id="container" 
+      [Highcharts]="Highcharts"
+      [constructorType]="chartConstructor"
+      [options]="worldChartOptions"
+       style="width: 100%;  display: block;">
+    </highcharts-chart>
+    </div>
 
     <!-- Github issues summary -->
     <div
-      class="sm:col-span-2 md:col-span-4 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden mt-8">
+      class="sm:col-span-2 w-full md:col-span-4 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden mt-8">
       <div class="flex flex-col sm:flex-row items-start justify-between">
         <div class="text-lg font-medium tracking-tight leading-6 truncate">Github Issues Summary</div>
         <div class="mt-3 sm:mt-0 sm:ml-2">

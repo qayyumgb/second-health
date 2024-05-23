@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Contact, Country, Tag } from 'app/modules/admin/apps/contacts/contacts.types';
+import { Contact, Contact2, Country, Tag } from 'app/modules/admin/apps/contacts/contacts.types';
 import { BehaviorSubject, filter, map, Observable, of, switchMap, take, tap, throwError } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
@@ -139,6 +139,21 @@ export class ContactsService
         );
     }
 
+
+    createNewContact(co): Observable<Contact2>
+    {
+        return this.contacts$.pipe(
+            take(1),
+            switchMap(contacts => this._httpClient.post<Contact2>('api/apps/contacts/contact', {}).pipe(
+                map(() =>
+                {
+                    co.id = contacts.length+1;
+                    this._contacts.next([co, ...contacts]);
+                    return co;
+                }),
+            )),
+        );
+    }
     /**
      * Update contact
      *

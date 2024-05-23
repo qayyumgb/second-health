@@ -4,17 +4,7 @@
         class="flex-auto h-full bg-card dark:bg-transparent"
         (backdropClick)="onBackdropClicked()">
 
-        <!-- Drawer -->
-        <!-- <mat-drawer
-            class="w-full md:w-160 dark:bg-gray-900"
-            [mode]="drawerMode"
-            [opened]="false"
-            [position]="'end'"
-            [disableClose]="true"
-            #matDrawer>
-            <router-outlet></router-outlet>
-        </mat-drawer> -->
-
+       
         <div class="flex flex-col">
 
             <!-- Main -->
@@ -79,6 +69,7 @@
                                         {{contact.name.charAt(0)}}
                                     </div>
                                 </ng-container>
+                               
                                 <!-- Contact -->
                                 <a (click)="openDetail(contact)"
                                     class="z-20 flex items-center px-6 py-4 md:px-8 cursor-pointer border-b"

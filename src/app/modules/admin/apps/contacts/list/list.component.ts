@@ -14,6 +14,8 @@ import { Contact, Country } from 'app/modules/admin/apps/contacts/contacts.types
 import { filter, fromEvent, Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { ContactsDetailsComponent } from '../details/details.component';
 import { AddNewUserComponent } from '../add-new-user/add-new-user.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 
 @Component({
     selector       : 'contacts-list',
@@ -21,11 +23,12 @@ import { AddNewUserComponent } from '../add-new-user/add-new-user.component';
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
-    imports        : [MatSidenavModule, RouterOutlet, NgIf, MatFormFieldModule, MatIconModule, MatInputModule, FormsModule, ReactiveFormsModule, MatButtonModule, NgFor, NgClass, RouterLink, AsyncPipe, I18nPluralPipe,MatDialogModule],
+    imports        : [MatSidenavModule,MatAutocompleteModule, RouterOutlet, NgIf, MatFormFieldModule, MatIconModule, MatInputModule, FormsModule, ReactiveFormsModule, MatButtonModule, NgFor, NgClass, RouterLink, AsyncPipe, I18nPluralPipe,MatDialogModule],
 })
 export class ContactsListComponent implements OnInit, OnDestroy
 {
     @ViewChild('matDrawer', {static: true}) matDrawer: MatDrawer;
+    options: string[] = ['One', 'Two', 'Three'];
 
     contacts$: Observable<Contact[]>;
 

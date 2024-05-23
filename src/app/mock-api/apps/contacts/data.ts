@@ -1,5 +1,7 @@
+import { Contact2 } from "app/modules/admin/apps/contacts/contacts.types";
+
 /* eslint-disable */
-export const contacts = [
+export const contacts2 = [
     {
         id          : 'cd5fa417-b667-482d-b208-798d9da3213c',
         avatar      : 'assets/images/avatars/male-01.jpg',
@@ -102,6 +104,42 @@ export const contacts = [
             'c31e9e5d-e0cb-4574-a13f-8a6ee5ff8309',
         ],
     },
+];
+
+export const contacts = [
+    {
+        id          : '1',
+        avatar      : 'assets/images/avatars/male-01.jpg',
+        name        : 'Dejesus Michael',
+        nameArabic        : 'ديجيسوس مايكل',
+        emails: 'dejesusmichael@mail.org',
+        phoneNumbers: '984 531 2468',
+        group: 'a',
+        password : '56ddbd47-4078-4ddd-8448-73c5e88d5f59',
+    },
+    {
+        id          : '2',
+        avatar      : null,
+        name        : 'Dena Molina',
+        nameArabic        : 'دينا مولينا',
+        emails: 'dejesusmichael@mail.org',
+        phoneNumbers: '984 531 2468',
+        group: 'a',
+        password : '56ddbd47-4078-4ddd-8448-73c5e88d5f59',
+      
+    },
+    {
+        id          : '3',
+        avatar      : 'assets/images/avatars/male-02.jpg',
+        name        : 'Bernard Langley',
+        nameArabic        : 'برنارد لانجلي',
+        emails: 'dejesusmichael@mail.org',
+        phoneNumbers: '984 531 2468',
+        group: 'a',
+        password : '56ddbd47-4078-4ddd-8448-73c5e88d5f59',
+
+        
+    }
 ];
 export const countries = [
     {

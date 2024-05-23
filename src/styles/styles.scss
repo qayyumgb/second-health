@@ -5,6 +5,13 @@
 .modal-dialog-content{
     max-height: 80vh;
 }
-.mat-mdc-dialog-surface.mdc-dialog__surface{
-  padding: 0;
+::ng-deep{
+    .mat-mdc-dialog-container .mdc-dialog__surface{
+        padding: 0  !important;
+        overflow: hidden;
+    }
+}
+.mat-mdc-dialog-container .mdc-dialog__surface{
+    padding: 0  !important;
+    overflow: hidden;
 }

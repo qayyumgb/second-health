@@ -20,7 +20,17 @@ export interface Contact
     notes?: string | null;
     tags: string[];
 }
-
+export interface Contact2
+{
+    id: string;
+    avatar?: string | null;
+    name: string;
+    nameArabic: string;
+    emails?: string;
+    group?:string;
+    phoneNumbers?:string;
+    password?: string;
+}
 export interface Country
 {
     id: string;

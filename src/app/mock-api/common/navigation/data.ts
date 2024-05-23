@@ -24,13 +24,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type    : 'group',
         icon    : 'heroicons_outline:home',
         children: [
-            {
-                id   : 'app-name',
-                title: 'App Name',
-                type : 'basic',
-                icon : 'heroicons_outline:academic-cap',
-                link : '/apps/AppName',
-            },
+            
             {
               id   : 'apps.contacts',
               title: 'Contacts',
@@ -74,7 +68,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 title: 'Report Name',
                 type : 'basic',
                 icon : 'heroicons_outline:square-3-stack-3d',
-                link : '/report/report-name',
+                link : '/apps/reports',
             },
         ],
     },

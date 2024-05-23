@@ -214,6 +214,16 @@ export class DashboardComponent {
     colorAxis: {
       min: 0
     },
+    tooltip: {
+      formatter: function() {
+          return `Value: ${this.point.value} <br>
+          Value: ${this.point.value} <br>
+          Value: ${this.point.value} <br>
+          Value: ${this.point.value} <br>
+          Value: ${this.point.value} <br>
+          <b>${this.point.name}</b>`;
+      }
+  },
     series: [
       {
         name: "Random data <br> random data 2",

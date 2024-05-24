@@ -55,7 +55,7 @@ groupName:string[] = ["Group 1", "Group 2", "Group 3", "Group 4", "Group 5"]
 
   onSubmit() {
     this.contact  ={
-      id:'',
+    id:'',
     nameArabic : this.contactForm?.controls['arabicName']?.value,
     name : this.contactForm.controls['name'].value,
     group : this.contactForm.controls['group'].value,

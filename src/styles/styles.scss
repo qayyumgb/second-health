@@ -10,15 +10,16 @@ html,body{
     max-height: 80vh;
 }
 ::ng-deep{
+    .mdc-dialog__surface,
     .mat-mdc-dialog-container .mdc-dialog__surface{
         padding: 0  !important;
         overflow: hidden;
     }
 }
-// .mat-mdc-dialog-container .mdc-dialog__surface{
-//     padding: 0  !important;
-//     overflow: hidden;
-// }
+.mat-mdc-dialog-container .mdc-dialog__surface{
+    padding: 0  !important;
+    overflow: hidden;
+}
 .mat-mdc-unelevated-button:not(:disabled){
   background-color: #15508a !important;
 }

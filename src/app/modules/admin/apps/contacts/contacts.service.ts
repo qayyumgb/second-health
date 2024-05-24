@@ -162,6 +162,7 @@ export class ContactsService
      */
     updateContact(id: string, contact: Contact): Observable<Contact>
     {
+        debugger
         return this.contacts$.pipe(
             take(1),
             switchMap(contacts => this._httpClient.patch<Contact>('api/apps/contacts/contact', {

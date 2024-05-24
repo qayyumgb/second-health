@@ -1,18 +1,23 @@
-<form action="" class="max-w-3xl w-full" style="min-width: 620px;">
+<form action="" class="max-w-3xl w-full" style="min-width: 620px;" [formGroup]="selectedProductForm">
   <h2 mat-dialog-title>Add Inventory</h2>
   <mat-dialog-content class="mat-typography">
     <div class="flex w-full">
       <mat-form-field class="w-2/3">
         <mat-label>The lounge</mat-label>
-        <mat-select class="w-12">
+        <mat-select class=""  [formControlName]="'lodge'">
           <ng-container *ngFor="let lounge of ['lounge 1', 'lounge 2', 'lounge 3', 'lounge 4']">
+            @if (updateData?.lodge == lounge) {
+              <mat-option [value]="lounge" selected>{{lounge}}</mat-option>
+            }
+            @else {
             <mat-option [value]="lounge">{{lounge}}</mat-option>
+            }
           </ng-container>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="pl-2 w-2/3">
         <mat-label>Period</mat-label>
-        <mat-select>
+        <mat-select  [formControlName]="'period'">
           <ng-container *ngFor="let period of ['period 1', 'period 2', 'period 3', 'period 4']">
             <mat-option [value]="period">{{period}}</mat-option>
           </ng-container>
@@ -22,7 +27,7 @@
     <div class="flex w-full">
       <mat-form-field class="w-2/3">
         <mat-label>Kind</mat-label>
-        <mat-select class="w-12">
+        <mat-select  [formControlName]="'kind'">
           <ng-container *ngFor="let lounge of ['kind 1', 'kind 2', 'kind 3', 'kind 4']">
             <mat-option [value]="lounge">{{lounge}}</mat-option>
           </ng-container>
@@ -30,7 +35,7 @@
       </mat-form-field>
       <mat-form-field class="pl-2 w-2/3">
         <mat-label>Date</mat-label>
-        <input matInput [matDatepicker]="dp">
+        <input matInput [matDatepicker]="dp"  [formControlName]="'date'">
         <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
         <mat-datepicker #dp></mat-datepicker>
       </mat-form-field>
@@ -40,34 +45,78 @@
         <!-- Name -->
         <mat-form-field class="w-full">
           <mat-label>Name</mat-label>
-          <input matInput>
+          <input matInput  [formControlName]="'fName'">
         </mat-form-field>
 
         <!-- SKU and Barcode -->
-        <div class="flex">
-          <mat-form-field class="w-1/3 pr-2">
-            <mat-label>SKU</mat-label>
-            <input matInput>
+        <div class="flex gap-3">
+          <mat-form-field class="w-full">
+            <mat-label>Phone</mat-label>
+            <input matInput  [formControlName]="'pNumber'">
           </mat-form-field>
-          <mat-form-field class="w-2/3 pl-2">
-            <mat-label>Barcode</mat-label>
-            <input matInput>
+          <mat-form-field class="w-full">
+            <mat-label>From</mat-label>
+            <input matInput  [formControlName]="'from'">
           </mat-form-field>
         </div>
 
 
 
         <!-- Stock and Reserved -->
-        <div class="flex">
-          <mat-form-field class="w-1/3 pr-2">
-            <mat-label>Stock</mat-label>
-            <input type="number" matInput>
+        <div class="flex gap-3">
+          <mat-form-field class="w-full">
+            <mat-label>F No</mat-label>
+            <input type="number" matInput  [formControlName]="'fNo'">
           </mat-form-field>
-          <mat-form-field class="w-1/3 pl-2">
-            <mat-label>Reserved</mat-label>
-            <input type="number" matInput>
+          <mat-form-field class="w-full">
+            <mat-label>Nat</mat-label>
+            <input type="number" matInput  [formControlName]="'nat'">
           </mat-form-field>
         </div>
+        <div class="flex gap-3">
+          <mat-form-field class="w-1/3 ">
+            <mat-label>KPI 1</mat-label>
+            <input type="number" matInput  [formControlName]="'kpi1'">
+          </mat-form-field>
+          <mat-form-field class="w-1/3">
+            <mat-label>KPI 2</mat-label>
+            <input type="number" matInput  [formControlName]="'kpi2'">
+          </mat-form-field>
+          <mat-form-field class="w-1/3 ">
+            <mat-label>KPI 3</mat-label>
+            <input type="number" matInput  [formControlName]="'kpi3'">
+          </mat-form-field>
+        </div>
+     
+        <div class="flex gap-3">
+          <mat-form-field class="w-1/3">
+            <mat-label>KPI 4</mat-label>
+            <input type="number" matInput  [formControlName]="'kpi4'">
+          </mat-form-field>
+          <mat-form-field class="w-1/3 ">
+            <mat-label>KPI 5</mat-label>
+            <input type="number" matInput  [formControlName]="'kpi5'">
+          </mat-form-field>
+          <mat-form-field class="w-1/3">
+            <mat-label>KPI 6</mat-label>
+            <input type="number" matInput  [formControlName]="'kpi6'">
+          </mat-form-field>
+        </div>
+        <div class="flex gap-3">
+          <mat-form-field class="w-1/3 ">
+            <mat-label>KPI 7</mat-label>
+            <input type="number" matInput  [formControlName]="'kpi7'">
+          </mat-form-field>
+          <mat-form-field class="w-1/3">
+            <mat-label>KPI 8</mat-label>
+            <input type="number" matInput  [formControlName]="'kpi8'">
+          </mat-form-field>
+          <mat-form-field class="w-1/3 ">
+            <mat-label>KPI 9</mat-label>
+            <input type="number" matInput  [formControlName]="'kpi9'">
+          </mat-form-field>
+        </div>
+        
       </div>
 
 
@@ -75,7 +124,7 @@
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Save</button>
+    <button mat-button color="primary" (click)="saveInventary()" [mat-dialog-close]="true" cdkFocusInitial>Save</button>
   </mat-dialog-actions>
 
 </form>

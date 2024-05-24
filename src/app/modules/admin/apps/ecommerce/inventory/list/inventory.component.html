@@ -26,7 +26,7 @@
                   [placeholder]="'Search products'">
           </mat-form-field>
           <!-- Add product button -->
-          <button (click)="openDialog()"
+          <button (click)="openDialog('add')"
               class="ml-4"
               mat-flat-button
               [color]="'primary'">
@@ -191,12 +191,11 @@
                   <ng-container matColumnDef="action">
                       <th mat-header-cell *matHeaderCellDef>
                       </th>
-                      <td mat-cell *matCellDef="let DashboardSummary" class="whitespace-nowrap">
-                        
-                          <button mat-icon-button (click)="Edit()">
+                      <td mat-cell  *matCellDef="let DashboardSummary" class="whitespace-nowrap">
+                         <button mat-icon-button (click)="openDialog(DashboardSummary.id)">
                             <mat-icon svgIcon="heroicons_mini:pencil-square" class="icon-size-4"></mat-icon>
                           </button>
-                          <button mat-icon-button (click)="deleteGridItem()">
+                          <button mat-icon-button (click)="deleteInventary(DashboardSummary.id)">
                             <mat-icon svgIcon="heroicons_mini:trash" class="icon-size-4"></mat-icon>
                           </button>
                           <button mat-icon-button>

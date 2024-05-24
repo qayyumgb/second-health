@@ -45,6 +45,7 @@ export class ContactsDetailsComponent implements OnInit, OnDestroy
      * Constructor
      */
     constructor(
+        private _contactsService: ContactsService,
       private _formBuilder: UntypedFormBuilder,
       @Inject(MAT_DIALOG_DATA) public data: any
     )
@@ -62,19 +63,20 @@ export class ContactsDetailsComponent implements OnInit, OnDestroy
     ngOnInit(): void
     {
         // Create the contact form
-        this.contactForm = this._formBuilder.group({
-          id          : [''],
-          avatar      : [null],
-          name        : ['', [Validators.required]],
-          emails      : this._formBuilder.array([]),
-          phoneNumbers: this._formBuilder.array([]),
-          title       : [''],
-          company     : [''],
-          birthday    : [null],
-          address     : [null],
-          notes       : [null],
-          tags        : [[]],
+    
+      this.contactForm = this._formBuilder.group({
+        id: [''],
+        avatar: [null],
+        name: [''],
+        arabicName: [''],
+        group: [''],
+        phoneNumbers: [''],
+        email: [''],
+        password: [''],
       });
+      if (this.data) {
+        this.contactForm.patchValue(this.data)
+      }
     }
 
     /**
@@ -119,5 +121,10 @@ export class ContactsDetailsComponent implements OnInit, OnDestroy
  
      }
 
-     
+     updateContact(){
+        this._contactsService.updateContact(this.contactForm.value.id,this.contactForm.value).subscribe(x => console.log(x))
+     }
+     deleteContact(){
+
+     }
 }

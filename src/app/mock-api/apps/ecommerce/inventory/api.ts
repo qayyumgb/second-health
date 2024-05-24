@@ -66,9 +66,9 @@ export class ECommerceInventoryMockApi
                 {
                     products.sort((a, b) =>
                     {
-                        const fieldA = a[sort].toString().toUpperCase();
-                        const fieldB = b[sort].toString().toUpperCase();
-                        return order === 'asc' ? fieldA.localeCompare(fieldB) : fieldB.localeCompare(fieldA);
+                        const fieldA = a[sort]?.toString().toUpperCase();
+                        const fieldB = b[sort]?.toString().toUpperCase();
+                        return order === 'asc' ? fieldA?.localeCompare(fieldB) : fieldB?.localeCompare(fieldA);
                     });
                 }
                 else

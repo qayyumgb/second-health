@@ -1,6 +1,6 @@
-import { NgFor } from '@angular/common';
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { AsyncPipe, NgFor } from '@angular/common';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatOptionModule } from '@angular/material/core';
@@ -13,18 +13,26 @@ import { RouterLink } from '@angular/router';
 import { InventoryService } from '../inventory.service';
 import { Iinventory } from '../inventory.types';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { Observable, map, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-add-inventory',
   standalone: true,
-  imports: [MatButtonModule, MatDialogModule,MatAutocompleteModule, RouterLink, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, NgFor, MatOptionModule, MatDatepickerModule],
+  imports: [MatButtonModule, MatDialogModule,MatAutocompleteModule, RouterLink, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, NgFor, MatOptionModule, MatDatepickerModule,MatAutocompleteModule,AsyncPipe],
   templateUrl: './add-inventory.component.html',
   styleUrl: './add-inventory.component.scss'
 })
-export class AddInventoryComponent {
+export class AddInventoryComponent implements OnInit {
   selectedProductForm: UntypedFormGroup;
   DashboardDataSource: number = 1
-  updateData: Iinventory
+  updateData: Iinventory;
+  lodgeControl = new FormControl('');
+  periodControl = new FormControl('');
+
+  optionsLodge: string[] = ['lounge 1', 'lounge 2', 'lounge 3','lounge 4','lounge 5'];
+  optionPeriod: string[] = ['period 1', 'period 2', 'period 3','period 4','period 5'];
+  lodngeFilteredOptions: Observable<string[]>;
+  periodFilteredOptions: Observable<string[]>;
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
     private _formBuilder: UntypedFormBuilder,
@@ -75,8 +83,26 @@ export class AddInventoryComponent {
       }
 
     })
-  }
 
+    this.lodngeFilteredOptions = this.lodgeControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterLodnge(value || '')),
+    );
+    this.periodFilteredOptions = this.periodControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterPeriod(value || '')),
+    );
+  }
+  private _filterLodnge(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.optionsLodge.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  private _filterPeriod(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.optionPeriod.filter(option => option.toLowerCase().includes(filterValue));
+  }
   tempInventary: Iinventory
   saveInventary() {
     this.tempInventary = this.selectedProductForm.value

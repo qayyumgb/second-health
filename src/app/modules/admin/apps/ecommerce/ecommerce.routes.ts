@@ -8,10 +8,10 @@ export default [
     {
         path      : '',
         pathMatch : 'full',
-        redirectTo: 'inventory',
+        redirectTo: '',
     },
     {
-        path     : 'inventory',
+        path     : '',
         component: InventoryComponent,
         children : [
             {

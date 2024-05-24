@@ -4,10 +4,10 @@
     <div class="flex w-full gap-2 mt-3">
       <mat-form-field class="w-full">
         <mat-label>The Lounge</mat-label>
-        <input type="text" placeholder="Choose a Lounge" aria-label="Number" matInput [matAutocomplete]="lounge"
+        <input type="text" placeholder="Choose a Lounge"  aria-label="Number" [formControl]="lodgeControl" matInput [matAutocomplete]="lounge"
           [formControlName]="'lodge'">
         <mat-autocomplete #lounge="matAutocomplete">
-          @for (option of ['lounge 1', 'lounge 2', 'xlounge 3', 'lounge 4']; track option) {
+          @for (option of lodngeFilteredOptions | async; track option) {
           <mat-option [value]="option">{{option}}</mat-option>
           }
         </mat-autocomplete>

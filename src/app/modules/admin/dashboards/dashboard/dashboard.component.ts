@@ -50,7 +50,7 @@ const DashboardSummary: DashboardSummaryGridElement[] = [
   {transactionId: '528651571NT', date: 'Oct 08, 2019', name: 'Gary Peters', amount: 1358.75, status: 'violated'},
   {transactionId: '528651571NT', date: 'Oct 08, 2019', name: 'Leo Gill', amount: 1358.75, status: 'pass'},
   {transactionId: '528651571NT', date: 'Oct 08, 2019', name: 'Sarah', amount: 1358.75, status: 'partially violated'},
-  {transactionId: '528651571NT', date: 'Oct 08, 2019', name: 'Nancy Salazar', amount: 1358.75, status: 'pending'},
+  {transactionId: '528651571NT', date: 'Oct 08, 2019', name: 'Nancy Salazar', amount: 1358.75, status: 'violated'},
   {transactionId: '528651571NT', date: 'Oct 08, 2019', name: 'Matthew Wood', amount: 1358.75, status: 'partially violated'},
 ];
 

@@ -196,8 +196,9 @@ export class DashboardComponent {
   }
   chartData = [{ code3: "ABW", z: 105 }, { code3: "AFG", z: 35530 }];
   worldChartOptions: Highcharts.Options = {
+    
     chart: {
-      map: worldMap
+      map: worldMap,
     },
     title: {
       text: ""
@@ -208,34 +209,49 @@ export class DashboardComponent {
         alignTo: "spacingBox"
       }
     },
+    
     legend: {
-      enabled: true
+      enabled: false
     },
     colorAxis: {
-      min: 0
+      min: 0,
+      stops: [
+        
+        [0, '#9ecc3b85']
+      ]
     },
     tooltip: {
       formatter: function() {
-          return `Value: ${this.point.value} <br>
-          Value: ${this.point.value} <br>
-          Value: ${this.point.value} <br>
-          Value: ${this.point.value} <br>
-          Value: ${this.point.value} <br>
-          <b>${this.point.name}</b>`;
+        return `<div class="custom-tooltip">
+                <div class="tooltip-body"><br>
+                  <p>Value: ${this.point.value}</p><br>
+                  <p>Value: ${this.point.value}</p><br>
+                  <p>Value: ${this.point.value}</p><br>
+                  <p>Value: ${this.point.value}</p><br>
+                  <p>Value: ${this.point.value}</p><br>
+                </div>
+                <br>
+                  <h3>${this.point.name}</h3>
+                  
+                </div>`;
       }
   },
+  
     series: [
+      
       {
         name: "Random data <br> random data 2",
         states: {
           
           hover: {
-            color: "#BADA55"
+            color: "#48AD48",
+            borderColor: 'transparent', // Remove the stroke color on hover
+          borderWidth: 0 // Remove the stroke width on hover
           }
         },
         dataLabels: {
           enabled: true,
-          format: ""
+          format: "",
         },
         allAreas: false,
         data: [
@@ -453,22 +469,27 @@ export class DashboardComponent {
           ['kg', 211],
           ['np', 212],
         ],
+        
       } as Highcharts.SeriesMapOptions,
       {
         // Specify points using lat/lon
         type: "mappoint",
+        
         name: "Canada cities",
         marker: {
           radius: 5,
           fillColor: "tomato"
         },
         data: [
+          
           {
+            color: '#000000',
             name: "Vancouver",
             lat: 49.246292,
             lon: -123.116226
           },
           {
+            color: '#000000',
             name: "Quebec City",
             lat: 46.829853,
             lon: -71.254028

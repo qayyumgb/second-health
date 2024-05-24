@@ -1,128 +1,160 @@
-<form action="" class="max-w-3xl w-full" style="min-width: 620px;" [formGroup]="selectedProductForm">
-  <h2 mat-dialog-title>Add Record</h2>
+<form action="" class="w-full" style="min-width: 620px;" [formGroup]="selectedProductForm">
+  <h2 mat-dialog-title class="text-lg text-gray-900 font-semibold">Add Record</h2>
   <mat-dialog-content class="mat-typography">
-    <div class="flex w-full">
-      <mat-form-field class="w-2/3">
-        <mat-label>Lounge</mat-label>
-        <mat-select class=""  [formControlName]="'lodge'">
-          <ng-container *ngFor="let lounge of ['lounge 1', 'lounge 2', 'lounge 3', 'lounge 4']">
-            @if (updateData?.lodge == lounge) {
-              <mat-option [value]="lounge" selected>{{lounge}}</mat-option>
-            }
-            @else {
-            <mat-option [value]="lounge">{{lounge}}</mat-option>
-            }
-          </ng-container>
-        </mat-select>
+    <div class="flex w-full gap-2 mt-3">
+      <mat-form-field class="w-full">
+        <mat-label>The Lounge</mat-label>
+        <input type="text" placeholder="Choose a Lounge" aria-label="Number" matInput [matAutocomplete]="lounge"
+          [formControlName]="'lodge'">
+        <mat-autocomplete #lounge="matAutocomplete">
+          @for (option of ['lounge 1', 'lounge 2', 'xlounge 3', 'lounge 4']; track option) {
+          <mat-option [value]="option">{{option}}</mat-option>
+          }
+        </mat-autocomplete>
       </mat-form-field>
-      <mat-form-field class="pl-2 w-2/3">
+      <mat-form-field class="w-full">
         <mat-label>Period</mat-label>
-        <mat-select  [formControlName]="'period'">
-          <ng-container *ngFor="let period of ['period 1', 'period 2', 'period 3', 'period 4']">
-            <mat-option [value]="period">{{period}}</mat-option>
-          </ng-container>
-        </mat-select>
+        <input type="text" placeholder="Choose a Period" aria-label="Number" matInput [matAutocomplete]="Period"
+          [formControlName]="'period'">
+        <mat-autocomplete #Period="matAutocomplete">
+          @for (option of ['period 1', 'period 2', 'period 3', 'period 4']; track option) {
+          <mat-option [value]="option">{{option}}</mat-option>
+          }
+        </mat-autocomplete>
       </mat-form-field>
     </div>
-    <div class="flex w-full">
-      <mat-form-field class="w-2/3">
-        <mat-label>Type</mat-label>
-        <mat-select  [formControlName]="'kind'">
-          <ng-container *ngFor="let lounge of ['kind 1', 'kind 2', 'kind 3', 'kind 4']">
-            <mat-option [value]="lounge">{{lounge}}</mat-option>
-          </ng-container>
-        </mat-select>
+    <div class="flex w-full gap-2">
+      <mat-form-field class="w-full">
+        <mat-label>Trip Type</mat-label>
+        <input type="text" placeholder="Choose a King" aria-label="Number" matInput [matAutocomplete]="kind"
+          [formControlName]="'tripType'">
+        <mat-autocomplete #kind="matAutocomplete">
+          @for (option of ['kind 1', 'kind 2', 'kind 3', 'kind 4']; track option) {
+          <mat-option [value]="option">{{option}}</mat-option>
+          }
+        </mat-autocomplete>
       </mat-form-field>
-      <mat-form-field class="pl-2 w-2/3">
-        <mat-label>Date & Time</mat-label>
-        <input matInput [matDatepicker]="dp"  [formControlName]="'date'">
+      <mat-form-field class="w-full ">
+        <mat-label>Date and Time</mat-label>
+        <input matInput [matDatepicker]="dp" [formControlName]="'dateTime'">
         <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
         <mat-datepicker #dp></mat-datepicker>
       </mat-form-field>
     </div>
-    <div class="flex items-center w-full">
-      <div class="flex flex-col w-full">
-        <!-- Name -->
-        <mat-form-field class="w-full">
-          <mat-label>Airlines</mat-label>
-          <input matInput  [formControlName]="'fName'">
-        </mat-form-field>
-
-        <!-- SKU and Barcode -->
-        <div class="flex gap-3">
-          <mat-form-field class="w-full">
-            <mat-label>Passengers No.</mat-label>
-            <input matInput  [formControlName]="'pNumber'">
-          </mat-form-field>
-          <mat-form-field class="w-full">
-            <mat-label>From</mat-label>
-            <input matInput  [formControlName]="'from'">
-          </mat-form-field>
-        </div>
-
-
-
-        <!-- Stock and Reserved -->
-        <div class="flex gap-3">
-          <mat-form-field class="w-full">
-            <mat-label>Flight Number</mat-label>
-            <input type="number" matInput  [formControlName]="'fNo'">
-          </mat-form-field>
-          <mat-form-field class="w-full">
-            <mat-label>Nationalities</mat-label>
-            <input type="number" matInput  [formControlName]="'nat'">
-          </mat-form-field>
-        </div>
-        <div class="">
-          <mat-form-field class="w-full ">
-            <mat-label>Vaccinated with polio vaccine before arriving</mat-label>
-            <input type="number" matInput  [formControlName]="'kpi1'">
-          </mat-form-field>
-          <mat-form-field class="w-full">
-            <mat-label>Vaccinated with polio vaccine at the port</mat-label>
-            <input type="number" matInput  [formControlName]="'kpi2'">
-          </mat-form-field>
-          <mat-form-field class="w-full">
-            <mat-label>Adhere to the yellow fever certificate</mat-label>
-            <input type="number" matInput  [formControlName]="'kpi3'">
-          </mat-form-field>
-        </div>
-     
-        <div class="">
-          <mat-form-field class="w-full">
-            <mat-label>Noncompliant with the yellow fever certificate</mat-label>
-            <input type="number" matInput  [formControlName]="'kpi4'">
-          </mat-form-field>
-          <mat-form-field class="w-full">
-            <mat-label>Yellow fever records</mat-label>
-            <input type="number" matInput  [formControlName]="'kpi5'">
-          </mat-form-field>
-          <mat-form-field class="w-full">
-            <mat-label>Vaccinated against meningitis before arriving</mat-label>
-            <input type="number" matInput  [formControlName]="'kpi6'">
-          </mat-form-field>
-        </div>
-        <div class="">
-          <mat-form-field class="w-full">
-            <mat-label>Given prophylactic treatment at the port</mat-label>
-            <input type="number" matInput  [formControlName]="'kpi7'">
-          </mat-form-field>
-          <mat-form-field class="w-full">
-            <mat-label>Expired meningitis certificates</mat-label>
-            <input type="number" matInput  [formControlName]="'kpi8'">
-          </mat-form-field>
-          <mat-form-field class="w-full">
-            <mat-label>Do not have meningitis certificates</mat-label>
-            <input type="number" matInput  [formControlName]="'kpi9'">
-          </mat-form-field>
-        </div>
-        
-      </div>
+    <div class="flex gap-2">
+      <mat-form-field class="w-full">
+        <mat-label>Name</mat-label>
+        <input matInput [formControlName]="'name'">
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label>Phone</mat-label>
+        <input matInput [formControlName]="'pNumber'">
+      </mat-form-field>
+    </div>
+    <div class="flex gap-3">
+      <mat-form-field class="w-full">
+        <mat-label>From</mat-label>
+        <input type="text" placeholder="Choose a Period" aria-label="Number" matInput [matAutocomplete]="Period"
+          [formControlName]="'from'">
+        <mat-autocomplete #Period="matAutocomplete">
+          @for (option of ['Pak', 'Ind', 'UK', 'TR']; track option) {
+          <mat-option [value]="option">{{option}}</mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label>Flight Number</mat-label>
+        <input type="number" matInput [formControlName]="'flightNo'">
+      </mat-form-field>
 
 
     </div>
+    <div class="flex gap-3">
+      <mat-form-field class="w-full">
+        <mat-label>Airlines</mat-label>
+        <input type="text" placeholder="Nationality" aria-label="Number" matInput [matAutocomplete]="airline"
+          [formControlName]="'airline'">
+        <mat-autocomplete #airline="matAutocomplete">
+          @for (option of ['Airline 1', 'Airline 2', 'Airline 3', 'Airline 4']; track option) {
+          <mat-option [value]="option">{{option}}</mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field class="w-full ">
+        <mat-label class="capitalized">No. of Passenger</mat-label>
+        <input type="text" matInput [formControlName]="'noOfPassenger'">
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label>Nationality</mat-label>
+        <input type="text" placeholder="Nationality" aria-label="Number" matInput [matAutocomplete]="Period"
+          [formControlName]="'nationality'">
+
+        <mat-autocomplete #Period="matAutocomplete">
+          @for (option of ['period 1', 'period 2', 'period 3', 'period 4']; track option) {
+          <mat-option [value]="option">{{option}}</mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <div class="flex gap-3">
+      <mat-form-field class="w-full ">
+        <mat-label class="capitalized">{{"Polio Vaccinated before arriving" }}</mat-label>
+        <input type="text" matInput [formControlName]="'pVBeforeArrival'">
+      </mat-form-field>
+    </div>
+    <div class="flex gap-3">
+      <mat-form-field class="w-full">
+        <mat-label class="capitalized">Port polio vaccination</mat-label>
+        <input type="text" matInput [formControlName]="'portPolioVaccination'">
+      </mat-form-field>
+      <mat-form-field class="w-full ">
+        <mat-label>Yellow fever
+          certification</mat-label>
+        <input type="text" matInput [formControlName]="'yellowFeverCertification'">
+      </mat-form-field>
+    </div>
+
+    <div class="flex gap-3">
+      <mat-form-field class="w-full">
+        <mat-label>Yellow fever certificate
+          Non-compliant </mat-label>
+        <input type="text" matInput [formControlName]="'yellowFeverCerNonComplaint'">
+      </mat-form-field>
+      <mat-form-field class="w-full ">
+        <mat-label>Yellow fever records</mat-label>
+        <input type="text" matInput [formControlName]="'yellowFeverRecord'">
+      </mat-form-field>
+    </div>
+    <div class="flex gap-3">
+      <mat-form-field class="w-full">
+        <mat-label> vaccinations against
+          meningitis</mat-label>
+        <input type="text" matInput [formControlName]="'MeningitisVaccinaiton'">
+      </mat-form-field>
+      <mat-form-field class="w-full ">
+        <mat-label>Preventive treatment
+          in the port </mat-label>
+        <input type="text" matInput [formControlName]="'portPreventionTreatment'">
+      </mat-form-field>
+    </div>
+    <div class="flex gap-3">
+      <mat-form-field class="w-full">
+        <mat-label>Expired meningitis
+          certificates</mat-label>
+        <input type="text" matInput [formControlName]="'expireMeningitisCertifate'">
+      </mat-form-field>
+      <mat-form-field class="w-full ">
+        <mat-label>meningitis certificates
+          not exist </mat-label>
+        <input type="text" matInput [formControlName]="'MeningitisCertificationNotExist'">
+      </mat-form-field>
+    </div>
+
+
+
+
   </mat-dialog-content>
-  <mat-dialog-actions align="end">
+  <mat-dialog-actions align="end" class="border-gray-300/70">
     <button mat-button mat-dialog-close>Cancel</button>
     <button mat-button color="primary" (click)="saveInventary()" [mat-dialog-close]="true" cdkFocusInitial>Save</button>
   </mat-dialog-actions>

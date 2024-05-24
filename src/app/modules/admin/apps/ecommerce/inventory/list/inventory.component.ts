@@ -57,7 +57,7 @@ export class InventoryListComponent implements OnInit {
       
     })
     
-    const dialogRef = this.dialog.open(AddInventoryComponent,{maxWidth:'660px'});
+    const dialogRef = this.dialog.open(AddInventoryComponent,{maxWidth:'900px', width:'100%'});
     a.unsubscribe();
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

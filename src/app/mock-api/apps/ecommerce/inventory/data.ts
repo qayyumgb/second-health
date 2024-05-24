@@ -106,9 +106,9 @@ export const vendors = [
     },
 ];
 export const products = [
-  {id:"1", lodge: 'lounge 1', period: 'period 1', date: 'Oct 08, 2019', kind: 'kind 1', fName: 'mitchel stark', from: 'Kwait',fNo:'12TH1233',pNumber:'IOU909090',nat:'THE768'},
-  {id:"2", lodge: 'lounge 2', period: 'period 2', date: 'Oct 08, 2019', kind: 'kind 2', fName: 'mitchel stark', from: 'Kwait',fNo:'12TH1233',pNumber:'IOU909090',nat:'THE768'},
-  {id:"3", lodge: 'lounge 3', period: 'period 3', date: 'Oct 08, 2019', kind: 'kind 3', fName: 'mitchel stark', from: 'Dubai',fNo:'12TH1233',pNumber:'IOU909090',nat:'THE768'},
-  {id:"4", lodge: 'lounge 4', period: 'period 4', date: 'Oct 08, 2019', kind: 'kind 2', fName: 'mitchel stark', from: 'Dublin',fNo:'12TH1233',pNumber:'IOU909090',nat:'THE768'},
+  {id:"1", lodge: 'lounge 1', period: 'period 1', dateTime: 'Oct 08, 2019', tripType: 'kind 1', name: 'mitchel stark', from: 'Kwait',flightNo:'12TH1233',pNumber:'IOU909090',nationality:'THE768'},
+  {id:"2", lodge: 'lounge 2', period: 'period 2', dateTime: 'Oct 08, 2019', tripType: 'kind 2', name: 'mitchel stark', from: 'Kwait',flightNo:'12TH1233',pNumber:'IOU909090',nationality:'THE768'},
+  {id:"3", lodge: 'lounge 3', period: 'period 3', dateTime: 'Oct 08, 2019', tripType: 'kind 3', name: 'mitchel stark', from: 'Dubai',flightNo:'12TH1233',pNumber:'IOU909090',nationality:'THE768'},
+  {id:"4", lodge: 'lounge 4', period: 'period 4', dateTime: 'Oct 08, 2019', tripType: 'kind 2', name: 'mitchel stark', from: 'Dublin',flightNo:'12TH1233',pNumber:'IOU909090',nationality:'THE768'},
  
 ];

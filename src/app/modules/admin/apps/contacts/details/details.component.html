@@ -17,10 +17,17 @@
     <!-- Header -->
     <div class="edit-mode relative w-full h-40 sm:h-48 px-8 sm:px-12 bg-accent-100 dark:bg-accent-700 mt-4">
         <!-- Background -->
-        <ng-container *ngIf="data.background">
-            <img
+        <ng-container >
+            @if (!data.background) {
+                <img
+                class="absolute inset-0 object-cover w-full h-full"
+                [src]="'https://i.pinimg.com/originals/83/87/dc/8387dceff44495a8dd13083cb6df128e.jpg'">
+            }
+            @else {
+                <img
                 class="absolute inset-0 object-cover w-full h-full"
                 [src]="data.background">
+            }
         </ng-container>
     </div>
 
@@ -56,8 +63,11 @@
             </div>
 
             <!-- Name -->
-            <div class="mt-3 text-4xl font-bold truncate">{{data.name}}</div>
-            <div class="mt-3 text-4xl font-bold truncate py-3">{{data.nameArabic}}</div>
+            <div class="absolute font-bold top-1.5 truncate nameofContact">
+                <div class=" text-2xl font-bold truncate">{{data.name}}</div>
+                <div class=" text-2xl font-bold truncate ">{{data.nameArabic}}</div>
+
+            </div>
 
            
 
@@ -79,7 +89,7 @@
                 </ng-container>
 
                 <!-- Emails -->
-                <ng-container *ngIf="data.emails.length">
+                <ng-container *ngIf="data.emails">
                   <div class="flex sm:items-center">
                     <mat-icon [svgIcon]="'heroicons_outline:envelope'"></mat-icon>
                     <div class="ml-6 leading-6">{{data.emails}}</div>
@@ -87,7 +97,7 @@
                 </ng-container>
 
                 <!-- Phone -->
-                <ng-container *ngIf="data.phoneNumbers.length">
+                <ng-container *ngIf="data.phoneNumbers">
                     <div class="flex">
                         
                         <div class="flex sm:items-center">
@@ -108,14 +118,7 @@
            
 
                 <!-- Notes -->
-                <ng-container *ngIf="data.notes">
-                    <div class="flex">
-                        <mat-icon [svgIcon]="'heroicons_outline:bars-3-bottom-left'"></mat-icon>
-                        <div
-                            class="max-w-none ml-6 prose prose-sm"
-                            [innerHTML]="data.notes"></div>
-                    </div>
-                </ng-container>
+               
             </div>
 
         </div>
@@ -135,7 +138,16 @@
         </ng-container>
         <!-- Close button -->
         <div class="flex items-center justify-end w-full max-w-3xl mx-auto pt-6">
-            <a
+            <div class="absolute bg-black/10 left-4 pt-1 px-1.5 rounded-full upload-background">
+                <input type="file" name="" id="upload__background">
+                <label for="upload__background">
+                    <mat-icon
+                                        class="text-white"
+                                        [svgIcon]="'heroicons_outline:camera'"></mat-icon>
+                </label>
+            </div>
+
+            <a class="bg-gray-300"
                 mat-icon-button
                 [matTooltip]="'Close'"
                 [routerLink]="['../']">
@@ -227,7 +239,7 @@
                             [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
                         <input
                             matInput
-                            [formControlName]="'arabicName'"
+                            [formControlName]="'nameArabic'"
                             [placeholder]="'Arabic Name'"
                             [spellcheck]="false">
                     </mat-form-field>
@@ -280,7 +292,7 @@
                                         [svgIcon]="'heroicons_solid:envelope'"></mat-icon>
                                     <input
                                         matInput
-                                        [formControlName]="'email'"
+                                        [formControlName]="'emails'"
                                         [placeholder]="'Email address'"
                                         [spellcheck]="false">
                                 </mat-form-field>
@@ -288,7 +300,45 @@
                     
                 </div>
 
-              
+                <div class="mt-8">
+                    <div class="space-y-4">
+                        <mat-form-field
+                                    class="flex-auto w-full"
+                                    [subscriptSizing]="'dynamic'">
+                                    <mat-label>Password</mat-label>
+                                    <mat-icon
+                                        matPrefix
+                                        class="hidden sm:flex icon-size-5"
+                                        [svgIcon]="'heroicons_solid:envelope'"></mat-icon>
+                                    <input
+                                        matInput
+                                        [formControlName]="'password'"
+                                        [placeholder]="'Email address'"
+                                        [spellcheck]="false">
+                                </mat-form-field>
+                    </div>
+                    
+                </div>
+
+                <div class="mt-8">
+                    <div class="space-y-4">
+                        <mat-form-field
+                                    class="flex-auto w-full"
+                                    [subscriptSizing]="'dynamic'">
+                                    <mat-label>Confirm Password </mat-label>
+                                    <mat-icon
+                                        matPrefix
+                                        class="hidden sm:flex icon-size-5"
+                                        [svgIcon]="'heroicons_solid:envelope'"></mat-icon>
+                                    <input
+                                        matInput
+                                        [formControlName]="'password'"
+                                        [placeholder]="'Email address'"
+                                        [spellcheck]="false">
+                                </mat-form-field>
+                    </div>
+                    
+                </div>
 
                 <!-- Address -->
                 

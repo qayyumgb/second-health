@@ -68,13 +68,16 @@ export class ContactsDetailsComponent implements OnInit, OnDestroy
         id: [''],
         avatar: [null],
         name: [''],
-        arabicName: [''],
+        nameArabic: [''],
         group: [''],
         phoneNumbers: [''],
-        email: [''],
+        emails: [''],
         password: [''],
+        confirmPassword: [''],
       });
       if (this.data) {
+        console.log(this.data);
+        
         this.contactForm.patchValue(this.data)
       }
     }

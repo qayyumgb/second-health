@@ -22,24 +22,26 @@ export interface InventoryProduct
 }
 export interface Iinventory {
     id:string
-    lodge?: string;
-    period: string;
-    date: string;
-    kind: string;
-    fNo: string;
-    from: string;
-    fName: string;
-    pNumber: string;
-    nat: string;
-    kpi1?:number
-    kpi2?:number
-    kpi3?:number
-    kpi4?:number
-    kpi6?:number
-    kpi5?:number
-    kpi7?:number
-    kpi8?:number
-    kpi9?:number
+    lodge?:string
+    period?:string
+    tripType?:string
+    dateTime?:string
+    name?:string
+    pNumber?:string
+    from?:string
+    flightNo?:string
+    airline?:string
+    noOfPassenger?:string
+    nationality?:string
+    pVBeforeArrival?:string
+    portPolioVaccination?:string
+    yellowFeverCertification?:string
+    yellowFeverCerNonComplaint?:string
+    yellowFeverRecord?:string
+    MeningitisVaccinaiton?:string
+    portPreventionTreatment?:string
+    expireMeningitisCertifate?:string
+    MeningitisCertificationNotExist?:string
   }
 export interface InventoryPagination
 {

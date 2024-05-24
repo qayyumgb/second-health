@@ -16,6 +16,9 @@ html,body{
         overflow: hidden;
     }
 }
+.capitalized{
+  text-transform: capitalize;
+}
 .mat-mdc-dialog-container .mdc-dialog__surface{
     padding: 0  !important;
     overflow: hidden;
@@ -28,5 +31,14 @@ html,body{
 
   thead{
     white-space: nowrap;
+  }
+}
+.nameofContact{
+  left: 11.6rem;
+}
+.upload-background{
+
+  input{
+    display: none;
   }
 }

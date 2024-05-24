@@ -12,11 +12,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { RouterLink } from '@angular/router';
 import { InventoryService } from '../inventory.service';
 import { Iinventory } from '../inventory.types';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-add-inventory',
   standalone: true,
-  imports: [MatButtonModule, MatDialogModule, RouterLink, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, NgFor, MatOptionModule, MatDatepickerModule],
+  imports: [MatButtonModule, MatDialogModule,MatAutocompleteModule, RouterLink, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, NgFor, MatOptionModule, MatDatepickerModule],
   templateUrl: './add-inventory.component.html',
   styleUrl: './add-inventory.component.scss'
 })
@@ -29,28 +30,31 @@ export class AddInventoryComponent {
     private _formBuilder: UntypedFormBuilder,
     private _inventoryService: InventoryService,
   ) {
+    debugger
   }
   ngOnInit(): void {
     this.selectedProductForm = this._formBuilder.group({
       id: [''],
       lodge: [''],
       period: [''],
-      date: [''],
-      kind: [[]],
-      fNo: [''],
-      from: [''],
-      fName: [''],
+      tripType: [""],
+      dateTime: [''],
+      name:[''],
       pNumber: [''],
-      nat: [''],
-      kpi1: [''],
-      kpi2: [''],
-      kpi3: [''],
-      kpi4: [''],
-      kpi6: [''],
-      kpi5: [''],
-      kpi7: [''],
-      kpi8: [''],
-      kpi9: [[]],
+      from: [''],
+      flightNo: [''],
+      airline: [''],
+      nationality: [''],
+      pVBeforeArrival: [''],
+      portPolioVaccination: [''],
+      yellowFeverCertification: [''],
+      noOfPassenger: [''],
+      yellowFeverCerNonComplaint: [''],
+      yellowFeverRecord: [''],
+      MeningitisVaccinaiton: [''],
+      portPreventionTreatment: [''],
+      expireMeningitisCertifate: [''],
+      MeningitisCertificationNotExist: [[]],
 
     });
 
@@ -75,8 +79,9 @@ export class AddInventoryComponent {
 
   tempInventary: Iinventory
   saveInventary() {
-    debugger
     this.tempInventary = this.selectedProductForm.value
+    console.log(this.tempInventary); 
+   if (this.tempInventary.lodge && this.tempInventary.period && this.tempInventary.name) {
     if (!this.tempInventary.id) {
       this.tempInventary.id = (this.DashboardDataSource + 1).toString();
     this._inventoryService.createProduct(this.tempInventary).subscribe({
@@ -89,6 +94,7 @@ export class AddInventoryComponent {
         next:x => console.log(x)
       })
     }
+   }
   }
 
 }

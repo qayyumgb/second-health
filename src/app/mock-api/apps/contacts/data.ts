@@ -89,7 +89,7 @@ export const contacts = [
         nameArabic        : 'ديجيسوس مايكل',
         emails: 'dejesusmichael@mail.org',
         phoneNumbers: '984 531 2468',
-        group: 'a',
+        group: 'dfghvbnm,',
         password : '56ddbd47-4078-4ddd-8448-73c5e88d5f59',
     },
     {
@@ -99,7 +99,7 @@ export const contacts = [
         nameArabic        : 'دينا مولينا',
         emails: 'dejesusmichael@mail.org',
         phoneNumbers: '984 531 2468',
-        group: 'a',
+        group: 'dsfghj',
         password : '56ddbd47-4078-4ddd-8448-73c5e88d5f59',
       
     },
@@ -110,7 +110,7 @@ export const contacts = [
         nameArabic        : 'برنارد لانجلي',
         emails: 'dejesusmichael@mail.org',
         phoneNumbers: '984 531 2468',
-        group: 'a',
+        group: 'sdfghj',
         password : '56ddbd47-4078-4ddd-8448-73c5e88d5f59',
 
         

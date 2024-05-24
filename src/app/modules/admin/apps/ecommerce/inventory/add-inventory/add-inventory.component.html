@@ -50,9 +50,9 @@
       </mat-form-field>
       <mat-form-field class="w-full">
         <mat-label>From</mat-label>
-        <input type="text" placeholder="Choose a Period" aria-label="Number" matInput [matAutocomplete]="Period"
-          [formControlName]="'from'">
-        <mat-autocomplete #Period="matAutocomplete">
+        <input type="text" placeholder="From" aria-label="Number" matInput [matAutocomplete]="from"
+          [formControl]="fromControl">
+        <mat-autocomplete #from="matAutocomplete">
           @for (option of fromFilteredOptions | async; track option) {
           <mat-option [value]="option">{{option}}</mat-option>
           }

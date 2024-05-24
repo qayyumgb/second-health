@@ -27,10 +27,10 @@ export const defaultNavigation: FuseNavigationItem[] = [
             
             {
               id   : 'app-name',
-              title: 'App Name',
+              title: 'HAJJ',
               type : 'basic',
               icon : 'heroicons_outline:bars-3-bottom-left',
-              link : '/apps/appname',
+              link : '/apps/hajj',
           },
         ],
     },

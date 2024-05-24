@@ -26,8 +26,6 @@ export interface Iinventory {
     period?:string
     tripType?:string
     dateTime?:string
-    name?:string
-    pNumber?:string
     from?:string
     flightNo?:string
     airline?:string

@@ -26,11 +26,11 @@ export const defaultNavigation: FuseNavigationItem[] = [
         children: [
             
             {
-              id   : 'apps.contacts',
-              title: 'Contacts',
+              id   : 'app-name',
+              title: 'App Name',
               type : 'basic',
               icon : 'heroicons_outline:user-group',
-              link : '/apps/contacts',
+              link : '/apps/appname',
           },
         ],
     },
@@ -46,7 +46,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 title: 'Users',
                 type : 'basic',
                 icon : 'heroicons_outline:bars-3-bottom-left',
-                link : '/admin/users',
+                link : '/apps/contacts',
             },
             {
                 id   : 'permissions',

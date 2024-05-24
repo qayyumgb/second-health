@@ -35,7 +35,7 @@ export class AddInventoryComponent implements OnInit {
 
   optionsLodge: string[] = ['lounge 1', 'lounge 2', 'lounge 3','lounge 4','lounge 5'];
   optionPeriod: string[] = ['period 1', 'period 2', 'period 3','period 4','period 5'];
-  optionFrom: string[] = ['period 1', 'period 2', 'period 3','period 4','period 5'];
+  optionFrom: string[] = ['from 1', 'from 2', 'from 3','from 4','from 5'];
   optionAirline: string[] = ['Airline 1', 'Airline 2', 'Airline 3','Airline 4','Airline 5'];
   optionNationality: string[] = ['Nationality 1', 'Nationality 2', 'Nationality 3','Nationality 4','Nationality 5'];
   optionType: string[] = ['Trip Type 1', 'Trip Type 2', 'Trip Type 3','Trip Type 4','Trip Type 5'];
@@ -57,8 +57,6 @@ export class AddInventoryComponent implements OnInit {
       period: [''],
       tripType: [""],
       dateTime: [''],
-      name:[''],
-      pNumber: [''],
       from: [''],
       flightNo: [''],
       airline: [''],
@@ -87,8 +85,15 @@ export class AddInventoryComponent implements OnInit {
 
     this._inventoryService.product$.subscribe(x => {
       this.updateData = x
+      
       if (x) {
-        this.selectedProductForm.patchValue(x)
+        this.selectedProductForm.patchValue(x);
+          this.lodgeControl.setValue(x.lodge)
+          this.periodControl.setValue(x.period)
+          this.fromControl.setValue(x.from)
+          this.TypeControl.setValue(x.tripType)
+          this.AirlineControl.setValue(x.airline)
+          this.NationalityControl.setValue(x.nationality)
       }
 
     })
@@ -131,7 +136,7 @@ export class AddInventoryComponent implements OnInit {
   }
   private _filterFrom(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return this.optionsLodge.filter(option => option.toLowerCase().includes(filterValue));
+    return this.optionFrom.filter(option => option.toLowerCase().includes(filterValue));
   }
   private _filterPeriod(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -153,9 +158,16 @@ export class AddInventoryComponent implements OnInit {
 
   tempInventary: Iinventory
   saveInventary() {
+    debugger
     this.tempInventary = this.selectedProductForm.value
+    this.tempInventary.lodge = this.lodgeControl.value
+    this.tempInventary.period = this.periodControl.value
+    this.tempInventary.from = this.fromControl.value
+    this.tempInventary.tripType = this.TypeControl.value
+    this.tempInventary.airline = this.AirlineControl.value
+    this.tempInventary.nationality = this.NationalityControl.value
     console.log(this.tempInventary); 
-   if (this.tempInventary.lodge && this.tempInventary.period && this.tempInventary.name) {
+   if (this.tempInventary.lodge && this.tempInventary.period ) {
     if (!this.tempInventary.id) {
       this.tempInventary.id = (this.DashboardDataSource + 1).toString();
     this._inventoryService.createProduct(this.tempInventary).subscribe({

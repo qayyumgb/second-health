@@ -216,11 +216,11 @@ export class DashboardComponent {
     },
     tooltip: {
       formatter: function() {
-          return `Value: ${this.point.value} <br>
-          Value: ${this.point.value} <br>
-          Value: ${this.point.value} <br>
-          Value: ${this.point.value} <br>
-          Value: ${this.point.value} <br>
+          return `Poliomyelitis: <b>${this.point.value}</b> <br>
+          Yellow fever certificate: <b>${this.point.value}</b> <br>
+          Prophylaxis: <b>${this.point.value}</b> <br>
+          Meningitis certificates not exist: <b>${this.point.value}</b> <br>
+          Meningitis certificates Expired: <b>${this.point.value}</b> <br>
           <b>${this.point.name}</b>`;
       }
   },

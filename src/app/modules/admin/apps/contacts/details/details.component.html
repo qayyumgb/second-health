@@ -1,15 +1,12 @@
 
 <!-- Your dialog content here -->
-
-<!-- Close button -->
-<div class="text-right">
-    <a mat-dialog-close
-    mat-icon-button
-    [matTooltip]="'Close'">
-    <mat-icon
-    [svgIcon]="'heroicons_outline:x-mark'"></mat-icon>
-</a>
+<div class="dialog-header flex items-center justify-between py-0 px-4 py-2 border-0">
+    <h1 mat-dialog-title2 class=""></h1>
+    <a mat-dialog-close mat-icon-button [matTooltip]="'Close'">
+        <mat-icon [svgIcon]="'heroicons_outline:x-mark'"></mat-icon>
+    </a>
 </div>
+
 <div mat-dialog-content>
 
     <!-- View mode -->

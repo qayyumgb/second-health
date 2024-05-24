@@ -4,7 +4,8 @@
     <div class="md:flex w-full gap-2 mt-3">
       <mat-form-field class="w-full">
         <mat-label>Lounge</mat-label>
-        <input type="text" placeholder="Choose a Lounge"  aria-label="Number" [formControl]="lodgeControl" matInput [matAutocomplete]="lounge"
+       
+        <input type="text" placeholder="Choose a Lounge"  aria-label="text" [formControl]="lodgeControl" matInput [matAutocomplete]="lounge"
           [formControlName]="'lodge'">
         <mat-autocomplete #lounge="matAutocomplete">
           @for (option of lodngeFilteredOptions | async; track option) {
@@ -14,10 +15,10 @@
       </mat-form-field>
       <mat-form-field class="w-full">
         <mat-label>Period</mat-label>
-        <input type="text" placeholder="Choose a Period" aria-label="Number" matInput [matAutocomplete]="Period"
+        <input type="text" placeholder="Choose a Period"  aria-label="text" [formControl]="periodControl" matInput [matAutocomplete]="Period"
           [formControlName]="'period'">
         <mat-autocomplete #Period="matAutocomplete">
-          @for (option of ['period 1', 'period 2', 'period 3', 'period 4']; track option) {
+          @for (option of periodFilteredOptions | async; track option) {
           <mat-option [value]="option">{{option}}</mat-option>
           }
         </mat-autocomplete>
@@ -25,11 +26,11 @@
     </div>
     <div class="md:flex w-full gap-2">
       <mat-form-field class="w-full">
-        <mat-label>Type</mat-label>
-        <input type="text" placeholder="Choose a King" aria-label="Number" matInput [matAutocomplete]="kind"
+        <mat-label>Trip Type</mat-label>
+        <input type="text" placeholder="Choose a King" aria-label="Number" [formControl]="TypeControl" matInput [matAutocomplete]="kind"
           [formControlName]="'tripType'">
         <mat-autocomplete #kind="matAutocomplete">
-          @for (option of ['kind 1', 'kind 2', 'kind 3', 'kind 4']; track option) {
+          @for (option of TypeFilteredOptions | async; track option) {
           <mat-option [value]="option">{{option}}</mat-option>
           }
         </mat-autocomplete>
@@ -65,7 +66,7 @@
         <input type="text" placeholder="Choose a Period" aria-label="Number" matInput [matAutocomplete]="Period"
           [formControlName]="'from'">
         <mat-autocomplete #Period="matAutocomplete">
-          @for (option of ['Pak', 'Ind', 'UK', 'TR']; track option) {
+          @for (option of fromFilteredOptions | async; track option) {
           <mat-option [value]="option">{{option}}</mat-option>
           }
         </mat-autocomplete>
@@ -80,12 +81,26 @@
     <div class="md:flex gap-3">
       
       <mat-form-field class="w-full">
-        <mat-label>Nationalities</mat-label>
-        <input type="text" placeholder="Nationality" aria-label="Number" matInput [matAutocomplete]="Period"
+        <mat-label>Airlines</mat-label>
+        <input type="text" placeholder="Nationality" aria-label="Number" [formControl]="AirlineControl" matInput [matAutocomplete]="airline"
+          [formControlName]="'airline'">
+        <mat-autocomplete #airline="matAutocomplete">
+          @for (option of AirlineFilteredOptions | async; track option) {
+          <mat-option [value]="option">{{option}}</mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field class="w-full ">
+        <mat-label class="capitalized">No. of Passenger</mat-label>
+        <input type="text" matInput [formControlName]="'noOfPassenger'">
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label>Nationality</mat-label>
+        <input type="text" placeholder="Nationality" aria-label="Number" [formControl]="NationalityControl" matInput [matAutocomplete]="nationality"
           [formControlName]="'nationality'">
 
-        <mat-autocomplete #Period="matAutocomplete">
-          @for (option of ['period 1', 'period 2', 'period 3', 'period 4']; track option) {
+        <mat-autocomplete #nationality="matAutocomplete">
+          @for (option of NationalityFilteredOptions | async; track option) {
           <mat-option [value]="option">{{option}}</mat-option>
           }
         </mat-autocomplete>

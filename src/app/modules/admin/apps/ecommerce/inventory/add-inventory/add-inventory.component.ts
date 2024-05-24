@@ -28,18 +28,28 @@ export class AddInventoryComponent implements OnInit {
   updateData: Iinventory;
   lodgeControl = new FormControl('');
   periodControl = new FormControl('');
+  fromControl = new FormControl('');
+  TypeControl = new FormControl('');
+  AirlineControl = new FormControl('');
+  NationalityControl = new FormControl('');
 
   optionsLodge: string[] = ['lounge 1', 'lounge 2', 'lounge 3','lounge 4','lounge 5'];
   optionPeriod: string[] = ['period 1', 'period 2', 'period 3','period 4','period 5'];
+  optionFrom: string[] = ['period 1', 'period 2', 'period 3','period 4','period 5'];
+  optionAirline: string[] = ['Airline 1', 'Airline 2', 'Airline 3','Airline 4','Airline 5'];
+  optionNationality: string[] = ['Nationality 1', 'Nationality 2', 'Nationality 3','Nationality 4','Nationality 5'];
+  optionType: string[] = ['Trip Type 1', 'Trip Type 2', 'Trip Type 3','Trip Type 4','Trip Type 5'];
   lodngeFilteredOptions: Observable<string[]>;
   periodFilteredOptions: Observable<string[]>;
+  fromFilteredOptions: Observable<string[]>;
+  TypeFilteredOptions: Observable<string[]>;
+  AirlineFilteredOptions: Observable<string[]>;
+  NationalityFilteredOptions: Observable<string[]>;
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
     private _formBuilder: UntypedFormBuilder,
     private _inventoryService: InventoryService,
-  ) {
-    debugger
-  }
+  ) {  }
   ngOnInit(): void {
     this.selectedProductForm = this._formBuilder.group({
       id: [''],
@@ -78,7 +88,6 @@ export class AddInventoryComponent implements OnInit {
     this._inventoryService.product$.subscribe(x => {
       this.updateData = x
       if (x) {
-        debugger
         this.selectedProductForm.patchValue(x)
       }
 
@@ -88,21 +97,60 @@ export class AddInventoryComponent implements OnInit {
       startWith(''),
       map(value => this._filterLodnge(value || '')),
     );
+
     this.periodFilteredOptions = this.periodControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filterPeriod(value || '')),
     );
+    
+    this.fromFilteredOptions = this.fromControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterFrom(value || '')),
+    );
+    
+
+    this.TypeFilteredOptions = this.TypeControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterType(value || '')),
+    );
+
+    this.AirlineFilteredOptions = this.AirlineControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterAirline(value || '')),
+    );
+
+    this.NationalityFilteredOptions = this.NationalityControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterNationality(value || '')),
+    );
+
   }
   private _filterLodnge(value: string): string[] {
     const filterValue = value.toLowerCase();
-
+    return this.optionsLodge.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  private _filterFrom(value: string): string[] {
+    const filterValue = value.toLowerCase();
     return this.optionsLodge.filter(option => option.toLowerCase().includes(filterValue));
   }
   private _filterPeriod(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.optionPeriod.filter(option => option.toLowerCase().includes(filterValue));
   }
+  
+  private _filterType(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.optionType.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  private _filterAirline(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.optionAirline.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  private _filterNationality(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.optionNationality.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
   tempInventary: Iinventory
   saveInventary() {
     this.tempInventary = this.selectedProductForm.value

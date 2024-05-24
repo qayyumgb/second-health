@@ -58,10 +58,10 @@
         <div class="mt-8">
             <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
                 <mat-label>Group</mat-label>
-                <input type="text" placeholder="Select group" aria-label="Number" matInput [formControlName]="'group'"
+                <input type="text" placeholder="Select group" aria-label="Number" [formControl]="groupControl" matInput [formControlName]="'group'"
                     [matAutocomplete]="auto">
                 <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                    @for (item of groupName; track $index) {
+                    @for (item of groupFilteredOptions | async;  track $index) {
                        <mat-option [value]="item">{{item}}</mat-option>
 
                    }

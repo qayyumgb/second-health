@@ -1,7 +1,7 @@
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -16,17 +16,22 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink } from '@angular/router';
 import { ContactsService } from '../contacts.service';
 import { Contact2 } from '../contacts.types';
+import { Observable, map, startWith } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-new-user',
   standalone: true,
-  imports: [MatAutocompleteModule, NgIf, MatButtonModule, MatTooltipModule, RouterLink, MatIconModule, NgFor, FormsModule, ReactiveFormsModule, MatRippleModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, NgClass, MatSelectModule, MatOptionModule, MatDatepickerModule, TextFieldModule, DatePipe, MatDialogModule],
+  imports: [MatAutocompleteModule, CommonModule, NgIf, MatButtonModule, MatTooltipModule, RouterLink, MatIconModule, NgFor, FormsModule, ReactiveFormsModule, MatRippleModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, NgClass, MatSelectModule, MatOptionModule, MatDatepickerModule, TextFieldModule, DatePipe, MatDialogModule],
   templateUrl: './add-new-user.component.html',
   styleUrl: './add-new-user.component.scss'
 })
 export class AddNewUserComponent implements OnInit {
   contact:Contact2 
   contactForm: FormGroup;
+  groupControl = new FormControl('');
+  groupFilteredOptions: Observable<string[]>;
+
 groupName:string[] = ["Group 1", "Group 2", "Group 3", "Group 4", "Group 5"]
   constructor(private _formBuilder: UntypedFormBuilder, 
               private _changeDetectorRef: ChangeDetectorRef,
@@ -51,9 +56,15 @@ groupName:string[] = ["Group 1", "Group 2", "Group 3", "Group 4", "Group 5"]
       password: [''],
       confirmPassword: [''],
     });
-
+    this.groupFilteredOptions = this.groupControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterGroup(value || '')),
+    );
   }
-
+  private _filterGroup(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.groupName.filter(option => option.toLowerCase().includes(filterValue));
+  }
   onSubmit() {
     this.contact  ={
     id:'',

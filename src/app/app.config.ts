@@ -52,7 +52,7 @@ export const appConfig: ApplicationConfig = {
                     },
                     {
                         id   : 'tr',
-                        label: 'Turkish',
+                        label: 'Arabic ',
                     },
                 ],
                 defaultLang         : 'en',

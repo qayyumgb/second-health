@@ -26,7 +26,7 @@
     </div>
     <div class="md:flex w-full gap-2">
       <mat-form-field class="w-full">
-        <mat-label>Trip Type</mat-label>
+        <mat-label>Type</mat-label>
         <input type="text" placeholder="Choose a King" aria-label="Number" [formControl]="TypeControl" matInput [matAutocomplete]="kind"
           [formControlName]="'tripType'">
         <mat-autocomplete #kind="matAutocomplete">
@@ -43,24 +43,11 @@
       </mat-form-field>
     </div>
 
-    <div class="md:flex w-full gap-2">
-      <mat-form-field class="w-full">
-        <mat-label>Airlines</mat-label>
-        <input type="text" placeholder="Nationality" aria-label="Number" matInput [matAutocomplete]="airline"
-          [formControlName]="'airline'">
-        <mat-autocomplete #airline="matAutocomplete">
-          @for (option of ['Airline 1', 'Airline 2', 'Airline 3', 'Airline 4']; track option) {
-          <mat-option [value]="option">{{option}}</mat-option>
-          }
-        </mat-autocomplete>
-      </mat-form-field>
-      <mat-form-field class="w-full ">
-        <mat-label class="capitalized">No. of Passenger</mat-label>
-        <input type="text" matInput [formControlName]="'noOfPassenger'">
-      </mat-form-field>
-    </div>
-    
     <div class="md:flex gap-2">
+      <mat-form-field class="w-full">
+        <mat-label>Flight Number</mat-label>
+        <input type="number" matInput [formControlName]="'flightNo'">
+      </mat-form-field>
       <mat-form-field class="w-full">
         <mat-label>From</mat-label>
         <input type="text" placeholder="Choose a Period" aria-label="Number" matInput [matAutocomplete]="Period"
@@ -71,15 +58,9 @@
           }
         </mat-autocomplete>
       </mat-form-field>
-      <mat-form-field class="w-full">
-        <mat-label>Flight Number</mat-label>
-        <input type="number" matInput [formControlName]="'flightNo'">
-      </mat-form-field>
-
-
     </div>
-    <div class="md:flex gap-3">
-      
+
+    <div class="md:flex w-full gap-2">
       <mat-form-field class="w-full">
         <mat-label>Airlines</mat-label>
         <input type="text" placeholder="Nationality" aria-label="Number" [formControl]="AirlineControl" matInput [matAutocomplete]="airline"
@@ -94,6 +75,10 @@
         <mat-label class="capitalized">No. of Passenger</mat-label>
         <input type="text" matInput [formControlName]="'noOfPassenger'">
       </mat-form-field>
+    </div>
+    
+    
+    <div class="md:flex gap-3">
       <mat-form-field class="w-full">
         <mat-label>Nationality</mat-label>
         <input type="text" placeholder="Nationality" aria-label="Number" [formControl]="NationalityControl" matInput [matAutocomplete]="nationality"

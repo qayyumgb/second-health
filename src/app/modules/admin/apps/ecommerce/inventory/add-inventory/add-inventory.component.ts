@@ -96,6 +96,7 @@ export class AddInventoryComponent implements OnInit {
           this.TypeControl.setValue(x.tripType)
           this.AirlineControl.setValue(x.airline)
           this.NationalityControl.setValue(x.nationality)
+          this.isEdit =true
       }
 
     })

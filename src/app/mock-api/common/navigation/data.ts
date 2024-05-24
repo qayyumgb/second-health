@@ -29,7 +29,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
               id   : 'app-name',
               title: 'App Name',
               type : 'basic',
-              icon : 'heroicons_outline:user-group',
+              icon : 'heroicons_outline:bars-3-bottom-left',
               link : '/apps/appname',
           },
         ],
@@ -45,7 +45,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 id   : 'users',
                 title: 'Users',
                 type : 'basic',
-                icon : 'heroicons_outline:bars-3-bottom-left',
+                icon : 'heroicons_outline:user-group',
                 link : '/apps/contacts',
             },
             {

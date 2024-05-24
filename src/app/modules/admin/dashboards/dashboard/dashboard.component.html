@@ -354,16 +354,10 @@
               </td>
             </ng-container>
 
-            <!-- Footer -->
-            <ng-container matColumnDef="recentOrdersTableFooter">
-              <td class="py-6 px-0 border-0" mat-footer-cell *matFooterCellDef colspan="6">
-                <button routerLink="/apps/ecommerce" mat-stroked-button>See all transactions</button>
-              </td>
-            </ng-container>
+           
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr class="order-row h-16" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            <tr class="h-16 border-0" mat-footer-row *matFooterRowDef="['recentOrdersTableFooter']"></tr>
           </table>
         </div>
       </div>

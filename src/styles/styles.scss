@@ -2,6 +2,13 @@
 /*  @ Import/write your custom styles here.
 /*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
 /* ----------------------------------------------------------------------------------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+html[dir="rtl"]{
+  body{
+    font-family: "Tajawal", sans-serif;
+  }
+}
 html,body{
   height: 100%;
 }

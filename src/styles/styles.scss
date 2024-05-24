@@ -23,3 +23,10 @@ html,body{
 .mat-mdc-unelevated-button:not(:disabled){
   background-color: #15508a !important;
 }
+
+.mat-mdc-table{
+
+  thead{
+    white-space: nowrap;
+  }
+}

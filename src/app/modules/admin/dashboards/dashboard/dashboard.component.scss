@@ -34,3 +34,9 @@
 .color-5{
   color:  #9ECC3B;
 }
+
+::ng-deep{
+  .highcharts-credits{
+display: none;
+  }
+}

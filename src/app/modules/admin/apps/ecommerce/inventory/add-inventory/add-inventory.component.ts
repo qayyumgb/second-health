@@ -50,6 +50,7 @@ export class AddInventoryComponent implements OnInit {
     private _formBuilder: UntypedFormBuilder,
     private _inventoryService: InventoryService,
   ) {  }
+  isEdit:boolean = false
   ngOnInit(): void {
     this.selectedProductForm = this._formBuilder.group({
       id: [''],
@@ -86,9 +87,12 @@ export class AddInventoryComponent implements OnInit {
     );
 
     this._inventoryService.product$.subscribe(x => {
+      this.isEdit = false
       this.updateData = x
       if (x) {
         this.selectedProductForm.patchValue(x)
+        this.isEdit = true;
+        console.log('staa',this.updateData)
       }
 
     })

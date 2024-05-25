@@ -262,17 +262,16 @@
                 <!-- Company -->
                 <div class="mt-8">
                     <mat-form-field
-                        class="w-full"
-                        [subscriptSizing]="'dynamic'">
+                    class="w-full"
+                    [subscriptSizing]="'dynamic'">
                         <mat-label>Group</mat-label>
-                        <mat-icon
-                            matPrefix
-                            class="hidden sm:flex icon-size-5"
-                            [svgIcon]="'heroicons_solid:building-office-2'"></mat-icon>
-                        <input
-                            matInput
-                            [formControlName]="'group'"
-                            [placeholder]="'Group'">
+                        <input type="text" placeholder="Select group" aria-label="Number" [formControl]="groupControl" matInput 
+                            [matAutocomplete]="auto">
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                            @for (item of groupFilteredOptions | async;  track $index) {
+                               <mat-option [value]="item">{{item}}</mat-option>
+                           }
+                        </mat-autocomplete>
                     </mat-form-field>
                 </div>
 

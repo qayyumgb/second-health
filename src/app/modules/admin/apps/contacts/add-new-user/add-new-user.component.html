@@ -4,7 +4,7 @@
         <mat-icon [svgIcon]="'heroicons_outline:x-mark'"></mat-icon>
     </a>
 </div>
-<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="contactForm" >
     <mat-dialog-content>
 
 
@@ -126,7 +126,7 @@
                 Cancel
             </button>
             <!-- Save -->
-            <button class="ml-2" mat-flat-button [color]="'primary'"  [matTooltip]="'Save'">
+            <button class="ml-2" mat-flat-button [color]="'primary'" (click)="onSubmit()" [matTooltip]="'Save'">
                 Save
             </button>
         </div>

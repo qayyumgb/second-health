@@ -67,10 +67,10 @@ groupName:string[] = ["Group 1", "Group 2", "Group 3", "Group 4", "Group 5"]
   }
   onSubmit() {
     this.contact  ={
-    id:'',
+    id:Math.floor(Math.random() * (5405454546)).toString(),
     nameArabic : this.contactForm?.controls['arabicName']?.value,
     name : this.contactForm.controls['name'].value,
-    group : this.contactForm.controls['group'].value,
+    group : this.groupControl.value,
     phoneNumbers : this.contactForm.controls['phone'].value,
     emails : this.contactForm.controls['email'].value,
     password : this.contactForm.controls['password'].value,

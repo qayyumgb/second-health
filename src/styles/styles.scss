@@ -3,56 +3,99 @@
 /*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
 /* ----------------------------------------------------------------------------------------------------- */
 
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
-html[dir="rtl"]{
-  body{
+@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap");
+html[dir="rtl"] {
+  body {
     font-family: "Tajawal", sans-serif;
   }
 }
-html,body{
+html,
+body {
   height: 100%;
 }
 
-.modal-dialog-content{
-    max-height: 80vh;
+.modal-dialog-content {
+  max-height: 80vh;
 }
-::ng-deep{
-    .mdc-dialog__surface,
-    .mat-mdc-dialog-container .mdc-dialog__surface{
-        padding: 0  !important;
-        overflow: hidden;
-    }
+::ng-deep {
+  .mdc-dialog__surface,
+  .mat-mdc-dialog-container .mdc-dialog__surface {
+    padding: 0 !important;
+    overflow: hidden;
+  }
 }
-.capitalized{
+.capitalized {
   text-transform: capitalize;
 }
-.mat-mdc-dialog-container .mdc-dialog__surface{
-    padding: 0  !important;
+.cdk-overlay-pane:not(.full-screen-dialog) {
+  .mat-mdc-dialog-container .mdc-dialog__surface {
+    padding: 0 !important;
     overflow: hidden;
     border-radius: 28px !important;
-    .mdc-dialog__title{
+    .mdc-dialog__title {
       font-size: 20px;
       font-weight: 500;
       border-bottom: 1px solid gainsboro;
-    margin-bottom: 12px;
+      margin-bottom: 12px;
     }
+  }
 }
-.mat-mdc-unelevated-button:not(:disabled){
+
+.mat-mdc-unelevated-button:not(:disabled) {
   background-color: #15508a !important;
 }
 
-.mat-mdc-table{
-
-  thead{
+.mat-mdc-table {
+  thead {
     white-space: nowrap;
   }
 }
-.nameofContact{
+.nameofContact {
   left: 11.6rem;
 }
-.upload-background{
-
-  input{
+.upload-background {
+  input {
     display: none;
+  }
+}
+
+.cdk-overlay-pane.full-screen-dialog {
+  .mat-mdc-dialog-container {
+    .mdc-dialog__surface {
+      padding: 0 !important;
+    }
+  }
+}
+@media (min-width: 1024px) {
+  .full-screen-dialog {
+    animation: 0.3s ease-in-out dialogAnimation forwards !important;
+    position: fixed !important;
+    animation-play-state: running; /* Initial state is running */
+  }
+  .cdk-overlay-pane.full-screen-dialog {
+    .mat-mdc-dialog-container {
+      .mdc-dialog__surface {
+        overflow: hidden;
+        border-radius: 0px !important;
+        .mdc-dialog__title {
+          font-size: 20px;
+          font-weight: 500;
+          border-bottom: 1px solid gainsboro;
+          margin-bottom: 12px;
+        }
+      }
+    }
+  }
+  .cdk-overlay-pane.full-screen-dialog .mat-mdc-dialog-container .mat-mdc-dialog-title + .mat-mdc-dialog-content {
+    max-height: calc(100vh - 126px) !important;
+  }
+}
+
+@keyframes dialogAnimation {
+  0% {
+    right: -100%;
+  }
+  100% {
+    right: 0;
   }
 }

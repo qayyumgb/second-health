@@ -29,6 +29,7 @@ export class InventoryListComponent implements OnInit {
   displayedColumns: string[] = ['lodge', 'period', 'date', 'kind', 'fNo', 'from','fName','pNumber','nat', 'action'];
   DashboardDataSource:Iinventory[];
   isLoading: boolean = false;
+  modalSizing:any;
 
   constructor(
     public dialog: MatDialog,
@@ -38,6 +39,25 @@ export class InventoryListComponent implements OnInit {
  
   ngOnInit(): void {
    this.fetchData(); 
+   if (window.innerWidth > 1024) {
+    this.modalSizing = {
+      width: '80%',
+      height: '100%',
+      maxWidth: '100%',
+      maxHeight: '100%',      
+      panelClass: 'full-screen-dialog' ,
+      enterAnimationDuration: '0', // Specify enter animation duration
+      exitAnimationDuration: '0'
+    }
+   } else {
+    this.modalSizing = {
+      width: '80%',
+      maxWidth: '500px',
+      panelClass: 'full-screen-dialog' ,
+      enterAnimationDuration: '300ms', // Specify enter animation duration
+      exitAnimationDuration: '150ms'
+    }
+   }
   }
   private fetchData(){
     this.inventaryService.products$.subscribe(
@@ -57,9 +77,7 @@ export class InventoryListComponent implements OnInit {
       
     })
     
-    const dialogRef = this.dialog.open(AddInventoryComponent,{
-        width: '730px',
-    });
+    const dialogRef = this.dialog.open(AddInventoryComponent,this.modalSizing);
     a.unsubscribe();
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

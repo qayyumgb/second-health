@@ -1,6 +1,6 @@
-import { NgIf } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,16 +13,19 @@ import { ModalComponent } from '@fuse/components/modal/modal.component';
 import { AddInventoryComponent } from '../add-inventory/add-inventory.component';
 import { Iinventory } from '../inventory.types';
 import { InventoryService } from '../inventory.service';
+import { FuseDrawerComponent } from "../../../../../../../@fuse/components/drawer/drawer.component";
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 
 
 
 @Component({
-  selector: 'app-view-detail',
-  standalone: true,
-  imports: [NgIf, MatProgressBarModule, MatFormFieldModule, MatIconModule, MatInputModule, FormsModule, ReactiveFormsModule, MatButtonModule,MatTableModule, MatDialogModule,MatPaginatorModule],
-  templateUrl    : './inventory.component.html',
+    selector: 'app-view-detail',
+    standalone: true,
+    templateUrl: './inventory.component.html',
+    styleUrl: './inventory.component.scss',
+    imports: [NgClass, NgIf, MatProgressBarModule, MatFormFieldModule, MatIconModule, MatInputModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatTableModule, MatDialogModule, MatPaginatorModule, FuseDrawerComponent, MatDatepickerModule]
 })
 export class InventoryListComponent implements OnInit {
 
@@ -30,6 +33,8 @@ export class InventoryListComponent implements OnInit {
   DashboardDataSource:Iinventory[];
   isLoading: boolean = false;
   modalSizing:any;
+formFieldHelpers: any;
+filterTableForm:UntypedFormGroup;
 
   constructor(
     public dialog: MatDialog,

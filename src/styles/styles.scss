@@ -99,3 +99,20 @@ body {
     right: 0;
   }
 }
+
+[dir=rtl]{
+  
+  .margin-auto-rtl{
+      margin-right: auto;
+      margin-left: unset !important;
+  }
+
+  .fuse-vertical-navigation-item-icon{
+    margin-right: 0;
+    margin-left: 16px;
+  }
+  .rtl-search-icon{
+    margin-right: 0 !important;
+    margin-left: 12px;
+  }
+}

@@ -29,14 +29,14 @@
                     </div>
 
                     <!-- Main actions -->
-                    <div class="flex items-center mt-4 sm:mt-0 md:mt-4">
+                    <div class="flex items-center mt-4 sm:mt-0 md:mt-4 gap-4">
                         <!-- Search -->
                         <div class="flex-auto">
                             <mat-form-field
                                 class="fuse-mat-dense fuse-mat-rounded w-full min-w-50"
                                 subscriptSizing="dynamic">
                                 <mat-icon
-                                    class="icon-size-5"
+                                    class="icon-size-5 rtl-search-icon"
                                     matPrefix
                                     [svgIcon]="'heroicons_solid:magnifying-glass'"></mat-icon>
                                 <input
@@ -48,7 +48,7 @@
                         </div>
                         <!-- Add contact button -->
                         <button
-                            class="ml-4"
+                            class=""
                             mat-flat-button
                             [color]="'primary'"
                             (click)="createNewUser()">
@@ -72,7 +72,7 @@
                                
                                 <!-- Contact -->
                                 <a (click)="openDetail(contact)"
-                                    class="z-20 flex items-center px-6 py-4 md:px-8 cursor-pointer border-b"
+                                    class="z-20 flex items-center px-6 py-4 md:px-8 cursor-pointer border-b gap-4"
                                     [ngClass]="{'hover:bg-gray-100 dark:hover:bg-hover': !selectedContact || selectedContact.id !== contact.id,
                                                 'bg-primary-50 dark:bg-hover': selectedContact && selectedContact.id === contact.id}"
                                     >
@@ -89,7 +89,7 @@
                                             </div>
                                         </ng-container>
                                     </div>
-                                    <div class="min-w-0 ml-4">
+                                    <div class="min-w-0">
                                         <div class="font-medium leading-5 truncate">{{contact.name}}</div>
                                         <div class="leading-5 truncate text-secondary">{{contact.title}}</div>
                                     </div>

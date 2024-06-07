@@ -14,11 +14,13 @@ import { InventoryService } from '../inventory.service';
 import { Iinventory } from '../inventory.types';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { Observable, map, startWith } from 'rxjs';
+import {MatTabsModule} from '@angular/material/tabs';
+import { ViolationComponent } from '../violation/violation.component';
 
 @Component({
   selector: 'app-add-inventory',
   standalone: true,
-  imports: [MatButtonModule, MatDialogModule,MatAutocompleteModule, RouterLink, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, NgFor, MatOptionModule, MatDatepickerModule,MatAutocompleteModule,AsyncPipe],
+  imports: [MatButtonModule, ViolationComponent, MatTabsModule, MatDialogModule,MatAutocompleteModule, RouterLink, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, NgFor, MatOptionModule, MatDatepickerModule,MatAutocompleteModule,AsyncPipe],
   templateUrl: './add-inventory.component.html',
   styleUrl: './add-inventory.component.scss'
 })

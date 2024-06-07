@@ -1,4 +1,45 @@
-@use 'styles/appearances/default';
-@use 'styles/appearances/compact';
-@use 'styles/appearances/dense';
-@use 'styles/appearances/thin';
+@use "styles/appearances/default";
+@use "styles/appearances/compact";
+@use "styles/appearances/dense";
+@use "styles/appearances/thin";
+
+.fuse-vertical-navigation-item-wrapper {
+    .fuse-vertical-navigation-item {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #3ac0c3;
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: all ease-in-out .3s;
+        .chev-rig{
+            transition: all ease-in-out .3s;
+        }
+        &.active{
+            .chev-rig{
+            transform: rotate(90deg);
+            }
+        }
+    }
+
+}
+.fuse-vertical-navigation-item-drop ul li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    gap: 1rem;
+    text-transform: uppercase;
+    a {
+        opacity: 0.8;
+    }
+}

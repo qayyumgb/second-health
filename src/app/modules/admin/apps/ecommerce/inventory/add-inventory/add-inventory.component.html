@@ -1,151 +1,173 @@
-<form action="" class="w-full" [formGroup]="selectedProductForm">
-  <h2 mat-dialog-title class="text-lg text-gray-900 font-semibold">{{isEdit?'Edit Records':'Add Records'}}</h2>
-  <mat-dialog-content class="mat-typography">
-    <div class="md:flex w-full gap-3 mt-3">
-      <mat-form-field class="w-full">
-        <mat-label>Lounge</mat-label>
-       
-        <input type="text" placeholder="Choose a Lounge"  aria-label="text" [formControl]="lodgeControl" matInput [matAutocomplete]="lounge"
-          [formControlName]="'lodge'">
-        <mat-autocomplete #lounge="matAutocomplete">
-          @for (option of lodngeFilteredOptions | async; track option) {
-          <mat-option [value]="option">{{option}}</mat-option>
-          }
-        </mat-autocomplete>
-      </mat-form-field>
-      <mat-form-field class="w-full">
-        <mat-label>Period</mat-label>
-        <input type="text" placeholder="Choose a Period"  aria-label="text" [formControl]="periodControl" matInput [matAutocomplete]="Period"
-          [formControlName]="'period'">
-        <mat-autocomplete #Period="matAutocomplete">
-          @for (option of periodFilteredOptions | async; track option) {
-          <mat-option [value]="option">{{option}}</mat-option>
-          }
-        </mat-autocomplete>
-      </mat-form-field>
-    </div>
-    <div class="md:flex w-full gap-3">
-      <mat-form-field class="w-full">
-        <mat-label>Type</mat-label>
-        <input type="text" placeholder="Choose a King" aria-label="Number" [formControl]="TypeControl" matInput [matAutocomplete]="kind"
-          [formControlName]="'tripType'">
-        <mat-autocomplete #kind="matAutocomplete">
-          @for (option of TypeFilteredOptions | async; track option) {
-          <mat-option [value]="option">{{option}}</mat-option>
-          }
-        </mat-autocomplete>
-      </mat-form-field>
-      <mat-form-field class="w-full ">
-        <mat-label>Date & Time</mat-label>
-        <input matInput [matDatepicker]="dp" [formControlName]="'dateTime'">
-        <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
-        <mat-datepicker #dp></mat-datepicker>
-      </mat-form-field>
-    </div>
-
-    <div class="md:flex gap-3">
-      <mat-form-field class="w-full">
-        <mat-label>Flight Number</mat-label>
-        <input type="number" matInput [formControlName]="'flightNo'">
-      </mat-form-field>
-      <mat-form-field class="w-full">
-        <mat-label>From</mat-label>
-        <input type="text" placeholder="From" aria-label="Number" matInput [matAutocomplete]="from"
-          [formControl]="fromControl">
-        <mat-autocomplete #from="matAutocomplete">
-          @for (option of fromFilteredOptions | async; track option) {
-          <mat-option [value]="option">{{option}}</mat-option>
-          }
-        </mat-autocomplete>
-      </mat-form-field>
-    </div>
-
-    <div class="md:flex w-full gap-3">
-      <mat-form-field class="w-full">
-        <mat-label>Airlines</mat-label>
-        <input type="text" placeholder="Nationality" aria-label="Number" [formControl]="AirlineControl" matInput [matAutocomplete]="airline"
-          [formControlName]="'airline'">
-        <mat-autocomplete #airline="matAutocomplete">
-          @for (option of AirlineFilteredOptions | async; track option) {
-          <mat-option [value]="option">{{option}}</mat-option>
-          }
-        </mat-autocomplete>
-      </mat-form-field>
-      <mat-form-field class="w-full ">
-        <mat-label class="capitalized">No. of Passenger</mat-label>
-        <input type="text" matInput [formControlName]="'noOfPassenger'">
-      </mat-form-field>
-    </div>
+<h2 mat-dialog-title class="text-lg text-gray-900 font-semibold">{{isEdit?'Edit Records':'Add Records'}}</h2>
+<mat-dialog-content class="mat-typography">
+  
+  <mat-tab-group>
+    <mat-tab label="General"> 
+      <form action="" class="w-full" [formGroup]="selectedProductForm">
+        <div class="md:flex w-full gap-3 mt-3">
+          <mat-form-field class="w-full">
+            <mat-label>Lounge</mat-label>
+    
+            <input type="text" placeholder="Choose a Lounge" aria-label="text" [formControl]="lodgeControl" matInput
+              [matAutocomplete]="lounge" [formControlName]="'lodge'">
+            <mat-autocomplete #lounge="matAutocomplete">
+              @for (option of lodngeFilteredOptions | async; track option) {
+              <mat-option [value]="option">{{option}}</mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field class="w-full">
+            <mat-label>Period</mat-label>
+            <input type="text" placeholder="Choose a Period" aria-label="text" [formControl]="periodControl" matInput
+              [matAutocomplete]="Period" [formControlName]="'period'">
+            <mat-autocomplete #Period="matAutocomplete">
+              @for (option of periodFilteredOptions | async; track option) {
+              <mat-option [value]="option">{{option}}</mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <div class="md:flex w-full gap-3">
+          <mat-form-field class="w-full">
+            <mat-label>Type</mat-label>
+            <input type="text" placeholder="Choose a King" aria-label="Number" [formControl]="TypeControl" matInput
+              [matAutocomplete]="kind" [formControlName]="'tripType'">
+            <mat-autocomplete #kind="matAutocomplete">
+              @for (option of TypeFilteredOptions | async; track option) {
+              <mat-option [value]="option">{{option}}</mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field class="w-full ">
+            <mat-label>Date & Time</mat-label>
+            <input matInput [matDatepicker]="dp" [formControlName]="'dateTime'">
+            <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
+          </mat-form-field>
+        </div>
+    
+        <div class="md:flex gap-3">
+          <mat-form-field class="w-full">
+            <mat-label>Flight Number</mat-label>
+            <input type="number" matInput [formControlName]="'flightNo'">
+          </mat-form-field>
+          <mat-form-field class="w-full">
+            <mat-label>From</mat-label>
+            <input type="text" placeholder="From" aria-label="Number" matInput [matAutocomplete]="from"
+              [formControl]="fromControl">
+            <mat-autocomplete #from="matAutocomplete">
+              @for (option of fromFilteredOptions | async; track option) {
+              <mat-option [value]="option">{{option}}</mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+    
+        <div class="md:flex w-full gap-3">
+          <mat-form-field class="w-full">
+            <mat-label>Airlines</mat-label>
+            <input type="text" placeholder="Nationality" aria-label="Number" [formControl]="AirlineControl" matInput
+              [matAutocomplete]="airline" [formControlName]="'airline'">
+            <mat-autocomplete #airline="matAutocomplete">
+              @for (option of AirlineFilteredOptions | async; track option) {
+              <mat-option [value]="option">{{option}}</mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field class="w-full ">
+            <mat-label class="capitalized">No. of Passenger</mat-label>
+            <input type="text" matInput [formControlName]="'noOfPassenger'">
+          </mat-form-field>
+        </div>
     
     
-    <div class="md:flex gap-3">
-      <mat-form-field class="w-full">
-        <mat-label>Nationality</mat-label>
-        <input type="text" placeholder="Nationality" aria-label="Number" [formControl]="NationalityControl" matInput [matAutocomplete]="nationality"
-          [formControlName]="'nationality'">
+        <div class="md:flex gap-3">
+          <mat-form-field class="w-full">
+            <mat-label>Nationality</mat-label>
+            <input type="text" placeholder="Nationality" aria-label="Number" [formControl]="NationalityControl" matInput
+              [matAutocomplete]="nationality" [formControlName]="'nationality'">
+    
+            <mat-autocomplete #nationality="matAutocomplete">
+              @for (option of NationalityFilteredOptions | async; track option) {
+              <mat-option [value]="option">{{option}}</mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+    
+        <div class="md:flex gap-3">
+          <mat-form-field class="w-full ">
+            <mat-label class="capitalized" title="Vaccinated with polio vaccine before arriving">Vaccinated with polio
+              vaccine before arriving</mat-label>
+            <input type="text" matInput [formControlName]="'pVBeforeArrival'">
+          </mat-form-field>
+        </div>
+    
+        <div class="md:flex gap-3">
+          <mat-form-field class="w-full">
+            <mat-label class="capitalized" title="Vaccinated with polio vaccine at the port">Vaccinated with polio vaccine
+              at the port
+            </mat-label>
+            <input type="text" matInput [formControlName]="'portPolioVaccination'">
+          </mat-form-field>
+          <mat-form-field class="w-full ">
+            <mat-label class="capitalized" title="Adhere to the yellow fever certificate">Adhere to the yellow fever
+              certificate</mat-label>
+            <input type="text" matInput [formControlName]="'yellowFeverCertification'">
+          </mat-form-field>
+        </div>
+    
+        <div class="md:flex gap-3">
+          <mat-form-field class="w-full">
+            <mat-label class="capitalized" title="Noncompliant with the yellow fever certificate">Noncompliant with the
+              yellow fever certificate</mat-label>
+            <input type="text" matInput [formControlName]="'yellowFeverCerNonComplaint'">
+          </mat-form-field>
+          <mat-form-field class="w-full ">
+            <mat-label>Yellow fever records</mat-label>
+            <input type="text" matInput [formControlName]="'yellowFeverRecord'">
+          </mat-form-field>
+        </div>
+        <div class="md:flex gap-3">
+          <mat-form-field class="w-full">
+            <mat-label class="capitalized" title="Vaccinated against meningitis before arriving"> Vaccinated against
+              meningitis before arriving</mat-label>
+            <input type="text" matInput [formControlName]="'MeningitisVaccinaiton'">
+          </mat-form-field>
+          <mat-form-field class="w-full ">
+            <mat-label class="capitalized" title="Given prophylactic treatment at the port">Given prophylactic treatment at
+              the port</mat-label>
+            <input type="text" matInput [formControlName]="'portPreventionTreatment'">
+          </mat-form-field>
+        </div>
+        <div class="md:flex gap-3">
+          <mat-form-field class="w-full">
+            <mat-label class="capitalized" title="Expired meningitis certificates">Expired meningitis
+              certificates</mat-label>
+            <input type="text" matInput [formControlName]="'expireMeningitisCertifate'">
+          </mat-form-field>
+          <mat-form-field class="w-full ">
+            <mat-label class="capitalized" title="Do not have meningitis certificates">Do not have meningitis
+              certificates</mat-label>
+            <input type="text" matInput [formControlName]="'MeningitisCertificationNotExist'">
+          </mat-form-field>
+        </div>
+    
+    
+      </form>
+    
+    </mat-tab>
+    <mat-tab label="Violations"> 
+      <app-violation></app-violation>  
+    </mat-tab>
+    <mat-tab label="Attachment"> Content 3 </mat-tab>
+  </mat-tab-group>
 
-        <mat-autocomplete #nationality="matAutocomplete">
-          @for (option of NationalityFilteredOptions | async; track option) {
-          <mat-option [value]="option">{{option}}</mat-option>
-          }
-        </mat-autocomplete>
-      </mat-form-field>
-    </div>
-    <div class="md:flex gap-3">
-      <mat-form-field class="w-full ">
-        <mat-label class="capitalized" title="Vaccinated with polio vaccine before arriving">Vaccinated with polio vaccine before arriving</mat-label>
-        <input type="text" matInput [formControlName]="'pVBeforeArrival'">
-      </mat-form-field>
-    </div>
-    <div class="md:flex gap-3">
-      <mat-form-field class="w-full">
-        <mat-label class="capitalized" title="Vaccinated with polio vaccine at the port">Vaccinated with polio vaccine at the port</mat-label>
-        <input type="text" matInput [formControlName]="'portPolioVaccination'">
-      </mat-form-field>
-      <mat-form-field class="w-full ">
-        <mat-label class="capitalized" title="Adhere to the yellow fever certificate">Adhere to the yellow fever certificate</mat-label>
-        <input type="text" matInput [formControlName]="'yellowFeverCertification'">
-      </mat-form-field>
-    </div>
-
-    <div class="md:flex gap-3">
-      <mat-form-field class="w-full">
-        <mat-label class="capitalized" title="Noncompliant with the yellow fever certificate">Noncompliant with the yellow fever certificate</mat-label>
-        <input type="text" matInput [formControlName]="'yellowFeverCerNonComplaint'">
-      </mat-form-field>
-      <mat-form-field class="w-full ">
-        <mat-label>Yellow fever records</mat-label>
-        <input type="text" matInput [formControlName]="'yellowFeverRecord'">
-      </mat-form-field>
-    </div>
-    <div class="md:flex gap-3">
-      <mat-form-field class="w-full">
-        <mat-label class="capitalized" title="Vaccinated against meningitis before arriving"> Vaccinated against meningitis before arriving</mat-label>
-        <input type="text" matInput [formControlName]="'MeningitisVaccinaiton'">
-      </mat-form-field>
-      <mat-form-field class="w-full ">
-        <mat-label class="capitalized" title="Given prophylactic treatment at the port">Given prophylactic treatment at the port</mat-label>
-        <input type="text" matInput [formControlName]="'portPreventionTreatment'">
-      </mat-form-field>
-    </div>
-    <div class="md:flex gap-3">
-      <mat-form-field class="w-full">
-        <mat-label class="capitalized" title="Expired meningitis certificates">Expired meningitis certificates</mat-label>
-        <input type="text" matInput [formControlName]="'expireMeningitisCertifate'">
-      </mat-form-field>
-      <mat-form-field class="w-full ">
-        <mat-label class="capitalized" title="Do not have meningitis certificates">Do not have meningitis certificates</mat-label>
-        <input type="text" matInput [formControlName]="'MeningitisCertificationNotExist'">
-      </mat-form-field>
-    </div>
+ 
 
 
-
-
-  </mat-dialog-content>
-  <mat-dialog-actions align="end" class="border-gray-300/70">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button color="primary" (click)="saveInventary()" [mat-dialog-close]="true" cdkFocusInitial>Save</button>
-  </mat-dialog-actions>
-
-</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end" class="border-gray-300/70">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button color="primary" (click)="saveInventary()" [mat-dialog-close]="true" cdkFocusInitial>Save</button>
+</mat-dialog-actions>

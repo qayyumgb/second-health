@@ -7,7 +7,7 @@
 
     <!-- Content -->
     <div
-        class="fuse-vertical-navigation-content"
+        class="fuse-vertical-navigation-content flex flex-col"
         fuseScrollbar
         [fuseScrollbarOptions]="{wheelPropagation: inner, suppressScrollX: true}"
         #navigationContent>
@@ -17,14 +17,10 @@
           <img width="240" style="width: 240px;" src="../../../../assets/images/logo/logo.png" >
             <!-- <ng-content select="[fuseVerticalNavigationContentHeader]"></ng-content> -->
         </div>
+        <!-- <ng-container *ngFor="let item of navigation; trackBy: trackByFn">
 
-        <!-- Items -->
-        <ng-container *ngFor="let item of navigation; trackBy: trackByFn">
-
-            <!-- Skip the hidden items -->
             <ng-container *ngIf="(item.hidden && !item.hidden(item)) || !item.hidden">
 
-                <!-- Group -->
                 <ng-container *ngIf="item.type === 'group'">
                     <fuse-vertical-navigation-group-item
                         [item]="item"
@@ -33,9 +29,31 @@
                 </ng-container>
 
             </ng-container>
+            
 
-        </ng-container>
-
+        </ng-container> -->
+        <div class="flex-grow">
+            <ul *ngFor="let item of navigation; trackBy: trackByFn" class="fuse-vertical-navigation-item-wrapper">
+                <li (click)="MakeActiveNavGroup(item.id)" [class]="activeNavGroup == item.id?'fuse-vertical-navigation-item  active':'fuse-vertical-navigation-item '" >{{item.title}}
+    
+                    <mat-icon
+                    class="chev-rig"
+                    >keyboard_arrow_right</mat-icon>
+                </li>
+                @if (item.children && activeNavGroup == item.id) {
+                    <li class="fuse-vertical-navigation-item-drop">
+                        <ul>
+                            <li [routerLink]="childLink.link" *ngFor="let childLink of item.children; trackBy: trackByFn">
+                                <mat-icon
+                                class="icon-size-6"
+                                [svgIcon]="childLink.icon"></mat-icon>
+                                 <a >{{childLink.title}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </div>
         <!-- Content footer -->
         <div class="fuse-vertical-navigation-content-footer">
           <img width="210" style="width: 210px; opacity: 0.2; margin: auto;" src="../../../../assets/images/logo/logo.png" >

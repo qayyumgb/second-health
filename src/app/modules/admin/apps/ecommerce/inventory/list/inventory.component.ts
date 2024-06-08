@@ -1,6 +1,6 @@
-import { NgClass, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
+import { DatePipe, NgClass, NgIf } from '@angular/common';
+import { Component, OnInit, Pipe } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -25,24 +25,39 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     standalone: true,
     templateUrl: './inventory.component.html',
     styleUrl: './inventory.component.scss',
-    imports: [NgClass, NgIf, MatProgressBarModule, MatFormFieldModule, MatIconModule, MatInputModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatTableModule, MatDialogModule, MatPaginatorModule, FuseDrawerComponent, MatDatepickerModule]
+    imports: [NgClass,DatePipe, NgIf, ReactiveFormsModule, MatProgressBarModule, MatFormFieldModule, MatIconModule, MatInputModule, FormsModule, MatButtonModule, MatTableModule, MatDialogModule, MatPaginatorModule, FuseDrawerComponent, MatDatepickerModule]
 })
 export class InventoryListComponent implements OnInit {
 
   displayedColumns: string[] = ['lodge', 'period', 'date', 'kind', 'fNo', 'from','fName','pNumber','nat', 'action'];
   DashboardDataSource:Iinventory[];
+  DashboardDataSourceStore:Iinventory[];
   isLoading: boolean = false;
   modalSizing:any;
 formFieldHelpers: any;
 filterTableForm:UntypedFormGroup;
+advanceFilter: FormGroup;
 
   constructor(
     public dialog: MatDialog,
-    private inventaryService:InventoryService
+    private inventaryService:InventoryService,
+    private fb: FormBuilder
   ) {}
 
  
   ngOnInit(): void {
+
+    this.advanceFilter = this.fb.group({
+        lodge : [''],
+        period : [''],
+        dateTime : [''],
+        tripType : [''],
+        flightNo : [''],
+        from : [''],
+        airline : [''],
+        noOfPassenger : [''],
+        nationality : [''],
+    });
    this.fetchData(); 
    if (window.innerWidth > 1024) {
     this.modalSizing = {
@@ -68,7 +83,7 @@ filterTableForm:UntypedFormGroup;
     this.inventaryService.products$.subscribe(
       (data: Iinventory[]) => {
         this.DashboardDataSource = data;
-        console.log(this.DashboardDataSource);
+        this.DashboardDataSourceStore= data;
       },
       (error: any) => {
         console.error('Error fetching product data: ', error);
@@ -92,5 +107,19 @@ filterTableForm:UntypedFormGroup;
   deleteInventary(id:string){
     this.inventaryService.deleteProduct(id).subscribe(x =>{
       console.log(x)})
+  }
+
+  onSearch(){
+    console.log(this.advanceFilter);
+
+    const filters = this.advanceFilter.value;
+    console.log(filters);
+    
+    this.DashboardDataSource = this.DashboardDataSourceStore.filter(item => {
+      return Object.keys(filters).every(key => {
+        return filters[key] === '' || item[key].toString().toLowerCase().includes(filters[key].toString().toLowerCase());
+      });
+    });
+    
   }
 }

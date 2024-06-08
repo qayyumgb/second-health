@@ -10,6 +10,8 @@ import { SettingsNotificationsComponent } from './notifications/notifications.co
 import { SettingsPlanBillingComponent } from './plan-billing/plan-billing.component';
 import { SettingsSecurityComponent } from './security/security.component';
 import { SettingsTeamComponent } from './team/team.component';
+import { FlightSettingsComponent } from './flight-settings/flight-settings.component';
+import { CountriesSettingsComponent } from './countries-settings/countries-settings.component';
 
 @Component({
     selector       : 'settings',
@@ -17,7 +19,7 @@ import { SettingsTeamComponent } from './team/team.component';
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
-    imports        : [MatSidenavModule, MatButtonModule, MatIconModule, NgFor, NgClass, NgSwitch, NgSwitchCase, SettingsAccountComponent, SettingsSecurityComponent, SettingsPlanBillingComponent, SettingsNotificationsComponent, SettingsTeamComponent],
+    imports        : [MatSidenavModule, MatButtonModule, MatIconModule, NgFor, NgClass, NgSwitch, NgSwitchCase, SettingsAccountComponent, SettingsSecurityComponent, SettingsPlanBillingComponent, SettingsNotificationsComponent, SettingsTeamComponent, FlightSettingsComponent, CountriesSettingsComponent],
 })
 export class SettingsComponent implements OnInit, OnDestroy
 {
@@ -25,7 +27,7 @@ export class SettingsComponent implements OnInit, OnDestroy
     drawerMode: 'over' | 'side' = 'side';
     drawerOpened: boolean = true;
     panels: any[] = [];
-    selectedPanel: string = 'account';
+    selectedPanel: string = 'flights';
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -50,34 +52,16 @@ export class SettingsComponent implements OnInit, OnDestroy
         // Setup available panels
         this.panels = [
             {
-                id         : 'account',
-                icon       : 'heroicons_outline:user-circle',
-                title      : 'Account',
-                description: 'Manage your public profile and private information',
+                id         : 'flights',
+                icon       : 'heroicons_outline:paper-airplane',
+                title      : 'Flights',
+                description: 'Manage your flight detail and private information',
             },
             {
-                id         : 'security',
-                icon       : 'heroicons_outline:lock-closed',
-                title      : 'Security',
-                description: 'Manage your password and 2-step verification preferences',
-            },
-            {
-                id         : 'plan-billing',
-                icon       : 'heroicons_outline:credit-card',
-                title      : 'Plan & Billing',
-                description: 'Manage your subscription plan, payment method and billing information',
-            },
-            {
-                id         : 'notifications',
-                icon       : 'heroicons_outline:bell',
-                title      : 'Notifications',
-                description: 'Manage when you\'ll be notified on which channels',
-            },
-            {
-                id         : 'team',
-                icon       : 'heroicons_outline:user-group',
-                title      : 'Team',
-                description: 'Manage your existing team and change roles/permissions',
+                id         : 'countries',
+                icon       : 'heroicons_outline:globe-europe-africa',
+                title      : 'Countries',
+                description: 'Manage different countries information',
             },
         ];
 

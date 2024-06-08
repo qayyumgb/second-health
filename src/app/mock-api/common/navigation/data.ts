@@ -55,6 +55,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 icon : 'heroicons_outline:lock-closed',
                 link : '/admin/permissions',
             },
+            {
+                id   : 'pages.settings',
+                title: 'Settings',
+                type : 'basic',
+                icon : 'heroicons_outline:cog-8-tooth',
+                link : '/pages/settings',
+            },
         ],
     },
     {
@@ -72,6 +79,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
             },
         ],
     },
+    
 ];
 
 // export const defaultNavigation: FuseNavigationItem[] = [

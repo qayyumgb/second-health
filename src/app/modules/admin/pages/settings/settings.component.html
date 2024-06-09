@@ -67,17 +67,17 @@
                     </button>
 
                     <!-- Panel title -->
-                    <div class="ml-2 lg:ml-0 text-3xl font-bold tracking-tight leading-none">
+                    <!-- <div class="ml-2 lg:ml-0 text-3xl font-bold tracking-tight leading-none">
                         {{getPanelInfo(selectedPanel).title}}
-                    </div>
+                    </div> -->
                 </div>
 
                 <!-- Load settings panel -->
-                <div class="mt-8">
+                <div class="mt-2">
                     <ng-container [ngSwitch]="selectedPanel">
                         <!-- Account -->
                         <ng-container *ngSwitchCase="'flights'">
-                            <flight-settings></flight-settings>
+                            <flight-settings [itemSelectedPanel]="selectedPanel"></flight-settings>
                         </ng-container>
                         <!-- Security -->
                         <ng-container *ngSwitchCase="'countries'">

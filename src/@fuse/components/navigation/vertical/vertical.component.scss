@@ -15,6 +15,12 @@
         align-items: center;
         justify-content: space-between;
         transition: all ease-in-out .3s;
+        cursor: pointer;
+
+        &:hover{
+            background-color: #ffffff1a;
+        }
+
         .chev-rig{
             transition: all ease-in-out .3s;
         }
@@ -36,9 +42,14 @@
     font-weight: 500;
     line-height: 20px;
     text-decoration: none;
-    border-radius: 6px;
     gap: 1rem;
     text-transform: uppercase;
+    cursor: pointer;
+
+    &:hover{
+        background-color: #ffffff1a;
+    }
+
     a {
         opacity: 0.8;
     }

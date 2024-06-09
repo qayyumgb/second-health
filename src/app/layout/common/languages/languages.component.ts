@@ -81,6 +81,7 @@ export class LanguagesComponent implements OnInit, OnDestroy
     {
       let direction = lang==='tr'?'rtl':'ltr'
       document.documentElement.setAttribute('dir', direction);
+      
         // Set the active lang
         this._translocoService.setActiveLang(lang);
     }

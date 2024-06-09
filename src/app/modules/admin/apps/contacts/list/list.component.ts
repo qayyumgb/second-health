@@ -15,6 +15,7 @@ import { filter, fromEvent, Observable, Subject, switchMap, takeUntil } from 'rx
 import { ContactsDetailsComponent } from '../details/details.component';
 import { AddNewUserComponent } from '../add-new-user/add-new-user.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { AvailableLangs, TranslocoService } from '@ngneat/transloco';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class ContactsListComponent implements OnInit, OnDestroy
     drawerMode: 'side' | 'over';
     searchInputControl: UntypedFormControl = new UntypedFormControl();
     selectedContact: Contact;
+    availableLangs: AvailableLangs;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     @ViewChild('dialogTemplate') dialogTemplate!: TemplateRef<any>;
     /**
@@ -50,19 +52,24 @@ export class ContactsListComponent implements OnInit, OnDestroy
         @Inject(DOCUMENT) private _document: any,
         private _router: Router,
         private _fuseMediaWatcherService: FuseMediaWatcherService,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private _translocoService: TranslocoService
     )
     {
     }
 
 
     openDetail(item: any): void {
+
+        let activeLang = this._translocoService.getActiveLang()
+        console.log("active language = ",activeLang)
      
       this.dialog.open(ContactsDetailsComponent, {
         width: '800px',
         data: item,
         // other configuration options
       });
+      document.getElementsByClassName('cdk-global-overlay-wrapper')[0].setAttribute('dir', '');
   
       // this._router.navigate(['./', item.id]); // Navigate to the route corresponding to the item
       this.selectedContact = null;
@@ -85,6 +92,10 @@ export class ContactsListComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
+
+        // Get the available languages from transloco
+        this.availableLangs = this._translocoService.getAvailableLangs();
+
         // Get the contacts
         this.contacts$ = this._contactsService.contacts$;
         this._contactsService.contacts$

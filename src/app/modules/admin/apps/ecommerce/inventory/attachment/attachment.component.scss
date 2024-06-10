@@ -1,0 +1,22 @@
+.attachment-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .attahment-file-lable-box {
+        input {
+            display: none;
+        }
+        label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 4rem;
+            border: 1px dashed #d0cccc;
+            border-radius: 7px;
+            color: gray;
+            opacity: 0.8;
+        }
+    }
+}

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 export interface PeriodicElement {
   violationID: number;
@@ -29,7 +30,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-violation',
   standalone: true,
-  imports: [MatTableModule,MatInputModule,MatFormFieldModule,MatIconModule],
+  imports: [MatTableModule,MatInputModule,MatFormFieldModule,MatIconModule,MatButtonModule],
   templateUrl: './violation.component.html',
   styleUrl: './violation.component.scss'
 })
@@ -47,7 +48,29 @@ export class ViolationComponent {
     "note",
     "action"
   ];
-  dataSource = ELEMENT_DATA;
+  dataSource  = new MatTableDataSource(ELEMENT_DATA);
   currentActiveRow:number = -1;
-  currentActiveRowHandling = (a:number) =>  this.currentActiveRow = a
+  
+  currentActiveRowHandling = (a:number) => this.currentActiveRow = a;
+
+  addNewRow() {
+    const lastPosition = this.dataSource.data.length > 0 ? this.dataSource.data[this.dataSource.data.length - 1].violationID : 0;
+    // Create a new empty data object
+    const newData: PeriodicElement = {
+      violationID : lastPosition+1,
+      shortCut: '',
+      violationName: '',
+      qty: '',
+      city: '',
+      type: '',
+      flight: '',
+      company: '',
+      note: '',
+    };
+    // Add the new data object to the data source
+    this.dataSource.data.push(newData);
+    // Refresh the table display
+    this.dataSource.filter = this.dataSource.filter;
+    this.currentActiveRowHandling(newData.violationID);
+  }
 }

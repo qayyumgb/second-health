@@ -51,7 +51,7 @@ body {
   }
 }
 .nameofContact {
-  left: 11.6rem;
+  left: 21.6rem;
 }
 .upload-background {
   input {
@@ -67,13 +67,25 @@ body {
   }
 }
 @media (min-width: 1024px) {
-  .full-screen-dialog {
-    animation: 0.3s ease dialogAnimation forwards !important;
-    position: fixed !important;
-    animation-play-state: running; /* Initial state is running */
-    right: 0;
-    transition: 0.3s transform all !important;
+  .mat-mdc-dialog-container-with-actions .mat-mdc-dialog-content{
+    max-height: calc(100vh - 138px);
   }
+  html:not([dir="rtl"]){
+    .full-screen-dialog {
+      animation: 0.3s ease-in-out dialogAnimation forwards !important;
+      position: fixed !important;
+      animation-play-state: running; /* Initial state is running */
+      right: 0;
+    }
+  }
+  html[dir="rtl"]{
+    .full-screen-dialog {
+      animation: 0.3s ease-in-out dialogAnimationrlt forwards !important;
+      position: fixed !important;
+      animation-play-state: running; /* Initial state is running */
+    }
+  }
+  
   .cdk-overlay-pane.full-screen-dialog {
     .mat-mdc-dialog-container {
       .mdc-dialog__surface {
@@ -110,6 +122,15 @@ body {
   }
 }
 
+@keyframes dialogAnimationrlt {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 0%;
+  }
+}
+
 html[dir=rtl]{
   
   .margin-auto-rtl{
@@ -129,7 +150,7 @@ html[dir=rtl]{
   }
   .nameofContact {
     left: unset !important; 
-    right: 11.6rem;
+    right: 21.6rem;
   }
   @media (min-width: 1024px) {
     .cdk-global-overlay-wrapper{

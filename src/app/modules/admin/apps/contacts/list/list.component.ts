@@ -30,6 +30,7 @@ export class ContactsListComponent implements OnInit, OnDestroy
 {
     @ViewChild('matDrawer', {static: true}) matDrawer: MatDrawer;
     options: string[] = ['One', 'Two', 'Three'];
+    modalSizing:any;
 
     contacts$: Observable<Contact[]>;
 
@@ -64,11 +65,33 @@ export class ContactsListComponent implements OnInit, OnDestroy
         let activeLang = this._translocoService.getActiveLang()
         console.log("active language = ",activeLang)
      
-      this.dialog.open(ContactsDetailsComponent, {
-        width: '800px',
-        data: item,
-        // other configuration options
-      });
+        
+     
+      if (window.innerWidth > 1024) {
+        this.modalSizing = {
+          width: '80%',
+          height: '100%',
+          maxWidth: '100%',
+          maxHeight: '100%',      
+          panelClass: 'full-screen-dialog' ,
+          enterAnimationDuration: '0', // Specify enter animation duration
+          exitAnimationDuration: '0',
+          data: item,
+
+        }
+       } else {
+        this.modalSizing = {
+          width: '80%',
+          maxWidth: '500px',
+          panelClass: 'full-screen-dialog' ,
+          enterAnimationDuration: '300ms', // Specify enter animation duration
+          exitAnimationDuration: '150ms',
+          data: item,
+
+        }
+       }
+
+       this.dialog.open(ContactsDetailsComponent, this.modalSizing);
       document.getElementsByClassName('cdk-global-overlay-wrapper')[0].setAttribute('dir', '');
   
       // this._router.navigate(['./', item.id]); // Navigate to the route corresponding to the item
@@ -77,9 +100,29 @@ export class ContactsListComponent implements OnInit, OnDestroy
 
 
     createNewUser() {
-        this.dialog.open(AddNewUserComponent, {
-            width: '800px',
-        });
+      
+        if (window.innerWidth > 1024) {
+            this.modalSizing = {
+              width: '80%',
+              height: '100%',
+              maxWidth: '100%',
+              maxHeight: '100%',      
+              panelClass: 'full-screen-dialog' ,
+              enterAnimationDuration: '0', // Specify enter animation duration
+              exitAnimationDuration: '0',
+    
+            }
+           } else {
+            this.modalSizing = {
+              width: '80%',
+              maxWidth: '500px',
+              panelClass: 'full-screen-dialog' ,
+              enterAnimationDuration: '300ms', // Specify enter animation duration
+              exitAnimationDuration: '150ms',
+    
+            }
+           }
+           this.dialog.open(AddNewUserComponent, this.modalSizing);
     }
 
 

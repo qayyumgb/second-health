@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
+import { Component, ViewChild } from '@angular/core';
+import { MatTable, MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 export interface PeriodicElement {
@@ -25,16 +25,15 @@ const ELEMENT_DATA: PeriodicElement[] = [
   { violationID: 5, shortCut: 'Boron', violationName: "10.811",  city: 'Khaplu', type: 'sometype', qty: "0510", flight: "PIA 058", company: "some Comapany", note: "some text Here" },
   { violationID: 6, shortCut: 'Carbon', violationName: "12.0107",  city: 'Khaplu', type: 'sometype', qty: "0510", flight: "PIA 058", company: "some Comapany", note: "some text Here" },
   { violationID: 7, shortCut: 'Nitrogen', violationName: "14.0067",  city: 'Khaplu', type: 'sometype', qty: "0510", flight: "PIA 058", company: "some Comapany", note: "some text Here" },
-  
+
 ];
 @Component({
   selector: 'app-violation',
   standalone: true,
-  imports: [MatTableModule,MatInputModule,MatFormFieldModule,MatIconModule,MatButtonModule],
+  imports: [MatTableModule, MatButtonModule, MatInputModule,MatFormFieldModule, MatIconModule],
   templateUrl: './violation.component.html',
   styleUrl: './violation.component.scss'
 })
-
 export class ViolationComponent {
   displayedColumns: string[] = [
     "violationID",
@@ -48,29 +47,18 @@ export class ViolationComponent {
     "note",
     "action"
   ];
-  dataSource  = new MatTableDataSource(ELEMENT_DATA);
+  dataSource  = ELEMENT_DATA;
   currentActiveRow:number = -1;
-  
-  currentActiveRowHandling = (a:number) => this.currentActiveRow = a;
+  currentActiveRowHandling = (a:number) =>  this.currentActiveRow = a
+  @ViewChild(MatTable) table: MatTable<PeriodicElement>;
+  addNewData = () => {
+    const lastPosition = this.dataSource.length+1
 
-  addNewRow() {
-    const lastPosition = this.dataSource.data.length > 0 ? this.dataSource.data[this.dataSource.data.length - 1].violationID : 0;
-    // Create a new empty data object
-    const newData: PeriodicElement = {
-      violationID : lastPosition+1,
-      shortCut: '',
-      violationName: '',
-      qty: '',
-      city: '',
-      type: '',
-      flight: '',
-      company: '',
-      note: '',
-    };
-    // Add the new data object to the data source
-    this.dataSource.data.push(newData);
-    // Refresh the table display
-    this.dataSource.filter = this.dataSource.filter;
-    this.currentActiveRowHandling(newData.violationID);
+    if (this.currentActiveRow != 0) {
+      let a: PeriodicElement = { violationID: lastPosition, shortCut: '', violationName: "", city: '', type: '', qty: "", flight: "", company: "", note: "" };
+      this.dataSource.splice(0, 0, a)
+      this.table.renderRows();
+      this.currentActiveRow = lastPosition;
+    }
   }
 }

@@ -213,3 +213,16 @@ body:has(.fuse-vertical-navigation-opened){
     width: calc(100% - 250px) !important;
   }
 }
+.setting-drawer-wrapper{
+  mat-drawer-container.mat-drawer-container {
+    display: flex;
+    .setting-drawer {
+      position: relative;
+      min-width: 322px;
+  }
+  .mat-drawer-content {
+    width: 100%;
+    margin-left: 0 !important;
+}
+  }
+} 

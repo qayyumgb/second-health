@@ -68,9 +68,11 @@ body {
 }
 @media (min-width: 1024px) {
   .full-screen-dialog {
-    animation: 0.3s ease-in-out dialogAnimation forwards !important;
+    animation: 0.3s ease dialogAnimation forwards !important;
     position: fixed !important;
     animation-play-state: running; /* Initial state is running */
+    right: 0;
+    transition: 0.3s transform all !important;
   }
   .cdk-overlay-pane.full-screen-dialog {
     .mat-mdc-dialog-container {
@@ -93,20 +95,30 @@ body {
 
 @keyframes dialogAnimation {
   0% {
-    right: -100%;
+    transform: translateX(100%) ;
   }
   100% {
-    right: 0;
+    transform: translateX(0%);
+  }
+}
+@keyframes dialogAnimationReverse {
+  0% {
+    transform: translateX(-100%) ;
+  }
+  100% {
+    transform: translateX(0%);
   }
 }
 
-[dir=rtl]{
+html[dir=rtl]{
   
   .margin-auto-rtl{
       margin-right: auto;
       margin-left: unset !important;
   }
-
+.mat-mdc-tab-labels{
+  flex-direction: row-reverse;
+}
   .fuse-vertical-navigation-item-icon{
     margin-right: 0;
     margin-left: 16px;
@@ -119,6 +131,23 @@ body {
     left: unset !important; 
     right: 11.6rem;
   }
+  @media (min-width: 1024px) {
+    .cdk-global-overlay-wrapper{
+      .full-screen-dialog {
+        left: 0;
+        right: auto;
+        animation: 0.3s ease-in-out dialogAnimationReverse forwards !important;
+      }
+    }
+  }
+  fuse-vertical-navigation.fuse-vertical-navigation-position-left.fuse-vertical-navigation-mode-side{
+    margin-right: -280px;
+    margin-left: 0;
+    &.fuse-vertical-navigation-opened{
+      margin-right: 0;
+    }
+  }
+  
 }
 
 .tajawal-extralight {
@@ -167,4 +196,20 @@ body {
 }
 .mat-drawer-container{
   z-index: 99 !important;
+}
+html[dir="rtl"]{
+  fuse-drawer.fuse-drawer-position-right.fuse-drawer-mode-over{
+    right: auto;
+    transform: translate3d(-100%, 0, 0);
+    left: 0;
+    &.fuse-drawer-opened {
+      transform: translate3d(0, 0, 0);
+  }
+  }
+}
+
+body:has(.fuse-vertical-navigation-opened){
+  .full-screen-dialog{
+    width: calc(100% - 250px) !important;
+  }
 }

@@ -141,7 +141,7 @@ export class ContactsService
 
 
     createNewContact(co): Observable<Contact2>
-    {
+    {debugger
         return this.contacts$.pipe(
             take(1),
             switchMap(contacts => this._httpClient.post<Contact2>('api/apps/contacts/contact', {}).pipe(

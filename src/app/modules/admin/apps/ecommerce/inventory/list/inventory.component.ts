@@ -61,7 +61,7 @@ advanceFilter: FormGroup;
    this.fetchData(); 
    if (window.innerWidth > 1024) {
     this.modalSizing = {
-      width: '80%',
+      width: '100%',
       height: '100%',
       maxWidth: '100%',
       maxHeight: '100%',      
@@ -71,7 +71,7 @@ advanceFilter: FormGroup;
     }
    } else {
     this.modalSizing = {
-      width: '80%',
+      width: '100%',
       maxWidth: '500px',
       panelClass: 'full-screen-dialog' ,
       enterAnimationDuration: '300ms', // Specify enter animation duration

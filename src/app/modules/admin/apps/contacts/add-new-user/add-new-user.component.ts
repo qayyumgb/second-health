@@ -32,6 +32,10 @@ export class AddNewUserComponent implements OnInit {
   groupControl = new FormControl('');
   groupFilteredOptions: Observable<string[]>;
 
+  providers = new FormControl();
+  allProviders: any[] = [{ PROV: "Group1" }, { PROV: "Group2" }, { PROV: "Group3" }, { PROV: "Group4" }, { PROV: "Group5" } ];
+  filteredProviders: any[] = this.allProviders;
+
 groupName:string[] = ["Group 1", "Group 2", "Group 3", "Group 4", "Group 5"]
   constructor(private _formBuilder: UntypedFormBuilder, 
               private _changeDetectorRef: ChangeDetectorRef,
@@ -60,7 +64,25 @@ groupName:string[] = ["Group 1", "Group 2", "Group 3", "Group 4", "Group 5"]
       startWith(''),
       map(value => this._filterGroup(value || '')),
     );
+
   }
+
+  onInputChange(event: any) {
+    const searchInput = event.target.value.toLowerCase();
+
+    this.filteredProviders = this.allProviders.filter(({ PROV }) => {
+      const prov = PROV.toLowerCase();
+      return prov.includes(searchInput);
+    });
+  }
+
+  onOpenChange(searchInput: any) {
+    searchInput.value = "";
+    this.filteredProviders = this.allProviders;
+  }
+
+
+
   private _filterGroup(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.groupName.filter(option => option.toLowerCase().includes(filterValue));

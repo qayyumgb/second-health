@@ -55,7 +55,7 @@
             </mat-form-field>
         </div>
 
-        <div class="mt-8">
+        <!-- <div class="mt-8">
             <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
                 <mat-label>Group</mat-label>
                 <input type="text" placeholder="Select group" aria-label="Number" [formControl]="groupControl" matInput [formControlName]="'group'"
@@ -67,6 +67,20 @@
                    }
                 </mat-autocomplete>
             </mat-form-field>
+        </div> -->
+        <div class="mt-8">
+            <mat-form-field class="w-full" appearance="fill">
+                <mat-label>Group</mat-label>
+                <mat-select multiple [formControl]="providers" (openedChange)="onOpenChange(multiUserSearch)">
+                  <mat-select-trigger>
+                    {{providers.value }}
+                  </mat-select-trigger>
+                  <input #multiUserSearch type="text" autocomplete="off" class="multiselect-search-input" 
+                  matInput placeholder="Search By Provider" (input)="onInputChange($event)"/>
+              
+                  <mat-option *ngFor="let provider of filteredProviders" [value]="provider.PROV">{{provider.PROV}}</mat-option>
+                </mat-select>
+              </mat-form-field>
         </div>
 
         <!-- phone -->

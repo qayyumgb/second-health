@@ -5,24 +5,58 @@
         <h2 class="text-3xl font-semibold tracking-tight leading-8">Reports</h2>
         <div class="font-medium tracking-tight text-secondary">You can download your reports</div>
       </div>
-
+      <div class="flex items-center ml-6 gap-3">
+        <button
+            class="hidden sm:inline-flex"
+            mat-stroked-button>
+            <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:eye'"></mat-icon>
+            <span class="ml-2">View</span>
+        </button>
+        <button class="image-icon-button hidden sm:inline-flex" mat-stroked-button >
+          <img class="" src="https://cdn-icons-png.flaticon.com/512/8243/8243067.png" alt="">
+          <span class="ml-2">Export to Excel</span>
+        </button>
+        <button class="image-icon-button hidden sm:inline-flex" mat-stroked-button >
+          <img class="" src="https://www.pngmart.com/files/23/Pdf-Icon-PNG-Image.png" alt="">
+          <span class="ml-2">Export to Pdf</span>
+        </button>
+      </div>
     </div>
-    <div class="repot-options grid gap-8 md:grid-flow-col w-full mt-8">
+    <div class="repot-options grid gap-8 md:grid-flow-col w-full mt-8 max-w-2xl">
       <div class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden">
         <div class="flex">
-          <img class="w-40" src="https://www.pngmart.com/files/23/Pdf-Icon-PNG-Image.png" alt="">
-          <div class="flex flex-col pt-3 items-start justify-center ml-5">
-            <div class="text-lg font-medium tracking-tight leading-6 mb-3">Export your Report as a PDF by clicking below button</div>
-            <button class="" mat-flat-button [color]="'primary'">
-              <mat-icon [svgIcon]="'heroicons_outline:folder-arrow-down'"></mat-icon>
-              <span class="ml-2 mr-1">Export as PDF</span>
-            </button>
-          </div>
-          
-        </div>
+          <mat-form-field
+              [ngClass]="formFieldHelpers"
+              class="flex-auto">
+              <mat-label>From Date</mat-label>
+              <input
+                  matInput
+                  [matDatepicker]="picker1">
+              <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+      </div>
+      <div class="flex">
+        <mat-form-field
+            [ngClass]="formFieldHelpers"
+            class="flex-auto">
+            <mat-label>To Date</mat-label>
+            <input
+                matInput
+                [matDatepicker]="picker1">
+            <mat-datepicker-toggle
+                matSuffix
+                [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+    </div>
         
       </div>
-      <div class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden">
+      <!-- <div class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden">
        
 
         <div class="flex">
@@ -36,7 +70,7 @@
           </div>
           
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 

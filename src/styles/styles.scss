@@ -247,3 +247,12 @@ body:has(.fuse-vertical-navigation-opened){
 }
   }
 } 
+
+.multiselect-search-input{
+  border: 1px solid gainsboro !important;
+  margin: 0.5rem 1rem;
+  padding: 1rem !important;
+  height: 50px ! IMPORTANT;
+  border-radius: 5px !important;
+  width: calc(100% - 2rem) !important;
+}

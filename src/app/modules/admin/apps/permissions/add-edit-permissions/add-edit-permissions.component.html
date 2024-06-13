@@ -1,0 +1,126 @@
+<h2 mat-dialog-title class="text-lg text-gray-900 font-semibold">Add Records</h2>
+<mat-dialog-content class="mat-typography">
+  
+  <mat-tab-group>
+    <mat-tab label="Groups"> 
+      <form action="" class="w-full mt-5">
+        <div class="md:flex gap-3">
+            <mat-form-field class="w-full ">
+              <mat-label class="capitalized" title="Vaccinated with polio vaccine before arriving">Vaccinated with polio
+                vaccine before arriving</mat-label>
+              <input type="text" matInput [formControlName]="'pVBeforeArrival'">
+            </mat-form-field>
+
+            <mat-form-field class="w-full" appearance="fill">
+                <mat-label>Group</mat-label>
+                <mat-select multiple [formControl]="providers" (openedChange)="onOpenChange(multiUserSearch)">
+                  <mat-select-trigger>
+                    {{providers.value }}
+                  </mat-select-trigger>
+                  <input #multiUserSearch type="text" autocomplete="off" class="multiselect-search-input" 
+                  matInput placeholder="Search By Provider" (input)="onInputChange($event)"/>
+              
+                  <mat-option *ngFor="let provider of filteredProviders" [value]="provider.PROV">{{provider.PROV}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            
+          </div>
+          <div class="flex">
+            <mat-form-field
+                class="flex-auto">
+                <mat-label>Group description</mat-label>
+                <textarea matInput></textarea>
+            </mat-form-field>
+        </div>
+          <div class="flex">
+            <mat-form-field
+                class="flex-auto">
+                <mat-label>Notes</mat-label>
+                <textarea matInput></textarea>
+            </mat-form-field>
+        </div>
+      </form>
+
+      <table class="w-full bg-transparent" mat-table [dataSource]="GroupUserDataSource">
+
+                    <!-- Group name -->
+                    <ng-container matColumnDef="userName">
+                        <th mat-header-cell *matHeaderCellDef>
+                            User name
+                        </th>
+                        <td mat-cell *matCellDef="let groupUserItem">
+                            <span class="whitespace-nowrap">
+                                {{groupUserItem.userName}}
+                            </span>
+                        </td>
+                    </ng-container>
+
+                    <!-- Description -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Id
+                        </th>
+                        <td mat-cell *matCellDef="let groupUserItem">
+                            <span class="whitespace-nowrap">
+                                {{groupUserItem.id}}
+                            </span>
+                        </td>
+                    </ng-container>
+
+                    <!-- Description -->
+                    <ng-container matColumnDef="title">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Title
+                        </th>
+                        <td mat-cell *matCellDef="let groupUserItem">
+                            <span class="whitespace-nowrap">
+                                {{groupUserItem.title}}
+                            </span>
+                        </td>
+                    </ng-container>
+
+                    <!-- Action -->
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef>
+                        </th>
+                        <td mat-cell *matCellDef="let groupUserItem" class="whitespace-nowrap">
+                            <button mat-icon-button >
+                                <mat-icon svgIcon="heroicons_mini:pencil-square" class="icon-size-4"></mat-icon>
+                            </button>
+                            <button mat-icon-button >
+                                <mat-icon svgIcon="heroicons_mini:trash" class="icon-size-4"></mat-icon>
+                            </button>
+                            <button mat-icon-button>
+                                <mat-icon [svgIcon]="'heroicons_mini:eye'" class="icon-size-4"></mat-icon>
+                            </button>
+
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                </table>
+      
+      
+
+      
+    
+    </mat-tab>
+    <mat-tab label="Permissions"> 
+      <!-- <app-violation></app-violation>   -->
+    </mat-tab>
+    <mat-tab label="Scripts"> 
+      <!-- <app-attachment></app-attachment> -->
+
+    </mat-tab>
+  </mat-tab-group>
+
+ 
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end" class="border-gray-300/70">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Save</button>
+</mat-dialog-actions>

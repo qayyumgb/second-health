@@ -90,6 +90,7 @@ export const appRoutes: Route[] = [
                 {path: 'contacts', loadChildren: () => import('app/modules/admin/apps/contacts/contacts.routes')},
                 {path: 'hajj', loadChildren: () => import('app/modules/admin/apps/ecommerce/ecommerce.routes')},
                 {path: 'reports', loadChildren: () => import('app/modules/admin/apps/reports/reports.routes')},
+                {path: 'permissions', loadChildren: () => import('app/modules/admin/apps/permissions/permission.routes')},
             ]},
 
             // Pages

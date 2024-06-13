@@ -50,10 +50,10 @@ export const defaultNavigation: FuseNavigationItem[] = [
             },
             {
                 id   : 'permissions',
-                title: 'Permissions',
+                title: 'Groups and Permissions',
                 type : 'basic',
                 icon : 'heroicons_outline:lock-closed',
-                link : '/admin/permissions',
+                link : '/apps/permissions',
             },
             {
                 id   : 'pages.settings',

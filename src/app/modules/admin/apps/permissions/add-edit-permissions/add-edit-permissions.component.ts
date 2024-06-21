@@ -19,13 +19,15 @@ import { RouterLink } from '@angular/router';
 import { FuseDrawerComponent } from '@fuse/components/drawer';
 import { ViolationComponent } from '../../ecommerce/inventory/violation/violation.component';
 import { AttachmentComponent } from '../../ecommerce/inventory/attachment/attachment.component';
+import { ScriptDetailsComponent } from "../script-details/script-details.component";
+import { PermissionDetailsComponent } from "../permission-details/permission-details.component";
 
 @Component({
-  selector: 'app-add-edit-permissions',
-  standalone: true,
-  imports: [MatButtonModule,AttachmentComponent, ViolationComponent,MatTableModule, MatTabsModule, MatDialogModule, MatAutocompleteModule, RouterLink, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, NgFor, MatOptionModule, MatDatepickerModule, MatAutocompleteModule, AsyncPipe],
-  templateUrl: './add-edit-permissions.component.html',
-  styleUrl: './add-edit-permissions.component.scss'
+    selector: 'app-add-edit-permissions',
+    standalone: true,
+    templateUrl: './add-edit-permissions.component.html',
+    styleUrl: './add-edit-permissions.component.scss',
+    imports: [MatButtonModule, AttachmentComponent, ViolationComponent, MatTableModule, MatTabsModule, MatDialogModule, MatAutocompleteModule, RouterLink, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, NgFor, MatOptionModule, MatDatepickerModule, MatAutocompleteModule, AsyncPipe, ScriptDetailsComponent, PermissionDetailsComponent]
 })
 export class AddEditPermissionsComponent {
   displayedColumns: string[] = ['userName', 'id', 'title', 'action'];

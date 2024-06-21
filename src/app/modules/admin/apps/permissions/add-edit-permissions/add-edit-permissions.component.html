@@ -6,13 +6,12 @@
       <form action="" class="w-full mt-5">
         <div class="md:flex gap-3">
             <mat-form-field class="w-full ">
-              <mat-label class="capitalized" title="Vaccinated with polio vaccine before arriving">Vaccinated with polio
-                vaccine before arriving</mat-label>
-              <input type="text" matInput [formControlName]="'pVBeforeArrival'">
+              <mat-label class="capitalized" title="group name">Group name</mat-label>
+              <input type="text" matInput >
             </mat-form-field>
 
             <mat-form-field class="w-full" appearance="fill">
-                <mat-label>Group</mat-label>
+                <mat-label>Add users</mat-label>
                 <mat-select multiple [formControl]="providers" (openedChange)="onOpenChange(multiUserSearch)">
                   <mat-select-trigger>
                     {{providers.value }}
@@ -108,11 +107,10 @@
     
     </mat-tab>
     <mat-tab label="Permissions"> 
-      <!-- <app-violation></app-violation>   -->
+      <app-permission-details></app-permission-details>
     </mat-tab>
     <mat-tab label="Scripts"> 
-      <!-- <app-attachment></app-attachment> -->
-
+      <app-script-details></app-script-details>
     </mat-tab>
   </mat-tab-group>
 
@@ -122,5 +120,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end" class="border-gray-300/70">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Save</button>
+  <button class="" mat-flat-button [color]="'primary'" [mat-dialog-close]="true" cdkFocusInitial><span class="ml-2 mr-1">Save</span></button>
 </mat-dialog-actions>

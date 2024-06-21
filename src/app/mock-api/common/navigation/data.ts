@@ -32,6 +32,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
               icon : 'heroicons_outline:bars-3-bottom-left',
               link : '/apps/hajj',
           },
+          {
+            id   : 'reportName',
+            title: 'Report Name',
+            type : 'basic',
+            icon : 'heroicons_outline:square-3-stack-3d',
+            link : '/apps/reports',
+        },
         ],
     },
     {
@@ -64,21 +71,15 @@ export const defaultNavigation: FuseNavigationItem[] = [
             },
         ],
     },
-    {
-        id      : 'report',
-        title   : 'Report',
-        type    : 'group',
-        icon    : 'heroicons_outline:rectangle-stack',
-        children: [
-            {
-                id   : 'reportName',
-                title: 'Report Name',
-                type : 'basic',
-                icon : 'heroicons_outline:square-3-stack-3d',
-                link : '/apps/reports',
-            },
-        ],
-    },
+    // {
+    //     id      : 'report',
+    //     title   : 'Report',
+    //     type    : 'group',
+    //     icon    : 'heroicons_outline:rectangle-stack',
+    //     children: [
+            
+    //     ],
+    // },
     
 ];
 

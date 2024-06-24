@@ -1,230 +1,230 @@
-<div class="">
-  <div class="flex justify-end">
-    <button (click)="addNewData()" class="" mat-flat-button [color]="'primary'">
-      <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
-      <span class="ml-2 mr-1">Addd</span>
+
+
+
+
+
+
+
+
+
+
+
+<div class="flex justify-end">
+  <button (click)="addNewData()" class="" mat-flat-button [color]="'primary'">
+    <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+    <span class="ml-2 mr-1">Add</span>
   </button>
-    
-  </div>
+
+</div>
+<div class="flex-talbe">
   <table mat-table [dataSource]="dataSource" class="">
 
-    <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-  
-    <!-- Position Column -->
-    
     <ng-container matColumnDef="violationID">
       <th mat-header-cell *matHeaderCellDef> Violation ID</th>
-      <td mat-cell >fasdf</td>
       <td mat-cell *matCellDef="let element">
         @if (currentActiveRow == element.violationID){
-        <div class=" editalbe-div" contenteditable="true">
+          <div class="editalbe-div-b w-5p" >
+            <input type="text" [(ngModel)]="element.violationID">
+
+          </div>
+
+        }
+        @else {
+        <div class="editalbe-p-div w-5p">
           {{element.violationID}}
         </div>
         }
-        @else {
-          <div class="editalbe-p-div">
-            {{element.violationID}}
-          </div>
-        }
-      </td>
-      <td>
-        asdfsd
       </td>
     </ng-container>
-  
-    <!-- Name Column -->
+
+
     <ng-container matColumnDef="shortCut">
       <th mat-header-cell *matHeaderCellDef> Short Cut </th>
-      <td mat-cell >fasdf</td>
       <td mat-cell *matCellDef="let element">
         @if (currentActiveRow == element.violationID){
-        <div class=" editalbe-div" contenteditable="true">
-          {{element.shortCut}}
-        </div>
+          <div class="editalbe-div-b w-5p" >
+            <input type="text" [(ngModel)]="element.shortCut">
+          </div>
+
         }
         @else {
-          <div class="editalbe-p-div">
-            {{element.shortCut}}
-  
-          </div>
-     
+        <div class="editalbe-p-div w-5p">
+          {{element.shortCut}}
+
+        </div>
+
         }
       </td>
     </ng-container>
-  
-    <!-- Weight Column -->
+
     <ng-container matColumnDef="violationName">
       <th mat-header-cell *matHeaderCellDef> Violation Name </th>
-      <td mat-cell >fasdf</td>
       <td mat-cell *matCellDef="let element">
         @if (currentActiveRow == element.violationID){
-        <div class=" editalbe-div" contenteditable="true">
-          {{element.violationName}}
-        </div>
+          <div class="editalbe-div-b w-5p" >
+            <input type="text" [(ngModel)]="element.violationName">
+          </div>
         } @else {
-          <div class="editalbe-p-div">
-            {{element.violationName}}
-  
+        <div class="editalbe-p-div w-5p">
+          {{element.violationName}}
+
         </div>
         }
-  
+
       </td>
     </ng-container>
-  
-    <!-- Symbol Column -->
+
+
     <ng-container matColumnDef="qty">
       <th mat-header-cell *matHeaderCellDef> Qty </th>
-      <td mat-cell >fasdf</td>
       <td mat-cell *matCellDef="let element">
         @if (currentActiveRow == element.violationID){
-        <div class=" editalbe-div" contenteditable="true">
-          {{element.qty}}
-        </div>
+          <div class="editalbe-div-b w-5p" >
+
+            <input type="text" [(ngModel)]="element.qty">
+          </div>
+
         } @else {
-          <div class="editalbe-p-div">
-  
+        <div class="editalbe-p-div w-5p">
+
           {{element.qty}}
-  
+
         </div>
         }
       </td>
     </ng-container>
-  
+
     <ng-container matColumnDef="city">
       <th mat-header-cell *matHeaderCellDef> City </th>
-      <td mat-cell >fasdf</td>
       <td mat-cell *matCellDef="let element">
         <div class="">
           @if (currentActiveRow == element.violationID){
-            <div class=" editalbe-div" contenteditable="true">
-              {{element.city}}
-  
+            <div class="editalbe-div-b w-5p" >
+
+              <input type="text" [(ngModel)]="element.city">
             </div>
-            } @else {
-              <div class="editalbe-p-div">
-              {{element.city}}
-            </div>
-            }
+          } @else {
+          <div class="editalbe-p-div w-5p">
+            {{element.city}}
+          </div>
+          }
         </div>
       </td>
     </ng-container>
-  
+
     <ng-container matColumnDef="type">
       <th mat-header-cell *matHeaderCellDef> Type </th>
-      <td mat-cell >fasdf</td>
-
       <td mat-cell *matCellDef="let element">
         <div>
           @if (currentActiveRow == element.violationID){
-          <div class=" editalbe-div" contenteditable="true">
-            {{element.type}}
-          </div>
+            <div class="editalbe-div-b w-5p" >
+
+              <input type="text" [(ngModel)]="element.type">
+            </div>
+
           }
           @else {
-            <div class="editalbe-p-div">
+          <div class="editalbe-p-div w-5p">
             {{element.type}}
           </div>
           }
-  
+
         </div>
       </td>
     </ng-container>
-  
+
     <ng-container matColumnDef="flight">
       <th mat-header-cell *matHeaderCellDef> flight </th>
-      <td mat-cell >fasdf</td>
-
       <td mat-cell *matCellDef="let element">
         <div>
           @if (currentActiveRow == element.violationID){
-          <div class=" editalbe-div" contenteditable="true">
+            <div class="editalbe-div-b w-5p" >
+
+              <input type="text" [(ngModel)]="element.flight">
+            </div>
+          }
+          @else {
+          <div class="editalbe-p-div w-5p">
             {{element.flight}}
           </div>
           }
-          @else {
-            <div class="editalbe-p-div">
-              {{element.flight}}
-            </div>
-          }
-  
+
         </div>
       </td>
     </ng-container>
-  
+
     <ng-container matColumnDef="company">
       <th mat-header-cell *matHeaderCellDef> company </th>
-      <td mat-cell >fasdf</td>
-
       <td mat-cell *matCellDef="let element">
         <div>
           @if (currentActiveRow == element.violationID){
-          <div class=" editalbe-div" contenteditable="true">
+            <div class="editalbe-div-b " >
+
+              <input type="text" [(ngModel)]="element.company">
+            </div>
+
+          }
+          @else {
+          <div class="editalbe-p-div">
             {{element.company}}
           </div>
           }
-          @else {
-            <div class="editalbe-p-div">
-              {{element.company}}
-            </div>
-          }
-  
+
         </div>
       </td>
     </ng-container>
-  
+
     <ng-container matColumnDef="note">
       <th mat-header-cell *matHeaderCellDef> note </th>
-      <td mat-cell >fasdf</td>
-
+\
       <td mat-cell *matCellDef="let element">
         <div>
           @if (currentActiveRow == element.violationID){
-          <div class=" editalbe-div" contenteditable="true">
+            <div class="editalbe-div-b" >
+
+              <input type="text" [(ngModel)]="element.note">
+            </div>
+
+          }
+          @else {
+          <div class="editalbe-p-div">
             {{element.note}}
           </div>
           }
-          @else {
-            <div class="editalbe-p-div">
-              {{element.note}}
-            </div>
-          }
-  
+
         </div>
       </td>
     </ng-container>
-  
+
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef> Action </th>
-      <td mat-cell >fasdf</td>
       <td mat-cell *matCellDef="let element">
         <div class="flex gap-3">
-          
+
           @if (element.violationID != currentActiveRow) {
-            <div>
-              <button mat-icon-button (click)="currentActiveRowHandling(element.violationID)">
-                <mat-icon svgIcon="heroicons_mini:pencil-square" class="icon-size-4"></mat-icon>
-              </button>
-            </div>
+          <div>
+            <button mat-icon-button (click)="currentActiveRowHandling(element.violationID)">
+              <mat-icon svgIcon="heroicons_mini:pencil-square" class="icon-size-4"></mat-icon>
+            </button>
+          </div>
           }
           @else {
-            <div (click)="currentActiveRowHandling(currentActiveRow = -1)">
-              <button mat-icon-button >
-                <!-- <mat-icon matSuffix>done</mat-icon> -->
-                <mat-icon svgIcon="heroicons_mini:check" class="icon-size-4"></mat-icon>
-  
-              </button>
-            </div>
-  
+          <div (click)="currentActiveRowHandling(-1)">
+            <button mat-icon-button type="submit">
+              <mat-icon svgIcon="heroicons_mini:check" class="icon-size-4"></mat-icon>
+
+            </button>
+          </div>
+
           }
-          <button mat-icon-button >
+          <button mat-icon-button>
             <mat-icon svgIcon="heroicons_mini:trash" class="icon-size-4"></mat-icon>
           </button>
         </div>
-  
+
       </td>
     </ng-container>
-  
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>

@@ -1,11 +1,20 @@
-.editalbe-p-div{
+.editalbe-p-div {
     padding: 6px 6px;
     border: 1px solid white;
-
+    max-width: 230px;
+    &.w-5p{
+        max-width: 110px;
+    }
 }
-.editalbe-div {
-    border: 1px solid gainsboro;
+.editalbe-div-b {
+    border: 1px solid gainsboro !important;
     border-radius: 6px;
     padding: 6px 6px;
-
+    &.w-5p{
+         max-width: 110px;
+    }
+}
+.flex-talbe{
+    width: 100%;
+    overflow-x: auto;
 }

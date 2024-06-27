@@ -1,7 +1,8 @@
 .attachment-wrapper {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: end;
+    gap: 1.5rem;
+    flex-wrap: wrap;
     .attahment-file-lable-box {
         input {
             display: none;

@@ -35,15 +35,22 @@
             <!-- Avatar and actions -->
             <div class="flex flex-auto items-end -mt-16">
                 <!-- Avatar -->
-                <div class="flex items-center justify-center w-32 h-32 rounded-full overflow-hidden ring-4 ring-bg-card">
-                    <img
-                        class="object-cover w-full h-full"
-                        *ngIf="data.avatar"
-                        [src]="data.avatar">
-                    <div
-                        class="flex items-center justify-center w-full h-full rounded overflow-hidden uppercase text-8xl font-bold leading-none bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200"
-                        *ngIf="!data.avatar">
-                        {{data.name.charAt(0)}}
+                <div class="flex gap-5 items-end"   >
+                    <div class="flex items-center justify-center w-32 h-32 rounded-full overflow-hidden ring-4 ring-bg-card">
+                        <img
+                            class="object-cover w-full h-full"
+                            *ngIf="data.avatar"
+                            [src]="data.avatar">
+                        <div
+                            class="flex items-center justify-center w-full h-full rounded overflow-hidden uppercase text-8xl font-bold leading-none bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                            *ngIf="!data.avatar">
+                            {{data.name.charAt(0)}}
+                        </div>
+                    </div>
+                    <div class=" font-bold top-1.5 truncate nameofContact">
+                        <div class=" text-2xl font-bold truncate">{{data.name}}</div>
+                        <div class=" text-2xl font-bold truncate tajawal-bold">{{data.nameArabic}}</div>
+        
                     </div>
                 </div>
                 <!-- Actions -->
@@ -60,7 +67,7 @@
             </div>
 
             <!-- Name -->
-            <div class="absolute font-bold top-1.5 truncate nameofContact">
+            <div class="hidden font-bold top-1.5 truncate nameofContact">
                 <div class=" text-2xl font-bold truncate">{{data.name}}</div>
                 <div class=" text-2xl font-bold truncate tajawal-bold">{{data.nameArabic}}</div>
 

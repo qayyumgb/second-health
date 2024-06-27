@@ -31,18 +31,23 @@ export class PermissionDetailsComponent {
     "permissions",
     "action",
   ];
+  addNew:boolean = false
   dataSource  = ELEMENT_DATA;
   currentActiveRow:number = -1;
-  currentActiveRowHandling = (a:number) =>  this.currentActiveRow = a
+  currentActiveRowHandling = (a:number) =>  {
+    this.currentActiveRow = a
+    this.addNew = false;
+  }
   @ViewChild(MatTable) table: MatTable<PeriodicElement>;
   addNewData = () => {
     const lastPosition = this.dataSource.length+1
 
-    if (this.currentActiveRow != 0) {
+    if (this.currentActiveRow != 0  && !this.addNew) {
       let a: PeriodicElement = { number: lastPosition, page: '', permissions: "" };
       this.dataSource.splice(0, 0, a)
       this.table.renderRows();
       this.currentActiveRow = lastPosition;
+      this.addNew = true
     }
   }
 }

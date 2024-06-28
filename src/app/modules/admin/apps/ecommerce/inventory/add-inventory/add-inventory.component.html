@@ -8,7 +8,7 @@
           <mat-form-field class="w-full">
             <mat-label>Lounge</mat-label>
     
-            <input type="text" placeholder="Choose a Lounge" aria-label="text" [formControl]="lodgeControl" matInput
+            <input type="text" placeholder="Choose a Lounge" aria-label="text" matInput
               [matAutocomplete]="lounge" [formControlName]="'lodge'">
             <mat-autocomplete #lounge="matAutocomplete">
               @for (option of lodngeFilteredOptions | async; track option) {
@@ -18,7 +18,7 @@
           </mat-form-field>
           <mat-form-field class="w-full">
             <mat-label>Period</mat-label>
-            <input type="text" placeholder="Choose a Period" aria-label="text" [formControl]="periodControl" matInput
+            <input type="text" placeholder="Choose a Period" aria-label="text" matInput
               [matAutocomplete]="Period" [formControlName]="'period'">
             <mat-autocomplete #Period="matAutocomplete">
               @for (option of periodFilteredOptions | async; track option) {
@@ -30,7 +30,7 @@
         <div class="md:flex w-full gap-3">
           <mat-form-field class="w-full">
             <mat-label>Type</mat-label>
-            <input type="text" placeholder="Choose a King" aria-label="Number" [formControl]="TypeControl" matInput
+            <input type="text" placeholder="Choose a King" aria-label="Number" matInput
               [matAutocomplete]="kind" [formControlName]="'tripType'">
             <mat-autocomplete #kind="matAutocomplete">
               @for (option of TypeFilteredOptions | async; track option) {
@@ -53,9 +53,8 @@
           </mat-form-field>
           <mat-form-field class="w-full">
             <mat-label>From</mat-label>
-            <input type="text" placeholder="From" aria-label="Number" matInput [matAutocomplete]="from"
-              [formControl]="fromControl">
-            <mat-autocomplete #from="matAutocomplete">
+            <input type="text" placeholder="From" aria-label="Number" [formControlName]="'from'" matInput [matAutocomplete]="from">
+                         <mat-autocomplete #from="matAutocomplete">
               @for (option of fromFilteredOptions | async; track option) {
               <mat-option [value]="option">{{option}}</mat-option>
               }
@@ -66,7 +65,7 @@
         <div class="md:flex w-full gap-3">
           <mat-form-field class="w-full">
             <mat-label>Airlines</mat-label>
-            <input type="text" placeholder="Nationality" aria-label="Number" [formControl]="AirlineControl" matInput
+            <input type="text" placeholder="Nationality" aria-label="Number" matInput
               [matAutocomplete]="airline" [formControlName]="'airline'">
             <mat-autocomplete #airline="matAutocomplete">
               @for (option of AirlineFilteredOptions | async; track option) {
@@ -84,7 +83,7 @@
         <div class="md:flex gap-3">
           <!-- <mat-form-field class="w-full">
             <mat-label>Nationality</mat-label>
-            <input type="text" placeholder="Nationality" aria-label="Number" [formControl]="NationalityControl" matInput
+            <input type="text" placeholder="Nationality" aria-label="Number" matInput
               [matAutocomplete]="nationality" [formControlName]="'nationality'">
     
             <mat-autocomplete #nationality="matAutocomplete">

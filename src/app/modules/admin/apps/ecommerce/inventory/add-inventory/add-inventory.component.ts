@@ -181,11 +181,6 @@ export class AddInventoryComponent implements OnInit {
   saveInventary() {
     debugger
     this.tempInventary = this.selectedProductForm.value
-    this.tempInventary.lodge = this.lodgeControl.value
-    this.tempInventary.period = this.periodControl.value
-    this.tempInventary.from = this.fromControl.value
-    this.tempInventary.tripType = this.TypeControl.value
-    this.tempInventary.airline = this.AirlineControl.value
     this.tempInventary.nationality = this.NationalityControl.value
     console.log(this.tempInventary);
     if (this.tempInventary.lodge && this.tempInventary.period) {

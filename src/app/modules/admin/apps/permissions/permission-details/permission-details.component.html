@@ -1,102 +1,110 @@
-<div class="">
-    <div class="flex justify-end">
-      <button (click)="addNewData()" class="" mat-flat-button [color]="'primary'">
-        <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
-        <span class="ml-2 mr-1">Add</span>
-    </button>
-      
-    </div>
-    <table mat-table [dataSource]="dataSource" class="">
-  
-      <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
-    
-      <!-- Position Column -->
-      
-      <ng-container matColumnDef="number">
-        <th mat-header-cell *matHeaderCellDef> Number</th>
-        <td mat-cell *matCellDef="let element">
-          @if (currentActiveRow == element.number){
-          <div class=" editalbe-div" contenteditable="true">
-            {{element.number}}
+
+
+
+
+
+
+
+
+
+
+
+<div class="flex justify-end">
+  <button (click)="addNewData()" class="" mat-flat-button [color]="'primary'">
+    <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+    <span class="ml-2 mr-1">Add</span>
+  </button>
+
+</div>
+<div class="flex-talbe">
+  <table mat-table [dataSource]="dataSource" class="">
+
+    <ng-container matColumnDef="number">
+      <th mat-header-cell *matHeaderCellDef> number</th>
+      <td mat-cell *matCellDef="let element">
+        @if (currentActiveRow == element.number){
+          <div class="editalbe-div-b w-5p  {{currentActiveRow == element.number && isEmpty && element.number=='' ? 'border-warn':''}}" >
+            <input type="text" [(ngModel)]="element.number">
+
           </div>
-          }
-          @else {
-            <div class="editalbe-p-div">
-              {{element.number}}
-            </div>
-          }
-        </td>
-      </ng-container>
-    
-      <!-- Name Column -->
-      <ng-container matColumnDef="page">
-        <th mat-header-cell *matHeaderCellDef> Page </th>
-        <td mat-cell *matCellDef="let element">
-          @if (currentActiveRow == element.page){
-          <div class=" editalbe-div" contenteditable="true">
-            {{element.page}}
+
+        }
+        @else {
+        <div class="editalbe-p-div w-5p">
+          {{element.number}}
+        </div>
+        }
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="page">
+      <th mat-header-cell *matHeaderCellDef> page </th>
+      <td mat-cell *matCellDef="let element">
+        @if (currentActiveRow == element.number){
+          <div class="editalbe-div-b w-5p  {{currentActiveRow == element.number && isEmpty && element.page=='' ? 'border-warn':''}}" >
+            <input type="text" [(ngModel)]="element.page">
           </div>
-          }
-          @else {
-            <div class="editalbe-p-div">
-              {{element.page}}
-    
-            </div>
-       
-          }
-        </td>
-      </ng-container>
-    
-      <!-- Weight Column -->
-      <ng-container matColumnDef="permissions">
-        <th mat-header-cell *matHeaderCellDef> Permissions </th>
-        <td mat-cell *matCellDef="let element">
-          @if (currentActiveRow == element.permissions){
-          <div class=" editalbe-div" contenteditable="true">
-            {{element.permissions}}
+
+        }
+        @else {
+        <div class="editalbe-p-div w-5p" >
+          {{element.page}}
+
+        </div>
+
+        }
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="permissions">
+      <th mat-header-cell *matHeaderCellDef> permissions </th>
+      <td mat-cell *matCellDef="let element">
+        @if (currentActiveRow == element.number){
+          <div class="editalbe-div-b w-5p  {{currentActiveRow == element.number && isEmpty && element.permissions=='' ? 'border-warn':''}}" >
+            <input type="text" [(ngModel)]="element.permissions">
           </div>
-          } @else {
-            <div class="editalbe-p-div">
-              {{element.permissions}}
-    
-          </div>
-          }
-    
-        </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef> Action </th>
-        <td mat-cell *matCellDef="let element">
-          <div class="flex gap-3">
-            
-            @if (element.number != currentActiveRow) {
-              <div>
-                <button mat-icon-button (click)="currentActiveRowHandling(element.number)">
-                  <mat-icon svgIcon="heroicons_mini:pencil-square" class="icon-size-4"></mat-icon>
-                </button>
-              </div>
-            }
-            @else {
-              <div (click)="currentActiveRowHandling(currentActiveRow = -1)">
-                <button mat-icon-button >
-                  <!-- <mat-icon matSuffix>done</mat-icon> -->
-                  <mat-icon svgIcon="heroicons_mini:check" class="icon-size-4"></mat-icon>
-    
-                </button>
-              </div>
-    
-            }
-            <button mat-icon-button >
-              <mat-icon svgIcon="heroicons_mini:trash" class="icon-size-4"></mat-icon>
+        } @else {
+        <div class="editalbe-p-div w-5p">
+          {{element.permissions}}
+
+        </div>
+        }
+
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="flex gap-3">
+
+          @if (element.number != currentActiveRow) {
+          <div>
+            <button mat-icon-button (click)="currentActiveRowHandling(element.number)">
+              <mat-icon svgIcon="heroicons_mini:pencil-square" class="icon-size-4"></mat-icon>
             </button>
           </div>
-    
-        </td>
-      </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  </div>
+          }
+          @else {
+          <div (click)="currentActiveRowHandling(-1)">
+            <button mat-icon-button type="submit">
+              <mat-icon svgIcon="heroicons_mini:check" class="icon-size-4"></mat-icon>
+
+            </button>
+          </div>
+
+          }
+          <button mat-icon-button>
+            <mat-icon svgIcon="heroicons_mini:trash" class="icon-size-4"></mat-icon>
+          </button>
+        </div>
+
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

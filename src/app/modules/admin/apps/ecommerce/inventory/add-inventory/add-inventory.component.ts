@@ -57,11 +57,11 @@ export class AddInventoryComponent implements OnInit {
   optionAirline: string[] = ['Airline 1', 'Airline 2', 'Airline 3', 'Airline 4', 'Airline 5'];
   optionNationality: string[] = ['Nationality 1', 'Nationality 2', 'Nationality 3', 'Nationality 4', 'Nationality 5'];
   optionType: string[] = ['Trip Type 1', 'Trip Type 2', 'Trip Type 3', 'Trip Type 4', 'Trip Type 5'];
-  lodngeFilteredOptions: Observable<string[]>;
-  periodFilteredOptions: Observable<string[]>;
-  fromFilteredOptions: Observable<string[]>;
-  TypeFilteredOptions: Observable<string[]>;
-  AirlineFilteredOptions: Observable<string[]>;
+  lodngeFilteredOptions: string[];
+  periodFilteredOptions: string[];
+  fromFilteredOptions: string[];
+  TypeFilteredOptions: string[];
+  AirlineFilteredOptions: string[];
   NationalityFilteredOptions: Observable<string[]>;
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
@@ -118,32 +118,7 @@ export class AddInventoryComponent implements OnInit {
       }
 
     })
-
-    this.lodngeFilteredOptions = this.lodgeControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filterLodnge(value || '')),
-    );
-
-    this.periodFilteredOptions = this.periodControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filterPeriod(value || '')),
-    );
-
-    this.fromFilteredOptions = this.fromControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filterFrom(value || '')),
-    );
-
-
-    this.TypeFilteredOptions = this.TypeControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filterType(value || '')),
-    );
-
-    this.AirlineFilteredOptions = this.AirlineControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filterAirline(value || '')),
-    );
+    this.searchnationality("", "all")
 
     this.NationalityFilteredOptions = this.NationalityControl.valueChanges.pipe(
       startWith(''),
@@ -199,4 +174,31 @@ export class AddInventoryComponent implements OnInit {
     }
   }
 
+  searchnationality(e: any, field: string) {
+    debugger
+    switch (field) {
+      case "lodge":
+        this.lodngeFilteredOptions = this._filterLodnge(this.lodgeControl.value || '');
+        break;
+      case "period":
+        this.periodFilteredOptions = this._filterPeriod(this.periodControl.value || '');
+        break;
+      case "type":
+        this.TypeFilteredOptions = this._filterType(this.TypeControl.value || '');
+        break;
+      case "from":
+        this.fromFilteredOptions = this._filterType(this.fromControl.value || '');
+        break;
+      case "airline":
+        this.AirlineFilteredOptions = this._filterAirline(this.AirlineControl.value || '');
+        break;
+      case "all":
+        this.lodngeFilteredOptions = this._filterLodnge(this.lodgeControl.value || '');
+        this.periodFilteredOptions = this._filterPeriod(this.periodControl.value || '');
+        this.TypeFilteredOptions = this._filterType(this.TypeControl.value || '');
+        this.fromFilteredOptions = this._filterType(this.fromControl.value || '');
+        this.AirlineFilteredOptions = this._filterAirline(this.AirlineControl.value || '');
+        break;
+    }
+  }
 }

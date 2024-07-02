@@ -9,7 +9,7 @@
             <mat-label>Lounge</mat-label>
     
             <input type="text" placeholder="Choose a Lounge" aria-label="text" matInput
-              [matAutocomplete]="lounge" [formControl]="lodgeControl" (keyup)="searchnationality($event,'lodge')" [formControlName]="'lodge'">
+             [matAutocomplete]="lounge" [formControl]="lodgeControl" (keyup)="searchnationality($event,'lodge')" (click)="searchnationality($event,'click')" [formControlName]="'lodge'">
             <mat-autocomplete #lounge="matAutocomplete">
               @for (option of lodngeFilteredOptions ; track option) {
               <mat-option [value]="option">{{option}}</mat-option>
@@ -19,7 +19,8 @@
           <mat-form-field class="w-full">
             <mat-label>Period</mat-label>
             <input type="text" placeholder="Choose a Period" aria-label="text" matInput
-              [matAutocomplete]="Period" [formControl]="periodControl" (keyup)="searchnationality($event,'period')" [formControlName]="'period'">
+             [matAutocomplete]="Period" [formControl]="periodControl" (keyup)="searchnationality($event,'period')"
+                    (click)="searchnationality($event,'click')" [formControlName]="'period'">
             <mat-autocomplete #Period="matAutocomplete">
               @for (option of periodFilteredOptions ; track option) {
               <mat-option [value]="option">{{option}}</mat-option>
@@ -31,7 +32,8 @@
           <mat-form-field class="w-full">
             <mat-label>Type</mat-label>
             <input type="text" placeholder="Choose a King" aria-label="Number" matInput
-              [matAutocomplete]="kind" [formControlName]="'tripType'" [formControl]="TypeControl" (keyup)="searchnationality($event,'type')" >
+             [matAutocomplete]="kind" [formControlName]="'tripType'" [formControl]="TypeControl" (keyup)="searchnationality($event,'type')"
+              (click)="searchnationality($event,'click')">
             <mat-autocomplete #kind="matAutocomplete">
               @for (option of TypeFilteredOptions ; track option) {
               <mat-option [value]="option">{{option}}</mat-option>
@@ -54,19 +56,19 @@
           <mat-form-field class="w-full">
             <mat-label>From</mat-label>
             <input type="text" placeholder="From" aria-label="Number" [formControl]="fromControl"
-             (keyup)="searchnationality($event,'from')" [formControlName]="'from'" matInput [matAutocomplete]="from">
-                         <mat-autocomplete #from="matAutocomplete">
+             (keyup)="searchnationality($event,'from')" (click)="searchnationality($event,'click')"
+              [formControlName]="'from'" matInput [matAutocomplete]="from">
+            <mat-autocomplete #from="matAutocomplete">
               @for (option of fromFilteredOptions ; track option) {
               <mat-option [value]="option">{{option}}</mat-option>
               }
             </mat-autocomplete>
           </mat-form-field>
         </div>
-    
         <div class="md:flex w-full gap-3">
           <mat-form-field class="w-full">
             <mat-label>Airlines</mat-label>
-            <input type="text" [formControl]="AirlineControl" (keyup)="searchnationality($event,'airline')"   placeholder="Nationality" aria-label="Number" matInput
+            <input type="text" [formControl]="AirlineControl" (keyup)="searchnationality($event,'airline')"   (click)="searchnationality($event,'click')" placeholder="Nationality" aria-label="Number" matInput
               [matAutocomplete]="airline" [formControlName]="'airline'">
             <mat-autocomplete #airline="matAutocomplete">
               @for (option of AirlineFilteredOptions ; track option) {
@@ -94,19 +96,67 @@
             </mat-autocomplete>
           </mat-form-field> -->
 
-          <mat-form-field  class="w-full">
+          <!-- <mat-form-field  class="w-full">
             <mat-label>Nationality</mat-label>
-            <mat-select [formControl]="NationalityControl" multiple>
-              <!-- <mat-autocomplete #nationality="matAutocomplete"> -->
-                <input type="text" [formControl]="NationalityControl" class="multiSelect-search"   placeholder="Search" >     
-              @for (topping of NationalityFilteredOptions | async; track topping) {
+            <mat-select [formControl]="NationalityControl" (valueChange)="changeNationality($event)" multiple>
+                <input type="text" [formControl]="NationalityControlSearch" (keyup)="searchnationality($event,'nationality')" (click)="searchnationality($event,'click')" class="multiSelect-search"   placeholder="Search" >     
+              @for (topping of NationalityFilteredOptions ; track topping) {
                 <mat-option [value]="topping">{{topping}}</mat-option>
               }   
-            <!-- </mat-autocomplete> -->
+            </mat-select>
+          </mat-form-field> -->
+        </div>
+        <div class="md:flex gap-3">
+
+          <!-- dddddddddddddddddddddddddddddddddddddddddddddddddddddddd -->
+          <mat-form-field class="w-full">
+            <mat-label>Nationality</mat-label>
+
+            <mat-select (openedChange)="openedChange($event)" placeholder="Select" [formControl]="selectFormControl"
+              multiple>
+              <mat-select-trigger>
+                {{selectFormControl.value}}
+                <!-- <span *ngIf="selectFormControl.value?.length > 1" class="additional-selection">
+                  (+{{selectFormControl.value.length - 1}} {{selectFormControl.value?.length === 2 ? 'other' :
+                  'others'}}) -->
+                <!-- </span> -->
+              </mat-select-trigger>
+              <div class="select-container">
+                <mat-optgroup>
+                  <mat-form-field style="width:100%;">
+                    <input #search class="w-full" placeholder="Search" aria-label="Search" matInput
+                      [formControl]="searchTextboxControl">
+                    <button [disableRipple]="true" *ngIf="search.value" matSuffix mat-icon-button aria-label="Clear"
+                      (click)="clearSearch($event)">
+                      &times;
+                    </button>
+                  </mat-form-field>
+                </mat-optgroup>
+                <mat-optgroup *ngIf="(filteredOptions | async).length == 0">
+                  <div>No results found!</div>
+                </mat-optgroup>
+                <mat-option (onSelectionChange)="selectionChange($event)" *ngFor="let option of filteredOptions | async"
+                  [value]="option">
+                  {{option}}
+                </mat-option>
+              </div>
             </mat-select>
           </mat-form-field>
         </div>
-    
+        <!-- dddddddddddddddddddddddddddddddddddddddddddddddddddddddd -->
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            ] <span>Redial</span>
+          </button>
+          <button mat-menu-item disabled>
+            ] <span>Check voice mail</span>
+          </button>
+          <button mat-menu-item>
+            <span>Disable alerts</span>
+          </button>
+        </mat-menu>
         <div class="md:flex gap-3">
           <mat-form-field class="w-full ">
             <mat-label class="capitalized" title="Vaccinated with polio vaccine before arriving">Vaccinated with polio

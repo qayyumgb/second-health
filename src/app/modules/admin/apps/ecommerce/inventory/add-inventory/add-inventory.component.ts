@@ -1,5 +1,5 @@
-import { AsyncPipe, NgFor } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -17,19 +17,20 @@ import { Observable, map, startWith } from 'rxjs';
 import { MatTabsModule } from '@angular/material/tabs';
 import { PeriodicElement, ViolationComponent } from '../violation/violation.component';
 import { MatTableModule } from '@angular/material/table';
+import {MatMenuModule} from '@angular/material/menu';
 import { AttachmentComponent } from '../attachment/attachment.component';
-const ELEMENT_DATA: { id: number, passengerNameEn: string, passengerNameAr: string, country: string, status: string }[]  = [
-  {id: 1, passengerNameEn: 'Hydrogen', passengerNameAr: 'Hydrogen',  country: 'Hydrogen',  status: 'Hydrogen',},
-  {id: 2, passengerNameEn: 'Helium',   passengerNameAr: 'Helium',  country: 'Helium',  status: 'Helium',},
-  {id: 3, passengerNameEn: 'Lithium',  passengerNameAr: 'Lithium',  country: 'Lithium',  status: 'Lithium',},
-  {id: 4, passengerNameEn: 'Beryllium', passengerNameAr: 'Beryllium',  country: 'Beryllium',  status: 'Beryllium',},
-  {id: 5, passengerNameEn: 'Boron',    passengerNameAr: 'Boron',  country: 'Boron',  status: 'Boron',},
-  {id: 6, passengerNameEn: 'Carbon', passengerNameAr: 'Carbon',  country: 'Carbon',  status: 'Carbon',},
+const ELEMENT_DATA: { id: number, passengerNameEn: string, passengerNameAr: string, country: string, status: string }[] = [
+  { id: 1, passengerNameEn: 'Hydrogen', passengerNameAr: 'Hydrogen',  country: 'Hydrogen', status: 'Hydrogen', },
+  { id: 2, passengerNameEn: 'Helium',   passengerNameAr: 'Helium', country: 'Helium', status: 'Helium', },
+  { id: 3, passengerNameEn: 'Lithium',  passengerNameAr: 'Lithium', country: 'Lithium', status: 'Lithium', },
+  { id: 4, passengerNameEn: 'Beryllium', passengerNameAr: 'Beryllium', country: 'Beryllium', status: 'Beryllium', },
+  { id: 5, passengerNameEn: 'Boron',    passengerNameAr: 'Boron', country: 'Boron', status: 'Boron', },
+  { id: 6, passengerNameEn: 'Carbon', passengerNameAr: 'Carbon', country: 'Carbon', status: 'Carbon', },
 ];
 @Component({
   selector: 'app-add-inventory',
   standalone: true,
-  imports: [MatButtonModule,AttachmentComponent, ViolationComponent,MatTableModule, MatTabsModule, MatDialogModule, MatAutocompleteModule, RouterLink, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, NgFor, MatOptionModule, MatDatepickerModule, MatAutocompleteModule, AsyncPipe],
+  imports: [MatButtonModule,MatMenuModule,CommonModule, AttachmentComponent, ViolationComponent, MatTableModule, MatTabsModule, MatDialogModule, MatAutocompleteModule, RouterLink, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, NgFor, MatOptionModule, MatDatepickerModule, MatAutocompleteModule, AsyncPipe],
   templateUrl: './add-inventory.component.html',
   styleUrl: './add-inventory.component.scss'
 })
@@ -42,7 +43,8 @@ export class AddInventoryComponent implements OnInit {
   fromControl = new FormControl('');
   TypeControl = new FormControl('');
   AirlineControl = new FormControl('');
-  NationalityControl = new FormControl('');
+  NationalityControl = new FormControl(['Nationality 1']);
+  NationalityControlSearch = new FormControl('');
   generalData = ELEMENT_DATA;
   displayedColumns: string[] = [
     "id",
@@ -62,7 +64,7 @@ export class AddInventoryComponent implements OnInit {
   fromFilteredOptions: string[];
   TypeFilteredOptions: string[];
   AirlineFilteredOptions: string[];
-  NationalityFilteredOptions: Observable<string[]>;
+  NationalityFilteredOptions: string[];
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
     private _formBuilder: UntypedFormBuilder,
@@ -70,6 +72,11 @@ export class AddInventoryComponent implements OnInit {
   ) { }
   isEdit: boolean = false
   ngOnInit(): void {
+    this.filteredOptions = this.searchTextboxControl.valueChanges
+    .pipe(
+      startWith<string>(''),
+      map(name => this._filter(name))
+    );
     this.selectedProductForm = this._formBuilder.group({
       id: [''],
       lodge: [''],
@@ -113,17 +120,17 @@ export class AddInventoryComponent implements OnInit {
         this.fromControl.setValue(x.from)
         this.TypeControl.setValue(x.tripType)
         this.AirlineControl.setValue(x.airline)
-        this.NationalityControl.setValue(x.nationality)
+        this.NationalityControl.setValue([x.nationality])
         this.isEdit = true
       }
 
     })
     this.searchnationality("", "all")
 
-    this.NationalityFilteredOptions = this.NationalityControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filterNationality(value || '')),
-    );
+    // this.NationalityFilteredOptions = this.NationalityControl.valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => this._filterNationality(value || '')),
+    // );
 
   }
   private _filterLodnge(value: string): string[] {
@@ -156,7 +163,7 @@ export class AddInventoryComponent implements OnInit {
   saveInventary() {
     debugger
     this.tempInventary = this.selectedProductForm.value
-    this.tempInventary.nationality = this.NationalityControl.value
+    this.tempInventary.nationality = JSON.stringify(this.NationalityControl.value)
     console.log(this.tempInventary);
     if (this.tempInventary.lodge && this.tempInventary.period) {
       if (!this.tempInventary.id) {
@@ -173,9 +180,9 @@ export class AddInventoryComponent implements OnInit {
       }
     }
   }
+  search:boolean =false;
 
   searchnationality(e: any, field: string) {
-    debugger
     switch (field) {
       case "lodge":
         this.lodngeFilteredOptions = this._filterLodnge(this.lodgeControl.value || '');
@@ -192,13 +199,104 @@ export class AddInventoryComponent implements OnInit {
       case "airline":
         this.AirlineFilteredOptions = this._filterAirline(this.AirlineControl.value || '');
         break;
+      case "nationality":
+        this.NationalityFilteredOptions = this._filterNationality(this.NationalityControlSearch.value || '');
+        break;
       case "all":
         this.lodngeFilteredOptions = this._filterLodnge(this.lodgeControl.value || '');
         this.periodFilteredOptions = this._filterPeriod(this.periodControl.value || '');
         this.TypeFilteredOptions = this._filterType(this.TypeControl.value || '');
         this.fromFilteredOptions = this._filterType(this.fromControl.value || '');
         this.AirlineFilteredOptions = this._filterAirline(this.AirlineControl.value || '');
+        this.NationalityFilteredOptions = this._filterNationality(this.NationalityControlSearch.value || '');
+
+        break;
+      case "click":
+        this.lodngeFilteredOptions = this._filterLodnge('');
+        this.periodFilteredOptions = this._filterPeriod('');
+        this.TypeFilteredOptions = this._filterType('');
+        this.fromFilteredOptions = this._filterType('');
+        this.AirlineFilteredOptions = this._filterAirline('');
+        this.NationalityFilteredOptions = this._filterNationality('');
+
         break;
     }
+    if (e.target.value) {
+      this.search = true
+    }
   }
+  res:string[] = []
+  changeNationality(e: any | null) {
+    debugger
+    let y:string[] = e
+    this.NationalityFilteredOptions = this._filterNationality('');
+
+    if (e) {
+      
+      y.forEach((x)=> {
+        if(this.res.some(m => m == x)){
+          let ind = this.res.indexOf(x)
+          
+        }else{
+          this.res.push(x)
+        }
+      })
+      this.NationalityControl.setValue(this.res)
+    }
+  }
+  @ViewChild('search') searchTextBox: ElementRef;
+  selectFormControl = new FormControl();
+  searchTextboxControl = new FormControl();
+  selectedValues = [];
+  data: string[] = [
+    'A1',
+    'A2',
+    'A3',
+    'B1',
+    'B2',
+    'B3',
+    'C1',
+    'C2',
+    'C3'
+  ]
+
+  filteredOptions: Observable<any[]>;
+
+  private _filter(name: string): String[] {
+    const filterValue = name.toLowerCase();
+    this.setSelectedValues();
+    this.selectFormControl.patchValue(this.selectedValues);
+    let filteredList = this.data.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+    return filteredList;
+  }
+
+  selectionChange(event) {
+    if (event.isUserInput && event.source.selected == false) {
+      let index = this.selectedValues.indexOf(event.source.value);
+      this.selectedValues.splice(index, 1)
+    }
+  }
+
+  openedChange(e) {
+    this.searchTextboxControl.patchValue('');
+    if (e == true) {
+      this.searchTextBox.nativeElement.focus();
+    }
+  }
+
+  clearSearch(event) {
+    event.stopPropagation();
+    this.searchTextboxControl.patchValue('');
+  }
+  setSelectedValues() {
+    console.log('selectFormControl', this.selectFormControl.value);
+    if (this.selectFormControl.value && this.selectFormControl.value.length > 0) {
+      this.selectFormControl.value.forEach((e) => {
+        if (this.selectedValues.indexOf(e) == -1) {
+          this.selectedValues.push(e);
+        }
+      });
+    }
+  }
+  
 }

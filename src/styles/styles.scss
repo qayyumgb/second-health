@@ -262,3 +262,16 @@ body:has(.fuse-vertical-navigation-opened){
   padding: 6px 6px;
 
 }
+.hidden-option{
+  display:none !important;
+}
+.filter-option{
+  .mat-pseudo-checkbox{
+    display: none;
+  }
+  &.mat-mdc-option[aria-disabled=true]{
+    pointer-events: all !important;
+    user-select: none;
+      cursor: default;
+  }
+}

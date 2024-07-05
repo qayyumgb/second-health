@@ -94,15 +94,33 @@
             </mat-autocomplete>
           </mat-form-field> -->
 
-          <mat-form-field  class="w-full">
+          <mat-form-field class="select-form w-full">
             <mat-label>Nationality</mat-label>
-            <mat-select [formControl]="NationalityControl" multiple>
-              <!-- <mat-autocomplete #nationality="matAutocomplete"> -->
-                <input type="text" [formControl]="NationalityControl" class="multiSelect-search"   placeholder="Search" >     
-              @for (topping of NationalityFilteredOptions | async; track topping) {
-                <mat-option [value]="topping">{{topping}}</mat-option>
-              }   
-            <!-- </mat-autocomplete> -->
+            <mat-select [formControl]="NationalityControl"
+              placeholder="Years"
+              name="year"
+              class="filter-select"
+              [(ngModel)]="selectedYears"
+              [compareWith]="equals"
+              multiple
+            >
+            <input
+              type="text"
+              class="multiSelect-search"
+              [(ngModel)]="filterTextBox"
+              value=""
+              placeholder="Search"
+              [ngModelOptions]="{standalone: true}"
+            />
+              <mat-option
+                *ngFor="let nationality of optionNationality"
+                [value]="nationality"
+                [class]="nationality.indexOf(filterTextBox) == -1 &&
+                filterTextBox?'hidden-option':''"
+                
+              >
+                {{ nationality }}
+              </mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -165,8 +183,9 @@
           </mat-form-field>
         </div>
     
-    
+       
       </form>
+     
       <table mat-table [dataSource]="generalData" >
 
         <!--- Note that these columns can be defined in any order.

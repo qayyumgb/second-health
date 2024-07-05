@@ -139,7 +139,7 @@ export class ContactsDetailsComponent implements OnInit, OnDestroy {
     }
     console.log(newContact);
     console.log(this.groupControl.value);
-    debugger
+    
     
     this._contactsService.updateContact(this.contactForm.value.id, newContact).subscribe(x => console.log(x))
   }

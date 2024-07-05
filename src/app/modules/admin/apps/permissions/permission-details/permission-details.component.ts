@@ -80,7 +80,7 @@ formExw(){
 
   @ViewChild(MatTable) table: MatTable<PeriodicElement>;
   currentActiveRowHandling = (a:number) =>  {
-    debugger
+    
     this.formExw();
     let index = this.addNewData ? 0 :this.currentActiveRow-1
     let x = this.hajjForm.value.rows[index].page

@@ -41,7 +41,13 @@ export class AddEditPermissionsComponent {
   providers = new FormControl();
   allProviders: any[] = [{ PROV: "Username1" }, { PROV: "Username2" }, { PROV: "Username3" }, { PROV: "Username4" }, { PROV: "Username5" } ];
   filteredProviders: any[] = this.allProviders;
-
+  filterTextBox:any = '';
+  selectedYears: any[];
+  equals(objOne, objTwo) {
+    if (typeof objOne !== 'undefined' && typeof objTwo !== 'undefined') {
+      return objOne.id === objTwo.id;
+    }
+  }
 
   onInputChange(event: any) {
     const searchInput = event.target.value.toLowerCase();

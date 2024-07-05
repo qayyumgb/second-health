@@ -43,6 +43,7 @@ export class AddInventoryComponent implements OnInit {
   TypeControl = new FormControl('');
   AirlineControl = new FormControl('');
   NationalityControl = new FormControl('');
+  NationalityControl1 = new FormControl('');
   generalData = ELEMENT_DATA;
   displayedColumns: string[] = [
     "id",
@@ -56,6 +57,8 @@ export class AddInventoryComponent implements OnInit {
   optionFrom: string[] = ['from 1', 'from 2', 'from 3', 'from 4', 'from 5'];
   optionAirline: string[] = ['Airline 1', 'Airline 2', 'Airline 3', 'Airline 4', 'Airline 5'];
   optionNationality: string[] = ['Nationality 1', 'Nationality 2', 'Nationality 3', 'Nationality 4', 'Nationality 5'];
+
+  
   optionType: string[] = ['Trip Type 1', 'Trip Type 2', 'Trip Type 3', 'Trip Type 4', 'Trip Type 5'];
   lodngeFilteredOptions: string[];
   periodFilteredOptions: string[];
@@ -63,6 +66,14 @@ export class AddInventoryComponent implements OnInit {
   TypeFilteredOptions: string[];
   AirlineFilteredOptions: string[];
   NationalityFilteredOptions: Observable<string[]>;
+  searchText:any = '';
+  filterTextBox:any = '';
+  selectedYears: any[];
+  equals(objOne, objTwo) {
+    if (typeof objOne !== 'undefined' && typeof objTwo !== 'undefined') {
+      return objOne.id === objTwo.id;
+    }
+  }
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
     private _formBuilder: UntypedFormBuilder,
@@ -120,10 +131,10 @@ export class AddInventoryComponent implements OnInit {
     })
     this.searchnationality("", "all")
 
-    this.NationalityFilteredOptions = this.NationalityControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filterNationality(value || '')),
-    );
+    // this.NationalityFilteredOptions = this.NationalityControl.valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => this._filterNationality(value || '')),
+    // );
 
   }
   private _filterLodnge(value: string): string[] {
@@ -147,14 +158,14 @@ export class AddInventoryComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.optionAirline.filter(option => option.toLowerCase().includes(filterValue));
   }
-  private _filterNationality(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.optionNationality.filter(option => option.toLowerCase().includes(filterValue));
-  }
+  // private _filterNationality(value: string): string[] {
+  //   const filterValue = value.toLowerCase();
+  //   return this.optionNationality.filter(option => option.toLowerCase().includes(filterValue));
+  // }
 
   tempInventary: Iinventory
   saveInventary() {
-    debugger
+    
     this.tempInventary = this.selectedProductForm.value
     this.tempInventary.nationality = this.NationalityControl.value
     console.log(this.tempInventary);
@@ -175,7 +186,7 @@ export class AddInventoryComponent implements OnInit {
   }
 
   searchnationality(e: any, field: string) {
-    debugger
+    
     switch (field) {
       case "lodge":
         this.lodngeFilteredOptions = this._filterLodnge(this.lodgeControl.value || '');

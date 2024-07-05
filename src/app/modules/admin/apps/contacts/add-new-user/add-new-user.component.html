@@ -55,30 +55,22 @@
             </mat-form-field>
         </div>
 
-        <!-- <div class="mt-8">
-            <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
-                <mat-label>Group</mat-label>
-                <input type="text" placeholder="Select group" aria-label="Number" [formControl]="groupControl" matInput [formControlName]="'group'"
-                    [matAutocomplete]="auto">
-                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                    @for (item of groupFilteredOptions | async;  track $index) {
-                       <mat-option [value]="item">{{item}}</mat-option>
-
-                   }
-                </mat-autocomplete>
-            </mat-form-field>
-        </div> -->
         <div class="mt-8">
             <mat-form-field class="w-full" appearance="fill">
                 <mat-label>Group</mat-label>
-                <mat-select multiple [formControl]="providers" (openedChange)="onOpenChange(multiUserSearch)">
+                <mat-select multiple [formControl]="providers">
                   <mat-select-trigger>
-                    {{providers.value }}
+                    <!-- {{providers.value }} -->
+                    {{providers.value ? providers.value : 'Select options'}}
                   </mat-select-trigger>
-                  <input #multiUserSearch type="text" autocomplete="off" class="multiselect-search-input" 
-                  matInput placeholder="Search By Provider" (input)="onInputChange($event)"/>
+                  <mat-option>
+                    <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="search" 
+                noEntriesFoundLabel="no matching data found"></ngx-mat-select-search>
+              </mat-option>
               
-                  <mat-option *ngFor="let provider of filteredProviders" [value]="provider.PROV">{{provider.PROV}}</mat-option>
+                  <mat-option *ngFor="let provider of filteredOptions | async" [value]="provider.PROV">
+                    {{provider.PROV}}
+                  </mat-option>
                 </mat-select>
               </mat-form-field>
         </div>

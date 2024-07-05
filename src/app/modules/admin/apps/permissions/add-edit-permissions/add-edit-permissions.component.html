@@ -11,7 +11,7 @@
             </mat-form-field>
 
 
-            <mat-form-field class="select-form w-full">
+            <!-- <mat-form-field class="select-form w-full">
               <mat-label>Add users</mat-label>
               <mat-select [formControl]="providers"
                 placeholder="search"
@@ -40,20 +40,32 @@
                 {{provider.PROV}}
                 </mat-option>
               </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
 
-            <!-- <mat-form-field class="w-full" appearance="fill">
-                <mat-label>Add users</mat-label>
-                <mat-select multiple [formControl]="providers" (openedChange)="onOpenChange(multiUserSearch)">
-                  <mat-select-trigger>
-                    {{providers.value }}
-                  </mat-select-trigger>
-                  <input #multiUserSearch type="text" autocomplete="off" class="multiselect-search-input" 
-                  matInput placeholder="Search By Provider" (input)="onInputChange($event)"/>
-              
-                  <mat-option *ngFor="let provider of filteredProviders" [value]="provider.PROV">{{provider.PROV}}</mat-option>
-                </mat-select>
-              </mat-form-field> -->
+            <mat-form-field class="select-form w-full" appearance="fill">
+              <mat-label>Add users</mat-label>
+              <mat-select multiple [formControl]="providers"
+              placeholder="User"
+              name="user"
+              class="filter-select">
+                <mat-select-trigger>
+                  <!-- {{providers.value }} -->
+                  {{providers.value ? providers.value : 'Select options'}}
+                </mat-select-trigger>
+                <mat-option *ngIf="filteredOptions.length === 0" [value]="'noResults'">
+                  No options found
+                </mat-option>
+                <mat-option>
+                  <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="search" 
+                  noEntriesFoundLabel="no matching data found"></ngx-mat-select-search>
+                </mat-option>
+            
+                <mat-option *ngFor="let user of filteredOptions | async"
+                [value]="user.PROV">
+                  {{user.PROV}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
             
           </div>
           <div class="flex">

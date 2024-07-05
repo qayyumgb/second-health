@@ -12,7 +12,7 @@
     <!-- View mode -->
 <ng-container *ngIf="!editMode">
     <!-- Header -->
-    <div class="edit-mode relative w-full h-40 sm:h-48 px-8 sm:px-12 bg-accent-100 dark:bg-accent-700 mt-4">
+    <div class="edit-mode opacity-0 relative w-full h-40 sm:h-48 px-8 sm:px-12 bg-accent-100 dark:bg-accent-700 mt-4">
         <!-- Background -->
         <ng-container >
             @if (!data.background) {
@@ -133,7 +133,7 @@
 <ng-container *ngIf="editMode">
 
     <!-- Header -->
-    <div class="not-edit-mode relative w-full h-40 sm:h-48 px-8 sm:px-12 bg-accent-100 dark:bg-accent-700">
+    <div class="not-edit-mode relative w-full opacity-0 h-40 sm:h-48 px-8 sm:px-12 bg-accent-100 dark:bg-accent-700">
         <!-- Background -->
         <ng-container *ngIf="data.background">
             <img
@@ -163,7 +163,7 @@
     </div>
 
     <!-- Contact form -->
-    <div class="not-edit-mode relative flex flex-col flex-auto items-center px-6 sm:px-12">
+    <div class="not-edit-mode  relative flex flex-col flex-auto items-center px-6 sm:px-12">
         <div class="w-full max-w-3xl">
             <form [formGroup]="contactForm">
 

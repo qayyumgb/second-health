@@ -16,13 +16,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink } from '@angular/router';
 import { ContactsService } from '../contacts.service';
 import { Contact2 } from '../contacts.types';
-import { Observable, map, startWith } from 'rxjs';
+import { Observable, combineLatest, map, startWith } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @Component({
   selector: 'app-add-new-user',
   standalone: true,
-  imports: [MatAutocompleteModule, CommonModule, NgIf, MatButtonModule, MatTooltipModule, RouterLink, MatIconModule, NgFor, FormsModule, ReactiveFormsModule, MatRippleModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, NgClass, MatSelectModule, MatOptionModule, MatDatepickerModule, TextFieldModule, DatePipe, MatDialogModule],
+  imports: [MatAutocompleteModule, CommonModule, NgIf, MatButtonModule, MatTooltipModule, RouterLink, MatIconModule, NgFor, FormsModule, ReactiveFormsModule, MatRippleModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, NgClass, MatSelectModule, MatOptionModule, MatDatepickerModule, TextFieldModule, DatePipe, MatDialogModule,NgxMatSelectSearchModule],
   templateUrl: './add-new-user.component.html',
   styleUrl: './add-new-user.component.scss'
 })
@@ -36,6 +37,10 @@ export class AddNewUserComponent implements OnInit {
   allProviders: any[] = [{ PROV: "Group1" }, { PROV: "Group2" }, { PROV: "Group3" }, { PROV: "Group4" }, { PROV: "Group5" } ];
   filteredProviders: any[] = this.allProviders;
 
+  multiSelectControl = new FormControl();
+  searchCtrl = new FormControl();
+  filteredOptions: Observable<string[]>;
+  selectedItems:any =[]
 groupName:string[] = ["Group 1", "Group 2", "Group 3", "Group 4", "Group 5"]
   constructor(private _formBuilder: UntypedFormBuilder, 
               private _changeDetectorRef: ChangeDetectorRef,
@@ -47,7 +52,19 @@ groupName:string[] = ["Group 1", "Group 2", "Group 3", "Group 4", "Group 5"]
   /**
      * On init
      */
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.allProviders.filter(option => option.PROV.toLowerCase().includes(filterValue));
+  }
   ngOnInit(): void {
+    this.filteredOptions = this.searchCtrl.valueChanges
+    .pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+
+
+    
     // Create the contact form
     this.contactForm = this._formBuilder.group({
       id: [''],

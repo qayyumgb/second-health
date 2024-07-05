@@ -1,5 +1,5 @@
 import { AsyncPipe, DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,15 +21,17 @@ import { ViolationComponent } from '../../ecommerce/inventory/violation/violatio
 import { AttachmentComponent } from '../../ecommerce/inventory/attachment/attachment.component';
 import { ScriptDetailsComponent } from "../script-details/script-details.component";
 import { PermissionDetailsComponent } from "../permission-details/permission-details.component";
+import { map, Observable, startWith } from 'rxjs';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @Component({
     selector: 'app-add-edit-permissions',
     standalone: true,
     templateUrl: './add-edit-permissions.component.html',
     styleUrl: './add-edit-permissions.component.scss',
-    imports: [MatButtonModule, AttachmentComponent, ViolationComponent, MatTableModule, MatTabsModule, MatDialogModule, MatAutocompleteModule, RouterLink, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, NgFor, MatOptionModule, MatDatepickerModule, MatAutocompleteModule, AsyncPipe, ScriptDetailsComponent, PermissionDetailsComponent]
+    imports: [MatButtonModule, AttachmentComponent, ViolationComponent, MatTableModule, MatTabsModule, MatDialogModule, MatAutocompleteModule, RouterLink, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, NgFor, MatOptionModule, MatDatepickerModule, MatAutocompleteModule, AsyncPipe, ScriptDetailsComponent, PermissionDetailsComponent,NgxMatSelectSearchModule]
 })
-export class AddEditPermissionsComponent {
+export class AddEditPermissionsComponent implements OnInit {
   displayedColumns: string[] = ['userName', 'id', 'title', 'action'];
   GroupUserDataSource = [
     {userName: 'User name 1', id: '123', title:'Software engineer'},
@@ -37,18 +39,24 @@ export class AddEditPermissionsComponent {
     {userName: 'User name 3', id: '567', title:'Software engineer'},
   ];
   flightFilter: FormGroup;
-
+  searchCtrl = new FormControl();
+  filteredOptions: Observable<string[]>;
   providers = new FormControl();
   allProviders: any[] = [{ PROV: "Username1" }, { PROV: "Username2" }, { PROV: "Username3" }, { PROV: "Username4" }, { PROV: "Username5" } ];
   filteredProviders: any[] = this.allProviders;
-  filterTextBox:any = '';
-  selectedYears: any[];
-  equals(objOne, objTwo) {
-    if (typeof objOne !== 'undefined' && typeof objTwo !== 'undefined') {
-      return objOne.id === objTwo.id;
-    }
-  }
 
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.allProviders.filter(option => option.PROV.toLowerCase().includes(filterValue));
+  }
+  ngOnInit(): void {
+    this.filteredOptions = this.searchCtrl.valueChanges
+    .pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+  }
   onInputChange(event: any) {
     const searchInput = event.target.value.toLowerCase();
 

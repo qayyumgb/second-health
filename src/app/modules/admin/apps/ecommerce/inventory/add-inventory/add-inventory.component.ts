@@ -18,6 +18,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { PeriodicElement, ViolationComponent } from '../violation/violation.component';
 import { MatTableModule } from '@angular/material/table';
 import { AttachmentComponent } from '../attachment/attachment.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 const ELEMENT_DATA: { id: number, passengerNameEn: string, passengerNameAr: string, country: string, status: string }[]  = [
   {id: 1, passengerNameEn: 'Hydrogen', passengerNameAr: 'Hydrogen',  country: 'Hydrogen',  status: 'Hydrogen',},
   {id: 2, passengerNameEn: 'Helium',   passengerNameAr: 'Helium',  country: 'Helium',  status: 'Helium',},
@@ -29,7 +30,7 @@ const ELEMENT_DATA: { id: number, passengerNameEn: string, passengerNameAr: stri
 @Component({
   selector: 'app-add-inventory',
   standalone: true,
-  imports: [MatButtonModule,AttachmentComponent, ViolationComponent,MatTableModule, MatTabsModule, MatDialogModule, MatAutocompleteModule, RouterLink, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, NgFor, MatOptionModule, MatDatepickerModule, MatAutocompleteModule, AsyncPipe],
+  imports: [MatButtonModule,AttachmentComponent, ViolationComponent,MatTableModule, MatTabsModule, MatDialogModule, MatAutocompleteModule, RouterLink, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, NgFor, MatOptionModule, MatDatepickerModule, MatAutocompleteModule, AsyncPipe,NgxMatSelectSearchModule],
   templateUrl: './add-inventory.component.html',
   styleUrl: './add-inventory.component.scss'
 })
@@ -66,21 +67,28 @@ export class AddInventoryComponent implements OnInit {
   TypeFilteredOptions: string[];
   AirlineFilteredOptions: string[];
   NationalityFilteredOptions: Observable<string[]>;
-  searchText:any = '';
-  filterTextBox:any = '';
-  selectedYears: any[];
-  equals(objOne, objTwo) {
-    if (typeof objOne !== 'undefined' && typeof objTwo !== 'undefined') {
-      return objOne.id === objTwo.id;
-    }
-  }
+  searchCtrl = new FormControl();
+  filteredOptions: Observable<string[]>;
+  selectedItems:any =[]
+ 
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
     private _formBuilder: UntypedFormBuilder,
     private _inventoryService: InventoryService,
   ) { }
-  isEdit: boolean = false
+  isEdit: boolean = false;
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.optionNationality.filter(option => option.toLowerCase().includes(filterValue));
+  }
   ngOnInit(): void {
+    this.filteredOptions = this.searchCtrl.valueChanges
+    .pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+
     this.selectedProductForm = this._formBuilder.group({
       id: [''],
       lodge: [''],
